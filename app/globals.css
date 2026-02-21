@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+:root {
+  --bg-deep-space: #0A0A0A; /*  */
+  --bg-midnight: #121417; /* [cite: 17] */
+  --text-pure-white: #FFFFFF; /* [cite: 18] */
+  --text-aero-silver: #BFC5CC; /* [cite: 19] */
+  --accent-electric-blue: #0F62FE; /* [cite: 21] */
+  --accent-sky-cyan: #1FB6FF; /* [cite: 22] */
+  --royal-blue: #0033A0; /* Blue Origin-inspired primary color */
+  --royal-blue-dark: #002266;
+  --royal-blue-light: #0044CC;
+}
+
+body {
+  background-color: var(--bg-deep-space);
+  color: var(--text-pure-white);
+}
+
+/* Custom utility classes for typography */
+.font-heading {
+  font-family: var(--font-montserrat), sans-serif;
+}
+.font-body {
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Royal Blue utility classes */
+.bg-royal-blue {
+  background-color: var(--royal-blue);
+}
+.bg-royal-blue-dark {
+  background-color: var(--royal-blue-dark);
+}
+.bg-royal-blue-light {
+  background-color: var(--royal-blue-light);
+}
+.text-royal-blue {
+  color: var(--royal-blue);
+}
+.border-royal-blue {
+  border-color: var(--royal-blue);
+}
+
+/* Smooth dropdown animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* Mobile menu slide-in animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+/* Pulsing glow animation for buttons */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(15, 98, 254, 0.5), 0 0 30px rgba(15, 98, 254, 0.3), 0 0 45px rgba(15, 98, 254, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(15, 98, 254, 0.8), 0 0 50px rgba(15, 98, 254, 0.5), 0 0 75px rgba(15, 98, 254, 0.3);
+  }
+}
+
+.animate-pulseGlow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Movie credits scrolling animation for Applications section */
+@keyframes scroll-up {
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(-150vh);
+  }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 20s linear forwards;
+}
+
+/* Fade in animation for Overview cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in and out loop animation for Overview cards */
+@keyframes fadeInOutLoop {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  3% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  14% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  16% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-loop {
+  animation: fadeInOutLoop 18s ease-in-out infinite;
+  opacity: 0;
+}
+
+.delay-100 {
+  animation-delay: 0s;
+}
+
+.delay-200 {
+  animation-delay: 3s;
+}
+
+.delay-300 {
+  animation-delay: 6s;
+}
+
+.delay-400 {
+  animation-delay: 9s;
+}
+
+.delay-500 {
+  animation-delay: 12s;
+}
+
+.delay-600 {
+  animation-delay: 15s;
+}
