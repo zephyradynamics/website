@@ -45,7 +45,7 @@ export default function HeaderDemo() {
           <li>Hover over "VEHICLES" or "SYSTEMS" to see the dropdown menus</li>
           <li>The dropdowns have a smooth fade-in animation</li>
           <li>Dropdowns use royal blue background with white text</li>
-          <li>On mobile (< 768px), the hamburger menu appears instead</li>
+          <li>On mobile (&lt; 768px), the hamburger menu appears instead</li>
         </ul>
       </main>
     </div>
