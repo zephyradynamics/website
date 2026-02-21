@@ -25,15 +25,13 @@ const backgroundImages = [
   }
 ];
 
-export default function EstralX2Page() {
+export default function KestrelX2Page() {
   const [showTitle, setShowTitle] = useState(true);
   const [showArrow, setShowArrow] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [typedText, setTypedText] = useState('');
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [scrollAnimationKey, setScrollAnimationKey] = useState(0);
-  const [showThankYou, setShowThankYou] = useState(false);
 
   const lines = [
     '> TECHNICAL_SPECIFICATIONS.SYS',
@@ -96,29 +94,6 @@ export default function EstralX2Page() {
       clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
-
-  // Continuous loop for Applications section
-  useEffect(() => {
-    // Start the continuous loop
-    const loopCycle = () => {
-      // Show scrolling content for 14 seconds
-      setShowThankYou(false);
-      setScrollAnimationKey(prev => prev + 1);
-      
-      setTimeout(() => {
-        // Show Thank You for 3 seconds
-        setShowThankYou(true);
-        
-        setTimeout(() => {
-          // Restart the loop
-          loopCycle();
-        }, 3000);
-      }, 14000);
-    };
-    
-    // Start the loop
-    loopCycle();
   }, []);
 
   useEffect(() => {
@@ -188,7 +163,7 @@ export default function EstralX2Page() {
         >
           <div className="relative z-10 max-w-5xl px-6">
             <h1 className="font-heading text-5xl md:text-7xl font-bold uppercase tracking-widest mb-6">
-              ESTRAL X2
+              KESTREL X2
             </h1>
             <p className="text-xl md:text-2xl text-[#BFC5CC] tracking-wide">
               Single Passenger Multi-Rotor eVTOL Prototype
@@ -372,69 +347,46 @@ export default function EstralX2Page() {
 
         {/* Scrolling Content Container */}
         <div className="relative z-10 flex-1 overflow-hidden flex items-center justify-center">
-          {/* Applications List - Scrolls off */}
-          {!showThankYou && (
-            <div key={scrollAnimationKey} className="animate-scroll-up text-center max-w-2xl mx-auto px-6">
-              <div className="space-y-16 text-white">
-                <div className="space-y-2">
-                  <h3 className="text-xl md:text-2xl font-heading font-bold text-[#0F62FE]">
-                    Personal Air Vehicle
-                  </h3>
-                  <p className="text-sm md:text-base text-[#BFC5CC] leading-relaxed">
-                    Individual urban mobility solution for personal transportation needs. 
-                    Experience the freedom of point-to-point travel without traffic constraints.
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-xl md:text-2xl font-heading font-bold text-[#0F62FE]">
-                    Urban Air Taxi
-                  </h3>
-                  <p className="text-sm md:text-base text-[#BFC5CC] leading-relaxed">
-                    On-demand passenger transport service for efficient city commuting.
-                    Revolutionizing urban transportation with autonomous aerial mobility.
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-xl md:text-2xl font-heading font-bold text-[#0F62FE]">
-                    Air Ambulance Variant
-                  </h3>
-                  <p className="text-sm md:text-base text-[#BFC5CC] leading-relaxed">
-                    Emergency medical response system for rapid patient transport.
-                    Saving lives through swift aerial emergency medical services.
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-xl md:text-2xl font-heading font-bold text-[#0F62FE]">
-                    Special Mission Configurations
-                  </h3>
-                  <p className="text-sm md:text-base text-[#BFC5CC] leading-relaxed">
-                    Customized platforms for defense, surveillance, and specialized operations.
-                    Adaptable solutions for mission-critical aerial requirements.
-                  </p>
-                </div>
+          {/* Applications - Fade In/Out like Overview */}
+          <div className="relative w-full max-w-2xl min-h-[300px]">
+            <div className="absolute inset-0 flex items-start justify-center pt-12 animate-fade-loop-app delay-100">
+              <div className="text-center px-6">
+                <h3 className="text-[#0F62FE] text-xl md:text-2xl font-heading font-bold mb-2">Personal Air Vehicle</h3>
+                <p className="text-sm md:text-base text-[#BFC5CC] leading-relaxed">
+                  Individual urban Mobility solution for personal transportation needs. 
+                  Experience the freedom of point to point travel without traffic constraints.
+                </p>
               </div>
             </div>
-          )}
 
-          {/* Thank You Section - Fades in after 3 seconds */}
-          <div 
-            className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${
-              showThankYou ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-          >
-            <div className="text-center px-6">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
-                Thank You for Visiting!
-              </h2>
-              <p className="text-lg md:text-xl text-[#0F62FE] mb-2">
-                Zephyra Dynamics
-              </p>
-              <p className="text-base text-[#BFC5CC]">
-                Shaping the Future of Urban air mobility
-              </p>
+            <div className="absolute inset-0 flex items-start justify-center pt-12 animate-fade-loop-app delay-200">
+              <div className="text-center px-6">
+                <h3 className="text-[#0F62FE] text-xl md:text-2xl font-heading font-bold mb-2">Urban Air Taxi</h3>
+                <p className="text-sm md:text-base text-[#BFC5CC] leading-relaxed">
+                  On demand passenger transport service for efficient city commuting.
+                  Revolutionizing urban transportation with autonomous aerial Mobility.
+                </p>
+              </div>
+            </div>
+
+            <div className="absolute inset-0 flex items-start justify-center pt-12 animate-fade-loop-app delay-300">
+              <div className="text-center px-6">
+                <h3 className="text-[#0F62FE] text-xl md:text-2xl font-heading font-bold mb-2">Air Ambulance Variant</h3>
+                <p className="text-sm md:text-base text-[#BFC5CC] leading-relaxed">
+                  Emergency medical response system for rapid patient transport.
+                  Saving lives through swift aerial emergency medical services.
+                </p>
+              </div>
+            </div>
+
+            <div className="absolute inset-0 flex items-start justify-center pt-12 animate-fade-loop-app delay-400">
+              <div className="text-center px-6">
+                <h3 className="text-[#0F62FE] text-xl md:text-2xl font-heading font-bold mb-2">Special Mission Configurations</h3>
+                <p className="text-sm md:text-base text-[#BFC5CC] leading-relaxed">
+                  Customized platforms for defense, surveillance, and specialized operations.
+                  Adaptable solutions for mission critical aerial requirements.
+                </p>
+              </div>
             </div>
           </div>
         </div>

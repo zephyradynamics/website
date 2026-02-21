@@ -25,7 +25,7 @@ export default function Footer() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-start mb-4">
-              <h3 className="text-white font-bold text-lg">Disclaimer - Future Variants (Estral X2)</h3>
+              <h3 className="text-white font-bold text-lg">Disclaimer - Future Variants (Kestrel X2)</h3>
               <button
                 onClick={() => setShowDisclaimer(false)}
                 className="text-[#BFC5CC] hover:text-white transition-colors"
@@ -56,7 +56,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-[#BFC5CC] text-sm leading-relaxed">
-              India's emerging aerospace startup focused on electric vertical take-off and landing aircraft for intra-city mobility. Building the future of urban air transportation safe, autonomous, and sustainable.
+               Shaping the Future of Urban Air Mobility.
             </p>
             {/* Supported By */}
             <div className="pt-4">
@@ -83,11 +83,11 @@ export default function Footer() {
               <Link href="/" className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors">
                 Home
               </Link>
+              <Link href="/kestrel-x2" className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors">
+                Kestrel X2
+              </Link>
               <Link href="/#about" className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors">
                 About
-              </Link>
-              <Link href="/estral-x2" className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors">
-                Estral X2
               </Link>
               <Link href="/#footer" className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors">
                 Contact
@@ -122,7 +122,7 @@ export default function Footer() {
                 className="flex items-center gap-3 text-[#BFC5CC] hover:text-[#0F62FE] transition-colors"
               >
                 <Linkedin size={20} />
-                <span className="text-sm">LinkedIn Profile</span>
+                <span className="text-sm">LinkedIn</span>
               </a>
 
               {/* Instagram */}
@@ -144,7 +144,7 @@ export default function Footer() {
                 className="flex items-center gap-3 text-[#BFC5CC] hover:text-[#0F62FE] transition-colors"
               >
                 <MapPin size={20} />
-                <span className="text-sm">Srinagar, Jammu Kashmir, India - 191111</span>
+                <span className="text-sm">Srinagar, Jammu Kashmir, India</span>
               </a>
             </div>
           </div>

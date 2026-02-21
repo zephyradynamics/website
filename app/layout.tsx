@@ -28,6 +28,16 @@ const navigationItems = [
     href: '/'
   },
   {
+    label: 'Vehicles',
+    href: '#',
+    dropdownItems: [
+      {
+        label: 'Kestrel X2',
+        href: '/kestrel-x2'
+      }
+    ]
+  },
+  {
     label: 'About',
     href: '/#about'
   },

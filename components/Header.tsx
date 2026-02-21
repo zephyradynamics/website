@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 // TypeScript interfaces for Header component props
 interface DropdownItem {
@@ -41,8 +41,20 @@ export default function Header({
       }
     };
 
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.desktop-nav')) {
+        setActiveDropdown(null);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('click', handleClickOutside);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('click', handleClickOutside);
+    };
   }, []);
 
   const toggleMobileMenu = () => {
@@ -83,25 +95,39 @@ export default function Header({
               <div
                 key={item.label}
                 className="relative group"
-                onMouseEnter={() => item.dropdownItems && setActiveDropdown(item.label)}
-                onMouseLeave={() => setActiveDropdown(null)}
               >
-                <Link
-                  href={item.href}
-                  className="hover:text-[#0F62FE] transition-colors duration-300 text-sm font-medium tracking-[0.2em]"
-                >
-                  {item.label}
-                </Link>
+                {item.dropdownItems ? (
+                  <button
+                    onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
+                    className="hover:text-[#0F62FE] transition-colors duration-300 text-sm font-medium tracking-[0.2em] flex items-center gap-1"
+                  >
+                    {item.label}
+                    <ChevronDown 
+                      size={16} 
+                      className={`transition-transform duration-200 ${
+                        activeDropdown === item.label ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="hover:text-[#0F62FE] transition-colors duration-300 text-sm font-medium tracking-[0.2em] flex items-center gap-1"
+                  >
+                    {item.label}
+                  </Link>
+                )}
 
                 {/* Dropdown menu for items with sub-items */}
                 {item.dropdownItems && activeDropdown === item.label && (
-                  <div className="absolute top-full left-0 mt-2 bg-[#0A0A0A] text-white rounded shadow-lg min-w-[200px] z-50 opacity-0 animate-fadeIn border border-white/10">
-                    <div className="py-2">
+                  <div className="absolute top-full left-0 mt-1 bg-[#0A0A0A] text-white rounded shadow-lg min-w-[140px] z-50 opacity-0 animate-fadeIn border border-white/10">
+                    <div className="py-1">
                       {item.dropdownItems.map((dropdownItem) => (
                         <Link
                           key={dropdownItem.label}
                           href={dropdownItem.href}
-                          className="block px-4 py-2 hover:text-[#0F62FE] transition-colors text-xs tracking-wide"
+                          className="block px-3 py-1.5 hover:text-[#0F62FE] transition-colors text-xs tracking-wide"
+                          onClick={() => setActiveDropdown(null)}
                         >
                           {dropdownItem.label}
                         </Link>
@@ -132,10 +158,11 @@ export default function Header({
                 <div key={item.label}>
                   <Link
                     href={item.href}
-                    className="block py-2 hover:text-[#0F62FE] transition-colors text-base font-medium tracking-[0.2em]"
+                    className="block py-2 hover:text-[#0F62FE] transition-colors text-base font-medium tracking-[0.2em] flex items-center gap-1"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
+                    {item.dropdownItems && <ChevronDown size={16} />}
                   </Link>
 
                   {/* Mobile dropdown items */}

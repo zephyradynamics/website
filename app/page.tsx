@@ -8,12 +8,12 @@ export default function Home() {
       {/* HERO SECTION */}
       <Hero 
         videoSrc="/hero.mp4"
-        heading="Shaping the Future of Urban air mobility"
-        subheading="Sustainable Air Mobility for Modern Cities"
+        heading="Shaping the Future of Urban Air Mobility"
+        subheading="Sustainable Air Mobility for Modern Cities in India"
         ctaButtons={[
           {
-            label: 'Explore Estral X2',
-            href: '/estral-x2',
+            label: 'Explore Kestrel X2',
+            href: '/kestrel-x2',
             variant: 'primary'
           }
         ]}
@@ -32,7 +32,7 @@ export default function Home() {
               Zephyra Dynamics is India's emerging aerospace startup focused on electric vertical take-off and landing aircraft for intra-city mobility. {/* [cite: 45] */}
             </p>
             <p className="text-white text-xl font-medium border-l-4 border-[#0F62FE] pl-6">
-              We are building the future of urban air transportation—safe, autonomous, and sustainable. {/* [cite: 46] */}
+              We are building the future of urban air transportation, which is safe, autonomous, and sustainable. {/* [cite: 46] */}
             </p>
           </div>
           <div className="flex-1 w-full aspect-square bg-[#0A0A0A] border border-gray-800 flex items-center justify-center overflow-hidden">

@@ -116,7 +116,7 @@ body {
   }
 }
 
-/* Fade in and out loop animation for Overview cards */
+/* Fade in and out loop animation for Overview cards - 18s for 6 items */
 @keyframes fadeInOutLoop {
   0% {
     opacity: 0;
@@ -140,6 +140,30 @@ body {
   }
 }
 
+/* Fade in and out loop animation for Applications - 12s for 4 items */
+@keyframes fadeInOutLoopApp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  4% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  21% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  25% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
   opacity: 0;
@@ -147,6 +171,11 @@ body {
 
 .animate-fade-loop {
   animation: fadeInOutLoop 18s ease-in-out infinite;
+  opacity: 0;
+}
+
+.animate-fade-loop-app {
+  animation: fadeInOutLoopApp 12s ease-in-out infinite;
   opacity: 0;
 }
 
