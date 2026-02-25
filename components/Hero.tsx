@@ -25,6 +25,15 @@ export default function Hero({
   overlayOpacity = 0.5,
   minHeight = '100vh',
 }: HeroProps) {
+  const handleButtonClick = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.getElementById(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <section 
       className="relative flex flex-col items-center justify-center text-center px-6"
@@ -63,19 +72,35 @@ export default function Hero({
         {ctaButtons && ctaButtons.length > 0 && (
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center cta-buttons">
             {ctaButtons.map((button, index) => (
-              <Link
-                key={index}
-                href={button.href}
-                className={`
-                  px-8 py-3 font-semibold tracking-wider uppercase transition-all duration-300
-                  ${button.variant === 'primary' 
-                    ? 'border-2 border-white bg-transparent text-white hover:bg-white/10 animate-pulseGlow hover:border-[#0F62FE]' 
-                    : 'border-2 border-white text-white hover:bg-white hover:text-royal-blue'
-                  }
-                `}
-              >
-                {button.label}
-              </Link>
+              button.href.startsWith('#') ? (
+                <button
+                  key={index}
+                  onClick={() => handleButtonClick(button.href)}
+                  className={`
+                    px-8 py-3 font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer
+                    ${button.variant === 'primary' 
+                      ? 'border-2 border-white bg-transparent text-white hover:bg-white/10 animate-pulseGlow hover:border-[#0F62FE]' 
+                      : 'border-2 border-white text-white hover:bg-white hover:text-black'
+                    }
+                  `}
+                >
+                  {button.label}
+                </button>
+              ) : (
+                <Link
+                  key={index}
+                  href={button.href}
+                  className={`
+                    px-8 py-3 font-semibold tracking-wider uppercase transition-all duration-300
+                    ${button.variant === 'primary' 
+                      ? 'border-2 border-white bg-transparent text-white hover:bg-white/10 animate-pulseGlow hover:border-[#0F62FE]' 
+                      : 'border-2 border-white text-white hover:bg-white hover:text-black'
+                    }
+                  `}
+                >
+                  {button.label}
+                </Link>
+              )
             ))}
           </div>
         )}

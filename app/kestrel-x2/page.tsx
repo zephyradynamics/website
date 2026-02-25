@@ -4,11 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 
 const backgroundImages = [
   {
-    image: '/army.png',
-    title: 'Special Mission Configurations',
-    description: 'Military and defense operations'
-  },
-  {
     image: '/ambulance.png',
     title: 'Air Ambulance',
     description: 'Emergency medical response'

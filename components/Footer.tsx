@@ -8,6 +8,19 @@ import { useState } from 'react';
 export default function Footer() {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
 
+  // Custom X (Twitter) Icon Component
+  const XIcon = ({ size = 20 }: { size?: number }) => (
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="currentColor"
+      className="inline-block"
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+  );
+
   return (
     <footer id="footer" className="bg-[#0A0A0A] text-white w-full border-t border-white/10 relative">
       {/* Disclaimer Popup - Modal Style */}
@@ -62,14 +75,14 @@ export default function Footer() {
             <div className="pt-4">
               <p className="text-[#6B7280] text-xs mb-2">Supported by</p>
               <a 
-                href="https://www.nvidia.com" 
+                href="https://www.3ds.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block"
               >
                 <img 
-                  src="/nvidia.png" 
-                  alt="NVIDIA" 
+                  src="/Dassault_Systèmes_logo.svg-removebg-preview.png" 
+                  alt="Dassault Systèmes" 
                   className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
                 />
               </a>
@@ -134,6 +147,17 @@ export default function Footer() {
               >
                 <Instagram size={20} />
                 <span className="text-sm">Instagram</span>
+              </a>
+
+              {/* X (Twitter) */}
+              <a
+                href="https://x.com/Zephyrdynamics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-[#BFC5CC] hover:text-[#0F62FE] transition-colors"
+              >
+                <XIcon size={20} />
+                <span className="text-sm">X</span>
               </a>
 
               {/* Location */}
