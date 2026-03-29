@@ -39,7 +39,7 @@ const navigationItems = [
   },
   {
     label: 'About',
-    href: '/#about'
+    href: '/about'
   },
   {
     label: 'Contact',

@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
+import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
   return (
@@ -20,57 +21,71 @@ export default function Home() {
         overlayOpacity={0.4}
       />
 
-      {/* SECTION 2: ABOUT */}
-      <section id="about" className="bg-[#0A0A0A] min-h-screen flex flex-col lg:flex-row items-center gap-16 px-6 lg:px-24 py-16">
-        <div className="flex-1 space-y-8">
-          <h2 className="font-heading text-4xl font-bold uppercase tracking-widest text-white">
-            About Zephyra Dynamics
+      {/* SECTION 1.5: KEY HIGHLIGHTS */}
+      <section className="bg-[#0A0A0A] py-20 px-6 lg:px-24">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-widest text-white mb-16 text-center">
+            What We're Building
           </h2>
-          <p className="text-[#BFC5CC] text-lg leading-relaxed max-w-xl">
-            Zephyra Dynamics is India's emerging aerospace startup focused on electric vertical take-off and landing aircraft for intra-city mobility.
-          </p>
-          <p className="text-white text-xl font-medium border-l-4 border-[#0F62FE] pl-6">
-            We are building the future of urban air transportation, which is safe, autonomous, and sustainable.
-          </p>
-        </div>
-        <div className="flex-1 w-full aspect-square bg-[#0A0A0A] border border-gray-800 flex items-center justify-center overflow-hidden">
-          <img 
-            src="/about_section.png" 
-            alt="Zephyra Dynamics Aircraft" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </section>
-
-      {/* SECTION 3: COMING SOON / PRE-BOOKING */}
-      <section id="coming-soon" className="bg-[#0A0A0A] min-h-screen flex items-center justify-center px-6 lg:px-24 py-16 relative overflow-hidden">
-        {/* Background Bubbles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-[#0F62FE]/10 rounded-full blur-xl animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-[#0F62FE]/15 rounded-full blur-lg animate-pulse delay-1000"></div>
-          <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-[#0F62FE]/8 rounded-full blur-2xl animate-pulse delay-2000"></div>
-          <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-[#0F62FE]/12 rounded-full blur-xl animate-pulse delay-500"></div>
-        </div>
-
-        {/* Content Bubble */}
-        <div className="max-w-4xl w-full relative z-10">
-          <div className="bg-gradient-to-br from-[#0F62FE]/5 to-transparent backdrop-blur-sm border border-[#0F62FE]/20 rounded-3xl p-8 lg:p-12 shadow-2xl text-center">
-            <div className="space-y-6 md:space-y-8">
-              <h2 className="font-heading text-3xl md:text-5xl lg:text-7xl font-bold uppercase tracking-widest text-white">
-                Pre-Book
-              </h2>
-              
-              <p className="text-white/90 text-lg md:text-2xl lg:text-3xl leading-relaxed max-w-3xl mx-auto">
-                Be among the first to experience the future of urban air mobility.
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-[#0F62FE]/5 to-transparent border border-[#0F62FE]/20 rounded-lg p-8 space-y-4">
+              <h3 className="font-heading text-2xl font-bold text-[#0F62FE] uppercase tracking-wide">Kestrel X2</h3>
+              <p className="text-[#BFC5CC] text-sm leading-relaxed text-justify">
+                Our flagship single-passenger eVTOL prototype represents years of rigorous aerospace engineering. From advanced aerodynamics to autonomous control systems, discover what makes Kestrel X2 the foundation of India's urban air mobility future.
               </p>
-              
-              <div className="inline-block px-8 py-3 font-semibold tracking-wider transition-all duration-300 border-2 border-white bg-transparent text-white">
-                <span className="text-white">Coming Soon</span>
-              </div>
+              <a href="/kestrel-x2" className="inline-block text-[#0F62FE] hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider mt-4">
+                Explore Kestrel X2 →
+              </a>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#0F62FE]/5 to-transparent border border-[#0F62FE]/20 rounded-lg p-8 space-y-4">
+              <h3 className="font-heading text-2xl font-bold text-[#0F62FE] uppercase tracking-wide">Our Team</h3>
+              <p className="text-[#BFC5CC] text-sm leading-relaxed text-justify">
+                Founded on academic excellence and aerospace expertise. Our lean, highly motivated team combines cutting-edge first-principles engineering with direct mentorship from experienced aerospace faculty to build the future of autonomous flight.
+              </p>
+              <a href="/about#team" className="inline-block text-[#0F62FE] hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider mt-4">
+                Meet the Team →
+              </a>
             </div>
           </div>
         </div>
       </section>
+
+{/* SECTION 2: NEWS */}
+      <section className="bg-[#0A0A0A] py-16 px-6 lg:px-24">
+        <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-widest text-white mb-10 text-center">
+          News From Zephyra Dynamics
+        </h2>
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-stretch max-w-4xl mx-auto">
+          <a
+            href="https://www.linkedin.com/posts/zephyradynamics_zephyradynamics-kestrelx2-evtol-activity-7431284149686067200-RzlU?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEFuCngBz8eI5C1Z50qNwu-RFTP_iQCi5LQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 border border-white/10 rounded-lg overflow-hidden cursor-pointer hover:border-[#0F62FE]/50 hover:scale-[1.02] transition-all duration-300"
+          >
+            <img
+              src="/das.png"
+              alt="Zephyra Dynamics News"
+              className="w-full h-full object-cover"
+            />
+          </a>
+          <a
+            href="https://www.linkedin.com/posts/zephyradynamics_zephyradynamics-kestrelx2-evtol-activity-7431284149686067200-RzlU?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEFuCngBz8eI5C1Z50qNwu-RFTP_iQCi5LQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 border border-white/10 rounded-lg overflow-hidden cursor-pointer hover:border-[#0F62FE]/50 hover:scale-[1.02] transition-all duration-300"
+          >
+            <img
+              src="/inv.png"
+              alt="Zephyra Dynamics News"
+              className="w-full h-full object-cover"
+            />
+          </a>
+        </div>
+      </section>
+
+      {/* CONTACT FORM */}
+      <ContactForm />
 
       {/* FOOTER */}
       <Footer />

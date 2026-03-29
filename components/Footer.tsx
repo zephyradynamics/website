@@ -74,18 +74,22 @@ export default function Footer() {
             {/* Supported By */}
             <div className="pt-4">
               <p className="text-[#6B7280] text-xs mb-2">Supported by</p>
-              <a 
-                href="https://www.3ds.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block"
-              >
-                <img 
-                  src="/Dassault_Systèmes_logo.svg-removebg-preview.png" 
-                  alt="Dassault Systèmes" 
-                  className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
-                />
-              </a>
+              <div className="flex items-center gap-4">
+                <a href="https://www.3ds.com" target="_blank" rel="noopener noreferrer">
+                  <img 
+                    src="/3DS_Corp_Logotype_White_RGB-1.png" 
+                    alt="Dassault Systèmes" 
+                    className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
+                  />
+                </a>
+                <a href="https://www.nvidia.com" target="_blank" rel="noopener noreferrer">
+                  <img 
+                    src="/nvidia.png" 
+                    alt="NVIDIA" 
+                    className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
+                  />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -120,11 +124,11 @@ export default function Footer() {
             <div className="flex flex-col gap-4">
               {/* Email */}
               <a
-                href="mailto:zephyradynamics@gmail.com"
+                href="mailto:info@zephyradynamics.com"
                 className="flex items-center gap-3 text-[#BFC5CC] hover:text-[#0F62FE] transition-colors"
               >
                 <Mail size={20} />
-                <span className="text-sm">zephyradynamics@gmail.com</span>
+                <span className="text-sm">info@zephyradynamics.com</span>
               </a>
 
               {/* LinkedIn */}
