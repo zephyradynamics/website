@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     const data = await resend.emails.send({
       from: 'Zephyra Dynamics <info@zephyradynamics.com>',
       to: 'info@zephyradynamics.com',
-      replyTo: email,
+      reply_to: email,
       subject: `New Contact Form Submission: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
