@@ -23,7 +23,9 @@ export default function Home() {
 
       {/* SECTION 1.5: KEY HIGHLIGHTS */}
       <section className="bg-deep-space py-20 px-6 lg:px-24 relative overflow-hidden">
-        <div className="absolute top-24 left-0 opacity-[0.08] text-9xl font-light pointer-events-none -ml-12">01</div>
+        {/* Adjusted background number positioning to prevent side-clipping */}
+        <div className="absolute top-24 left-4 opacity-[0.08] text-8xl md:text-9xl font-light pointer-events-none z-0">01</div>
+        
         <div className="max-w-6xl mx-auto relative z-10">
           <h2 className="font-heading text-5xl md:text-6xl font-bold uppercase tracking-widest text-cloud-white mb-16 text-center">
             What We're Building
@@ -54,7 +56,9 @@ export default function Home() {
 
       {/* SECTION 2: NEWS */}
       <section className="bg-deep-space py-20 px-6 lg:px-24 relative overflow-hidden">
-        <div className="absolute top-12 right-0 opacity-[0.08] text-9xl font-light pointer-events-none -mr-20">02</div>
+        {/* Adjusted background number positioning to prevent side-clipping */}
+        <div className="absolute top-12 right-4 opacity-[0.08] text-8xl md:text-9xl font-light pointer-events-none z-0">02</div>
+        
         <h2 className="font-heading text-5xl md:text-6xl font-bold uppercase tracking-widest text-cloud-white mb-12 text-center relative z-10">
           Newsroom
         </h2>

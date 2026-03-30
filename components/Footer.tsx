@@ -74,7 +74,8 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-cloud-white uppercase tracking-widest">Connect</h3>
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2 text-stratosphere-silver text-sm">
-                <MapPin size={16} className="text-horizon-cyan" />
+                {/* Changed className from text-horizon-cyan to text-cloud-white */}
+                <MapPin size={16} className="text-cloud-white" />
                 <span>Srinagar, India</span>
               </div>
               <div className="flex items-center gap-4 pt-2">

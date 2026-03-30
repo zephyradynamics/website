@@ -99,7 +99,7 @@ export default function CareersPage() {
         <div className="relative z-10 max-w-4xl">
           <p className="text-stratosphere-silver text-sm font-bold uppercase tracking-widest mb-4">Join Our Team</p>
           <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-wide text-cloud-white mb-6">
-            Careers at Zephyra Dynamics
+            CAREERS AT ZEPHYRA DYNAMICS
           </h1>
           <p className="text-lg md:text-xl text-stratosphere-silver leading-relaxed max-w-3xl mx-auto">
             Build the future of urban air mobility. Join a fast-growing team of engineers and innovators working on Kestrel X2 and next-generation eVTOL systems.
@@ -108,11 +108,10 @@ export default function CareersPage() {
       </section>
 
       {/* WHY JOIN US SECTION */}
-      {/* Removed overflow-hidden from section to prevent modal clipping */}
       <section className="px-6 lg:px-24 py-20 max-w-6xl mx-auto w-full relative">
-        {/* Safely contained background number */}
+        {/* Adjusted background number positioning to prevent side-clipping */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-12 -left-12 opacity-[0.08] text-9xl font-light">01</div>
+          <div className="absolute top-12 left-4 opacity-[0.08] text-8xl md:text-9xl font-light">01</div>
         </div>
 
         <div className="relative z-10 text-center mb-16">
@@ -151,11 +150,10 @@ export default function CareersPage() {
       <div className="w-full h-px bg-gradient-to-r from-transparent via-horizon-cyan to-transparent mx-auto max-w-5xl"></div>
 
       {/* OPEN POSITIONS */}
-      {/* Removed overflow-hidden from section to prevent modal clipping */}
       <section className="px-6 lg:px-24 py-20 max-w-6xl mx-auto w-full relative">
-        {/* Safely contained background number */}
+        {/* Adjusted background number positioning to prevent side-clipping */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-12 -right-12 opacity-[0.08] text-9xl font-light">02</div>
+          <div className="absolute top-12 right-4 opacity-[0.08] text-8xl md:text-9xl font-light">02</div>
         </div>
 
         <div className="relative z-10 text-center mb-16">
@@ -166,7 +164,6 @@ export default function CareersPage() {
 
         <div className="space-y-8 relative z-10">
           {positions.map((position, index) => (
-            // Removed backdrop-blur-sm and added dynamic focus-within/hover z-indexes
             <div 
               key={position.id} 
               className="relative z-10 bg-orbital-blue/10 border border-horizon-cyan/30 rounded-xl p-8 lg:p-10 hover:border-horizon-cyan/50 transition-all duration-300 hover:z-[100] focus-within:z-[100]"
@@ -183,11 +180,6 @@ export default function CareersPage() {
                     {position.description}
                   </p>
                 </div>
-                {/* Added massive CSS overrides to force constraints:
-                  - Center the fixed container & add top padding (!pt-24) to clear the header
-                  - Constrain the form bubble height (!max-h-[80vh]) and allow scrolling (!overflow-y-auto)
-                  - Force z-index to 999999 so it covers the navbar
-                */}
                 <div className="mt-4 lg:mt-0 relative z-[999999] [&>button]:bg-horizon-cyan [&>button]:text-deep-space [&>button]:px-6 [&>button]:py-3 [&>button]:rounded-lg [&>button]:font-bold [&>button]:uppercase [&>button]:tracking-wide [&>button]:hover:bg-cyan-400 [&>button]:transition-colors [&>button]:shadow-lg [&_.fixed]:!z-[999999] [&_.fixed]:!flex [&_.fixed]:!flex-col [&_.fixed]:!items-center [&_.fixed]:!justify-center [&_.fixed]:!pt-24 [&_.fixed]:!pb-8 [&_.fixed_>_*]:!max-h-[80vh] [&_.fixed_>_*]:!overflow-y-auto [&_.fixed_>_*]:!w-full [&_.fixed_>_*]:!max-w-2xl">
                   <CareerApplyModal position={position} />
                 </div>
@@ -223,11 +215,10 @@ export default function CareersPage() {
       </section>
 
       {/* WORK MODE SECTION */}
-      {/* Removed overflow-hidden from section to prevent modal clipping */}
       <section className="px-6 lg:px-24 py-20 max-w-6xl mx-auto w-full relative">
-        {/* Safely contained background number */}
+        {/* Adjusted background number positioning to prevent side-clipping */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute bottom-12 -left-12 opacity-[0.08] text-9xl font-light">03</div>
+          <div className="absolute bottom-12 left-4 opacity-[0.08] text-8xl md:text-9xl font-light">03</div>
         </div>
 
         <div className="bg-gradient-to-br from-horizon-cyan/10 to-transparent border border-horizon-cyan/30 rounded-xl p-8 lg:p-12 backdrop-blur-sm relative z-10">
