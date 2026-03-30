@@ -62,10 +62,10 @@ export default function Header({
   };
 
   return (
-    <header 
-      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 text-white ${
-        isScrolled 
-          ? 'backdrop-blur-md !bg-black/30 border-b border-white/10' 
+    <header
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 text-cloud-white ${
+        isScrolled
+          ? 'backdrop-blur-md !bg-deep-space/30 border-b border-horizon-cyan/20'
           : '!bg-transparent border-b border-transparent'
       }`}
     >
@@ -99,7 +99,7 @@ export default function Header({
                 {item.dropdownItems ? (
                   <button
                     onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
-                    className="hover:text-[#0F62FE] transition-colors duration-300 text-sm font-medium tracking-[0.2em] flex items-center gap-1"
+                    className="hover:text-horizon-cyan transition-colors duration-300 text-sm font-medium tracking-[0.2em] flex items-center gap-1"
                   >
                     {item.label}
                     <ChevronDown 
@@ -112,7 +112,7 @@ export default function Header({
                 ) : (
                   <Link
                     href={item.href}
-                    className="hover:text-[#0F62FE] transition-colors duration-300 text-sm font-medium tracking-[0.2em] flex items-center gap-1"
+                    className="hover:text-horizon-cyan transition-colors duration-300 text-sm font-medium tracking-[0.2em] flex items-center gap-1"
                   >
                     {item.label}
                   </Link>
@@ -120,13 +120,13 @@ export default function Header({
 
                 {/* Dropdown menu for items with sub-items */}
                 {item.dropdownItems && activeDropdown === item.label && (
-                  <div className="absolute top-full left-0 mt-1 bg-[#0A0A0A] text-white rounded shadow-lg min-w-[140px] z-50 opacity-0 animate-fadeIn border border-white/10">
+                  <div className="absolute top-full left-0 mt-1 bg-deep-space text-cloud-white rounded shadow-lg min-w-[140px] z-50 opacity-0 animate-fadeIn border border-horizon-cyan/20">
                     <div className="py-1">
                       {item.dropdownItems.map((dropdownItem) => (
                         <Link
                           key={dropdownItem.label}
                           href={dropdownItem.href}
-                          className="block px-3 py-1.5 hover:text-[#0F62FE] transition-colors text-xs tracking-wide"
+                          className="block px-3 py-1.5 hover:text-horizon-cyan transition-colors text-xs tracking-wide"
                           onClick={() => setActiveDropdown(null)}
                         >
                           {dropdownItem.label}
@@ -142,7 +142,7 @@ export default function Header({
           {/* Mobile Hamburger Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden p-2 hover:text-[#0F62FE] transition-colors"
+            className="md:hidden p-2 hover:text-horizon-cyan transition-colors"
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMobileMenuOpen}
           >
@@ -152,13 +152,13 @@ export default function Header({
 
         {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden mt-6 pb-4 border-t border-white/10 pt-6 bg-[#0A0A0A]/95 -mx-6 px-6" role="navigation" aria-label="Mobile navigation">
+          <nav className="md:hidden mt-6 pb-4 border-t border-horizon-cyan/20 pt-6 bg-deep-space/95 -mx-6 px-6" role="navigation" aria-label="Mobile navigation">
             <div className="flex flex-col space-y-6">
               {navItems.map((item) => (
                 <div key={item.label}>
                   <Link
                     href={item.href}
-                    className="block py-2 hover:text-[#0F62FE] transition-colors text-base font-medium tracking-[0.2em] flex items-center gap-1"
+                    className="block py-2 hover:text-horizon-cyan transition-colors text-base font-medium tracking-[0.2em] flex items-center gap-1"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -172,7 +172,7 @@ export default function Header({
                         <Link
                           key={dropdownItem.label}
                           href={dropdownItem.href}
-                          className="block py-1 text-xs text-[#BFC5CC] hover:text-[#0F62FE] transition-colors tracking-wide"
+                          className="block py-1 text-xs text-stratosphere-silver hover:text-horizon-cyan transition-colors tracking-wide"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {dropdownItem.label}

@@ -1,20 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --bg-deep-space: #0A0A0A; /*  */
-  --bg-midnight: #121417; /* [cite: 17] */
-  --text-pure-white: #FFFFFF; /* [cite: 18] */
-  --text-aero-silver: #BFC5CC; /* [cite: 19] */
-  --accent-electric-blue: #0F62FE; /* [cite: 21] */
-  --accent-sky-cyan: #1FB6FF; /* [cite: 22] */
-  --royal-blue: #0033A0; /* Blue Origin-inspired primary color */
-  --royal-blue-dark: #002266;
-  --royal-blue-light: #0044CC;
+  /* Primary Colours */
+  --deep-space-navy: #0A1628;
+  --deep-space-darker: #050D14;
+  --orbital-blue: #0D2B55;
+  --horizon-cyan: #00AEEF;
+
+  /* Neutral & Support Colours */
+  --stratosphere-silver: #8A9BB5;
+  --cloud-white: #FFFFFF;
+  --mist: #EEF2F7;
+  --graphite: #2C3E50;
+
+  /* Legacy refs for compatibility */
+  --bg-deep-space: #0A1628;
+  --bg-midnight: #0D2B55;
+  --text-pure-white: #FFFFFF;
+  --text-aero-silver: #8A9BB5;
+  --accent-electric-blue: #00AEEF;
+  --accent-sky-cyan: #00AEEF;
+  --royal-blue: #00AEEF;
+  --royal-blue-dark: #0D2B55;
+  --royal-blue-light: #00AEEF;
 }
 
 body {
-  background-color: var(--bg-deep-space);
-  color: var(--text-pure-white);
+  background-color: var(--deep-space-navy);
+  color: var(--cloud-white);
 }
 
 /* Custom utility classes for typography */
@@ -25,21 +38,41 @@ body {
   font-family: var(--font-inter), sans-serif;
 }
 
-/* Royal Blue utility classes */
+/* Colour utilities */
+.bg-deep-space {
+  background-color: var(--deep-space-navy);
+}
+.bg-deep-space-darker {
+  background-color: var(--deep-space-darker);
+}
+.bg-orbital-blue {
+  background-color: var(--orbital-blue);
+}
+.text-horizon-cyan {
+  color: var(--horizon-cyan);
+}
+.text-stratosphere-silver {
+  color: var(--stratosphere-silver);
+}
+.border-horizon-cyan {
+  border-color: var(--horizon-cyan);
+}
+
+/* Royal Blue utility classes for compatibility */
 .bg-royal-blue {
-  background-color: var(--royal-blue);
+  background-color: var(--horizon-cyan);
 }
 .bg-royal-blue-dark {
-  background-color: var(--royal-blue-dark);
+  background-color: var(--orbital-blue);
 }
 .bg-royal-blue-light {
-  background-color: var(--royal-blue-light);
+  background-color: var(--horizon-cyan);
 }
 .text-royal-blue {
-  color: var(--royal-blue);
+  color: var(--horizon-cyan);
 }
 .border-royal-blue {
-  border-color: var(--royal-blue);
+  border-color: var(--horizon-cyan);
 }
 
 /* Smooth dropdown animation */
@@ -79,10 +112,10 @@ body {
 /* Pulsing glow animation for buttons */
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(15, 98, 254, 0.5), 0 0 30px rgba(15, 98, 254, 0.3), 0 0 45px rgba(15, 98, 254, 0.1);
+    box-shadow: 0 0 15px rgba(0, 174, 239, 0.5), 0 0 30px rgba(0, 174, 239, 0.3), 0 0 45px rgba(0, 174, 239, 0.1);
   }
   50% {
-    box-shadow: 0 0 25px rgba(15, 98, 254, 0.8), 0 0 50px rgba(15, 98, 254, 0.5), 0 0 75px rgba(15, 98, 254, 0.3);
+    box-shadow: 0 0 25px rgba(0, 174, 239, 0.8), 0 0 50px rgba(0, 174, 239, 0.5), 0 0 75px rgba(0, 174, 239, 0.3);
   }
 }
 
@@ -202,3 +235,14 @@ body {
 .delay-600 {
   animation-delay: 15s;
 }
+
+/* Section number styling for visual rhythm */
+.section-number {
+  position: relative;
+  font-size: 8rem;
+  font-weight: 300;
+  opacity: 0.08;
+  line-height: 1;
+  pointer-events: none;
+}
+

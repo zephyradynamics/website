@@ -7,13 +7,13 @@ export default function Home() {
     <div className="flex flex-col font-body">
       
       {/* HERO SECTION */}
-      <Hero 
+      <Hero
         videoSrc="/hero.mp4"
         heading="Shaping the Future of Urban Air Mobility"
         subheading="Sustainable Air Mobility for Modern Cities in India"
         ctaButtons={[
           {
-            label: 'Explore Kestrel X2',
+            label: 'Discover Kestrel X2',
             href: '/kestrel-x2',
             variant: 'primary'
           }
@@ -22,28 +22,29 @@ export default function Home() {
       />
 
       {/* SECTION 1.5: KEY HIGHLIGHTS */}
-      <section className="bg-[#0A0A0A] py-20 px-6 lg:px-24">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-widest text-white mb-16 text-center">
+      <section className="bg-deep-space py-20 px-6 lg:px-24 relative overflow-hidden">
+        <div className="absolute top-24 left-0 opacity-[0.08] text-9xl font-light pointer-events-none -ml-12">01</div>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <h2 className="font-heading text-5xl md:text-6xl font-bold uppercase tracking-widest text-cloud-white mb-16 text-center">
             What We're Building
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-[#0F62FE]/5 to-transparent border border-[#0F62FE]/20 rounded-lg p-8 space-y-4">
-              <h3 className="font-heading text-2xl font-bold text-[#0F62FE] uppercase tracking-wide">Kestrel X2</h3>
-              <p className="text-[#BFC5CC] text-sm leading-relaxed text-justify">
-                Our flagship single-passenger eVTOL prototype represents years of rigorous aerospace engineering. From advanced aerodynamics to autonomous control systems, discover what makes Kestrel X2 the foundation of India's urban air mobility future.
+            <div className="bg-gradient-to-br from-horizon-cyan/10 to-transparent border border-horizon-cyan/30 rounded-lg p-8 backdrop-blur-sm transition-all duration-300 hover:border-horizon-cyan/50 flex flex-col">
+              <h3 className="font-heading text-2xl font-bold text-horizon-cyan uppercase tracking-wide mb-4">Introducing Kestrel X2</h3>
+              <p className="text-stratosphere-silver text-base leading-relaxed text-justify font-body flex-grow">
+                The Aircraft Built for One. Most aircraft are built for many. Kestrel X2 is built for you. A single-passenger eVTOL engineered from first principles where every gram, every watt, and every aerodynamic decision serves one purpose: getting one person there, reliably and safely.
               </p>
-              <a href="/kestrel-x2" className="inline-block text-[#0F62FE] hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider mt-4">
-                Explore Kestrel X2 →
+              <a href="/kestrel-x2" className="inline-block text-horizon-cyan hover:text-cloud-white transition-colors text-sm font-semibold uppercase tracking-wider mt-4">
+                Explore Full Specifications →
               </a>
             </div>
 
-            <div className="bg-gradient-to-br from-[#0F62FE]/5 to-transparent border border-[#0F62FE]/20 rounded-lg p-8 space-y-4">
-              <h3 className="font-heading text-2xl font-bold text-[#0F62FE] uppercase tracking-wide">Our Team</h3>
-              <p className="text-[#BFC5CC] text-sm leading-relaxed text-justify">
-                Founded on academic excellence and aerospace expertise. Our lean, highly motivated team combines cutting-edge first-principles engineering with direct mentorship from experienced aerospace faculty to build the future of autonomous flight.
+            <div className="bg-gradient-to-br from-horizon-cyan/10 to-transparent border border-horizon-cyan/30 rounded-lg p-8 backdrop-blur-sm transition-all duration-300 hover:border-horizon-cyan/50 flex flex-col">
+              <h3 className="font-heading text-2xl font-bold text-horizon-cyan uppercase tracking-wide mb-4">Our Team</h3>
+              <p className="text-stratosphere-silver text-base leading-relaxed text-justify font-body flex-grow">
+                Founded on academic excellence and aerospace expertise. Our lean, highly motivated team combines cutting-edge first-principles engineering with direct mentorship from experienced aerospace faculty. We work on real-world aerospace systems, building the future of autonomous flight with precision and purpose.
               </p>
-              <a href="/about#team" className="inline-block text-[#0F62FE] hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider mt-4">
+              <a href="/about#team" className="inline-block text-horizon-cyan hover:text-cloud-white transition-colors text-sm font-semibold uppercase tracking-wider mt-4">
                 Meet the Team →
               </a>
             </div>
@@ -51,17 +52,18 @@ export default function Home() {
         </div>
       </section>
 
-{/* SECTION 2: NEWS */}
-      <section className="bg-[#0A0A0A] py-16 px-6 lg:px-24">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-widest text-white mb-10 text-center">
-          News From Zephyra Dynamics
+      {/* SECTION 2: NEWS */}
+      <section className="bg-deep-space py-20 px-6 lg:px-24 relative overflow-hidden">
+        <div className="absolute top-12 right-0 opacity-[0.08] text-9xl font-light pointer-events-none -mr-20">02</div>
+        <h2 className="font-heading text-5xl md:text-6xl font-bold uppercase tracking-widest text-cloud-white mb-12 text-center relative z-10">
+          Newsroom
         </h2>
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-stretch max-w-4xl mx-auto">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-stretch max-w-4xl mx-auto relative z-10">
           <a
             href="https://www.linkedin.com/posts/zephyradynamics_zephyradynamics-kestrelx2-evtol-activity-7431284149686067200-RzlU?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEFuCngBz8eI5C1Z50qNwu-RFTP_iQCi5LQ"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 border border-white/10 rounded-lg overflow-hidden cursor-pointer hover:border-[#0F62FE]/50 hover:scale-[1.02] transition-all duration-300"
+            className="flex-1 border border-horizon-cyan/30 rounded-lg overflow-hidden cursor-pointer hover:border-horizon-cyan transition-all duration-300 hover:shadow-lg hover:shadow-horizon-cyan/20"
           >
             <img
               src="/das.png"
@@ -73,7 +75,7 @@ export default function Home() {
             href="https://www.linkedin.com/posts/zephyradynamics_zephyradynamics-kestrelx2-evtol-activity-7431284149686067200-RzlU?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEFuCngBz8eI5C1Z50qNwu-RFTP_iQCi5LQ"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 border border-white/10 rounded-lg overflow-hidden cursor-pointer hover:border-[#0F62FE]/50 hover:scale-[1.02] transition-all duration-300"
+            className="flex-1 border border-horizon-cyan/30 rounded-lg overflow-hidden cursor-pointer hover:border-horizon-cyan transition-all duration-300 hover:shadow-lg hover:shadow-horizon-cyan/20"
           >
             <img
               src="/inv.png"
@@ -81,6 +83,42 @@ export default function Home() {
               className="w-full h-full object-cover"
             />
           </a>
+        </div>
+      </section>
+
+      {/* SECTION 3: INDIA FOCUS */}
+      <section className="bg-orbital-blue py-20 px-6 lg:px-24 relative overflow-hidden border-y border-horizon-cyan/20">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-stratosphere-silver text-xs font-bold uppercase tracking-widest mb-4 text-center">Built for India. Ready for the World.</p>
+          <h2 className="font-heading text-4xl md:text-5xl font-bold uppercase tracking-widest text-cloud-white mb-8 text-center">
+            India's Urban Sky is Open
+          </h2>
+          <p className="text-stratosphere-silver text-base leading-relaxed max-w-3xl mx-auto text-justify">
+            India has 54 cities with populations exceeding one million. Its metropolitan areas rank among the most congested on Earth. The ground is full. The sky above every Indian city remains largely unclaimed.
+          </p>
+          <p className="text-cloud-white text-base leading-relaxed max-w-3xl mx-auto mt-6 text-justify">
+            Zephyra Dynamics was conceived in India, for India with the scale, the regulatory landscape, and the density of Indian cities as the primary design constraint. Kestrel X2 is not a product adapted for India. It is a product that could only have come from India.
+          </p>
+        </div>
+      </section>
+
+      {/* SECTION 4: FINAL HOME CTA */}
+      <section className="bg-deep-space py-16 px-6 lg:px-24 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-cloud-white mb-8">
+            Be Part of What Comes Next
+          </h2>
+          <p className="text-stratosphere-silver text-base mb-10">
+            Kestrel X2 is accepting expressions of interest from early access partners, institutional collaborators, and potential operators. The era of urban air mobility in India begins with a single seat.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/#footer" className="px-8 py-3 bg-horizon-cyan text-deep-space font-semibold uppercase tracking-wider rounded hover:bg-horizon-cyan/90 transition-colors">
+              Request Early Access
+            </a>
+            <a href="/#footer" className="px-8 py-3 border border-horizon-cyan text-horizon-cyan font-semibold uppercase tracking-wider rounded hover:bg-horizon-cyan/10 transition-colors">
+              Partner With Us
+            </a>
+          </div>
         </div>
       </section>
 

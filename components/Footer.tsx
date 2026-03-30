@@ -1,19 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { Linkedin, Instagram, Mail, MapPin } from 'lucide-react';
-import { useState } from 'react';
+import { Linkedin, Instagram, MapPin } from 'lucide-react';
 
 export default function Footer() {
-  const [showDisclaimer, setShowDisclaimer] = useState(false);
-
   // Custom X (Twitter) Icon Component
   const XIcon = ({ size = 20 }: { size?: number }) => (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox="0 0 24 24" 
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
       fill="currentColor"
       className="inline-block"
     >
@@ -22,166 +18,84 @@ export default function Footer() {
   );
 
   return (
-    <footer id="footer" className="bg-[#0A0A0A] text-white w-full border-t border-white/10 relative">
-      {/* Disclaimer Popup - Modal Style */}
-      {showDisclaimer && (
-        <>
-          {/* Backdrop */}
-          <div 
-            className="fixed inset-0 bg-black/70 z-50"
-            onClick={() => setShowDisclaimer(false)}
-          ></div>
-          
-          {/* Popup Window */}
-          <div 
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-[#0A0A0A] border-2 border-[#0F62FE]/50 rounded-lg p-6 max-w-lg w-full mx-4 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-start mb-4">
-              <h3 className="text-white font-bold text-lg">Disclaimer - Future Variants (Kestrel X2)</h3>
-              <button
-                onClick={() => setShowDisclaimer(false)}
-                className="text-[#BFC5CC] hover:text-white transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            <p className="text-sm text-[#BFC5CC] leading-relaxed">
-              All brand names and logos displayed in the Future Variants section are used for illustrative and conceptual purposes only. 
-              They represent potential future applications and do not constitute official partnerships, endorsements, or affiliations with any organization.
-            </p>
-          </div>
-        </>
-      )}
+    <footer id="footer" className="bg-deep-space text-cloud-white w-full border-t border-horizon-cyan/20 relative overflow-hidden">
+      {/* Decorative top gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-horizon-cyan to-transparent"></div>
 
       {/* Content */}
-      <div className="py-8 px-6 lg:px-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
-          {/* Left: Logo and Description */}
+      <div className="py-12 px-6 lg:px-24 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* Column 1: Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <img 
-                src="/logo.png" 
-                alt="Zephyra Dynamics" 
+            <div>
+              <img
+                src="/logo.png"
+                alt="Zephyra Dynamics"
                 className="h-10 w-auto object-contain"
               />
+              <p className="text-stratosphere-silver text-xs font-semibold mt-2">Shaping the Future of Urban Air Mobility</p>
             </div>
-            <p className="text-[#BFC5CC] text-sm leading-relaxed">
-               Shaping the Future of Urban Air Mobility.
-            </p>
-            {/* Supported By */}
-            <div className="pt-4">
-              <p className="text-[#6B7280] text-xs mb-2">Supported by</p>
+            {/* Partners */}
+            <div>
+              <p className="text-stratosphere-silver text-[10px] font-semibold mb-2">Supported by</p>
               <div className="flex items-center gap-4">
-                <a href="https://www.3ds.com" target="_blank" rel="noopener noreferrer">
-                  <img 
-                    src="/3DS_Corp_Logotype_White_RGB-1.png" 
-                    alt="Dassault Systèmes" 
-                    className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
-                  />
-                </a>
-                <a href="https://www.nvidia.com" target="_blank" rel="noopener noreferrer">
-                  <img 
-                    src="/nvidia.png" 
-                    alt="NVIDIA" 
-                    className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
-                  />
-                </a>
+                <img
+                  src="/Dassault_Systèmes_logo.svg-removebg-preview.png"
+                  alt="Dassault Systèmes"
+                  className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
+                />
+                <img
+                  src="/nvidia.png"
+                  alt="NVIDIA"
+                  className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
+                />
               </div>
             </div>
           </div>
 
-          {/* Middle: Quick Links */}
+          {/* Column 2: Company */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold mb-6">Quick Links</h3>
+            <h3 className="text-sm font-bold text-cloud-white uppercase tracking-widest">Company</h3>
             <div className="flex flex-col gap-3">
-              <Link href="/" className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors">
-                Home
-              </Link>
-              <Link href="/kestrel-x2" className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors">
+              <Link href="/kestrel-x2" className="text-stratosphere-silver hover:text-horizon-cyan transition-colors text-sm">
                 Kestrel X2
               </Link>
-              <Link href="/#about" className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors">
+              <Link href="/about" className="text-stratosphere-silver hover:text-horizon-cyan transition-colors text-sm">
                 About
               </Link>
-              <Link href="/#footer" className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors">
-                Contact
+              <Link href="/careers" className="text-stratosphere-silver hover:text-horizon-cyan transition-colors text-sm">
+                Careers
               </Link>
-              <button 
-                onClick={() => setShowDisclaimer(true)}
-                className="text-[#BFC5CC] hover:text-[#0F62FE] transition-colors text-left cursor-pointer"
-              >
-                Disclaimer
-              </button>
             </div>
           </div>
 
-          {/* Right: Contact Us */}
+          {/* Column 3: Connect */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold mb-6">Contact Us</h3>
-            <div className="flex flex-col gap-4">
-              {/* Email */}
-              <a
-                href="mailto:info@zephyradynamics.com"
-                className="flex items-center gap-3 text-[#BFC5CC] hover:text-[#0F62FE] transition-colors"
-              >
-                <Mail size={20} />
-                <span className="text-sm">info@zephyradynamics.com</span>
-              </a>
-
-              {/* LinkedIn */}
-              <a
-                href="https://www.linkedin.com/company/zephyradynamics/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-[#BFC5CC] hover:text-[#0F62FE] transition-colors"
-              >
-                <Linkedin size={20} />
-                <span className="text-sm">LinkedIn</span>
-              </a>
-
-              {/* Instagram */}
-              <a
-                href="https://www.instagram.com/zephyradynamics/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-[#BFC5CC] hover:text-[#0F62FE] transition-colors"
-              >
-                <Instagram size={20} />
-                <span className="text-sm">Instagram</span>
-              </a>
-
-              {/* X (Twitter) */}
-              <a
-                href="https://x.com/Zephyrdynamics"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-[#BFC5CC] hover:text-[#0F62FE] transition-colors"
-              >
-                <XIcon size={20} />
-                <span className="text-sm">X</span>
-              </a>
-
-              {/* Location */}
-              <a
-                href="https://maps.google.com/?q=Srinagar,+Jammu+Kashmir,+India+191111"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-[#BFC5CC] hover:text-[#0F62FE] transition-colors"
-              >
-                <MapPin size={20} />
-                <span className="text-sm">Srinagar, Jammu Kashmir, India</span>
-              </a>
+            <h3 className="text-sm font-bold text-cloud-white uppercase tracking-widest">Connect</h3>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2 text-stratosphere-silver text-sm">
+                <MapPin size={16} className="text-horizon-cyan" />
+                <span>Srinagar, India</span>
+              </div>
+              <div className="flex items-center gap-4 pt-2">
+                <a href="https://www.linkedin.com/company/zephyradynamics/" target="_blank" rel="noopener noreferrer" className="text-stratosphere-silver hover:text-horizon-cyan transition-colors">
+                  <Linkedin size={16} />
+                </a>
+                <a href="https://x.com/Zephyrdynamics" target="_blank" rel="noopener noreferrer" className="text-stratosphere-silver hover:text-horizon-cyan transition-colors">
+                  <XIcon size={16} />
+                </a>
+                <a href="https://www.instagram.com/zephyradynamics/" target="_blank" rel="noopener noreferrer" className="text-stratosphere-silver hover:text-horizon-cyan transition-colors">
+                  <Instagram size={16} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Copyright */}
-        <div className="border-t border-white/10 pt-6 text-center">
-          <p className="text-[#BFC5CC] text-sm">
-            © 2025 Zephyra Dynamics:- All rights reserved
+        {/* Bottom Bar */}
+        <div className="border-t border-horizon-cyan/20 pt-8 text-center">
+          <p className="text-stratosphere-silver/70 text-xs">
+            © 2025 Zephyra Dynamics. All Rights Reserved
           </p>
         </div>
       </div>

@@ -38,8 +38,18 @@ const navigationItems = [
     ]
   },
   {
-    label: 'About',
-    href: '/about'
+    label: 'Explore',
+    href: '#',
+    dropdownItems: [
+      {
+        label: 'About',
+        href: '/about'
+      },
+      {
+        label: 'Careers',
+        href: '/careers'
+      }
+    ]
   },
   {
     label: 'Contact',
@@ -55,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${montserrat.variable} ${inter.variable} font-sans antialiased bg-[#0A0A0A] text-white overflow-x-hidden`}
+        className={`${montserrat.variable} ${inter.variable} font-sans antialiased bg-deep-space text-cloud-white overflow-x-hidden`}
       >
         <Header 
           logoSrc="/logo.png"

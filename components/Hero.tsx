@@ -51,19 +51,19 @@ export default function Hero({
       </video>
 
       {/* Dark Overlay for text readability */}
-      <div 
-        className="absolute inset-0 bg-black -z-10"
+      <div
+        className="absolute inset-0 bg-deep-space -z-10"
         style={{ opacity: overlayOpacity }}
       />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl">
-        <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold tracking-wide text-white">
+        <h1 className="font-heading text-3xl md:text-5xl lg:text-7xl font-bold tracking-wide text-cloud-white">
           {heading}
         </h1>
-        
+
         {subheading && (
-          <p className="mt-8 text-lg md:text-xl lg:text-2xl font-body font-normal tracking-wider max-w-3xl mx-auto text-white/95 leading-relaxed">
+          <p className="mt-8 text-lg md:text-xl lg:text-2xl font-body font-normal tracking-wider max-w-3xl mx-auto text-cloud-white/95 leading-relaxed">
             {subheading}
           </p>
         )}
@@ -78,9 +78,9 @@ export default function Hero({
                   onClick={() => handleButtonClick(button.href)}
                   className={`
                     px-8 py-3 font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer
-                    ${button.variant === 'primary' 
-                      ? 'border-2 border-white bg-transparent text-white hover:bg-white/10 animate-pulseGlow hover:border-[#0F62FE]' 
-                      : 'border-2 border-white text-white hover:bg-white hover:text-black'
+                    ${button.variant === 'primary'
+                      ? 'border-2 border-cloud-white bg-transparent text-cloud-white hover:bg-cloud-white/10 animate-pulseGlow hover:border-horizon-cyan'
+                      : 'border-2 border-cloud-white text-cloud-white hover:bg-cloud-white hover:text-deep-space'
                     }
                   `}
                 >
@@ -92,9 +92,9 @@ export default function Hero({
                   href={button.href}
                   className={`
                     px-8 py-3 font-semibold tracking-wider uppercase transition-all duration-300
-                    ${button.variant === 'primary' 
-                      ? 'border-2 border-white bg-transparent text-white hover:bg-white/10 animate-pulseGlow hover:border-[#0F62FE]' 
-                      : 'border-2 border-white text-white hover:bg-white hover:text-black'
+                    ${button.variant === 'primary'
+                      ? 'border-2 border-cloud-white bg-transparent text-cloud-white hover:bg-cloud-white/10 animate-pulseGlow hover:border-horizon-cyan'
+                      : 'border-2 border-cloud-white text-cloud-white hover:bg-cloud-white hover:text-deep-space'
                     }
                   `}
                 >
