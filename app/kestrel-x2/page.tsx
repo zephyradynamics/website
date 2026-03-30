@@ -117,8 +117,8 @@ export default function KestrelX2Page() {
           }`}
         >
           <div className="relative z-10 max-w-5xl px-6">
-            {/* Added font-sans and drop-shadow-2xl for max visibility */}
-            <h1 className="font-sans text-5xl md:text-7xl font-bold uppercase tracking-widest mb-6 leading-tight drop-shadow-2xl text-white">
+            {/* Updated to match the home page style: font-body, text-4xl/6xl, normal case */}
+            <h1 className="font-body text-4xl md:text-6xl font-bold tracking-wide mb-6 leading-tight drop-shadow-2xl text-white">
               Engineered for One<br />Perfected for All
             </h1>
           </div>
