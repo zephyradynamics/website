@@ -30,6 +30,7 @@ export default function Header({
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileActiveDropdown, setMobileActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -57,20 +58,34 @@ export default function Header({
     };
   }, []);
 
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMobileMenuOpen]);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    if (!isMobileMenuOpen) setMobileActiveDropdown(null);
+  };
+
+  const toggleMobileDropdown = (label: string) => {
+    setMobileActiveDropdown(mobileActiveDropdown === label ? null : label);
   };
 
   return (
     <header
       className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 text-cloud-white ${
-        isScrolled
+        isScrolled && !isMobileMenuOpen
           ? 'backdrop-blur-md !bg-deep-space/30 border-b border-horizon-cyan/20'
           : '!bg-transparent border-b border-transparent'
       }`}
     >
       <div className="container mx-auto px-6 lg:px-12 py-1">
-        <div className="flex items-center justify-between h-12">
+        <div className="flex items-center justify-between h-16 md:h-12 relative z-[60]">
           {/* Logo/Brand - Left side */}
           <div className="flex items-center justify-start h-full">
             <div className="flex items-center gap-3">
@@ -89,13 +104,10 @@ export default function Header({
             </div>
           </div>
 
-          {/* Desktop Navigation - Right side */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-stretch justify-end space-x-1 desktop-nav h-full">
             {navItems.map((item) => (
-              <div
-                key={item.label}
-                className="relative flex items-stretch"
-              >
+              <div key={item.label} className="relative flex items-stretch">
                 {item.dropdownItems ? (
                   <button
                     onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
@@ -106,12 +118,7 @@ export default function Header({
                     }`}
                   >
                     {item.label}
-                    <ChevronDown 
-                      size={16} 
-                      className={`transition-transform duration-200 ${
-                        activeDropdown === item.label ? 'rotate-180' : ''
-                      }`}
-                    />
+                    <ChevronDown size={16} className={`transition-transform duration-200 ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
                   </button>
                 ) : (
                   <Link
@@ -122,15 +129,14 @@ export default function Header({
                   </Link>
                 )}
 
-                {/* Dropdown menu - Now set to w-full to perfectly match the button width */}
                 {item.dropdownItems && activeDropdown === item.label && (
-                  <div className="absolute top-full left-0 w-full bg-[#151515] rounded-b-md shadow-2xl z-50 overflow-hidden">
+                  <div className="absolute top-full left-0 w-full bg-[#151515] rounded-b-md shadow-2xl z-50 overflow-hidden border-t border-white/5">
                     <div className="py-2 flex flex-col">
                       {item.dropdownItems.map((dropdownItem) => (
                         <Link
                           key={dropdownItem.label}
                           href={dropdownItem.href}
-                          className="block w-full py-3 px-2 hover:bg-white/10 transition-colors text-sm text-gray-300 hover:text-white tracking-widest text-center"
+                          className="block w-full px-5 py-3 hover:bg-white/10 transition-colors text-sm text-gray-300 hover:text-white tracking-widest text-center"
                           onClick={() => setActiveDropdown(null)}
                         >
                           {dropdownItem.label}
@@ -148,35 +154,48 @@ export default function Header({
             onClick={toggleMobileMenu}
             className="md:hidden p-2 hover:text-horizon-cyan transition-colors"
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
-        {/* Mobile Menu Overlay */}
+        {/* Mobile Menu Overlay - Full screen black blur including upper section */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden mt-6 pb-4 border-t border-horizon-cyan/20 pt-6 bg-deep-space/95 -mx-6 px-6" role="navigation" aria-label="Mobile navigation">
-            <div className="flex flex-col space-y-6">
+          <div className="fixed inset-0 z-[55] bg-black/90 backdrop-blur-2xl md:hidden flex flex-col animate-fadeIn">
+            <nav className="flex flex-col pt-24 px-8 space-y-8 overflow-y-auto" role="navigation">
               {navItems.map((item) => (
-                <div key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="block py-2 hover:text-horizon-cyan transition-colors text-base font-medium tracking-[0.2em] flex items-center gap-1"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                    {item.dropdownItems && <ChevronDown size={16} />}
-                  </Link>
+                <div key={item.label} className="border-b border-white/10 pb-4">
+                  {item.dropdownItems ? (
+                    <button
+                      className="w-full flex items-center justify-between py-2 text-white transition-colors text-xl font-medium tracking-[0.2em]"
+                      onClick={() => toggleMobileDropdown(item.label)}
+                    >
+                      {item.label}
+                      <ChevronDown 
+                        size={20} 
+                        className={`transition-transform duration-300 ${
+                          mobileActiveDropdown === item.label ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="block py-2 text-white transition-colors text-xl font-medium tracking-[0.2em]"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
 
-                  {/* Mobile dropdown items */}
-                  {item.dropdownItems && (
-                    <div className="ml-4 mt-3 space-y-3">
+                  {/* Mobile dropdown items - Closed by default */}
+                  {item.dropdownItems && mobileActiveDropdown === item.label && (
+                    <div className="ml-4 mt-4 space-y-5 animate-fadeIn">
                       {item.dropdownItems.map((dropdownItem) => (
                         <Link
                           key={dropdownItem.label}
                           href={dropdownItem.href}
-                          className="block py-1 text-xs text-stratosphere-silver hover:text-horizon-cyan transition-colors tracking-wide"
+                          className="block text-stratosphere-silver hover:text-horizon-cyan transition-colors text-base tracking-widest"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {dropdownItem.label}
@@ -186,8 +205,8 @@ export default function Header({
                   )}
                 </div>
               ))}
-            </div>
-          </nav>
+            </nav>
+          </div>
         )}
       </div>
     </header>

@@ -40,7 +40,7 @@ export default function Footer() {
               <p className="text-stratosphere-silver text-[10px] font-semibold mb-2">Supported by</p>
               <div className="flex items-center gap-4">
                 <img
-                  src="/Dassault_Systèmes_logo.svg-removebg-preview.png"
+                  src="/3DS_Corp_Logotype_White_RGB-1.png"
                   alt="Dassault Systèmes"
                   className="h-8 w-auto object-contain hover:scale-110 transition-transform duration-300"
                 />
