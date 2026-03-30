@@ -72,7 +72,7 @@ export default function Header({
       <div className="container mx-auto px-6 lg:px-12 py-1">
         <div className="flex items-center justify-between h-12">
           {/* Logo/Brand - Left side */}
-          <div className="flex items-center justify-start">
+          <div className="flex items-center justify-start h-full">
             <div className="flex items-center gap-3">
               {logoSrc ? (
                 <Image 
@@ -90,16 +90,20 @@ export default function Header({
           </div>
 
           {/* Desktop Navigation - Right side */}
-          <nav className="hidden md:flex items-center justify-end space-x-10 desktop-nav">
+          <nav className="hidden md:flex items-stretch justify-end space-x-1 desktop-nav h-full">
             {navItems.map((item) => (
               <div
                 key={item.label}
-                className="relative group"
+                className="relative flex items-stretch"
               >
                 {item.dropdownItems ? (
                   <button
                     onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
-                    className="hover:text-horizon-cyan transition-colors duration-300 text-sm font-medium tracking-[0.2em] flex items-center gap-1"
+                    className={`px-5 h-full transition-colors duration-200 text-sm font-medium tracking-[0.2em] flex items-center gap-1 ${
+                      activeDropdown === item.label 
+                        ? 'bg-[#151515] text-cloud-white rounded-t-md' 
+                        : 'hover:text-horizon-cyan text-cloud-white'
+                    }`}
                   >
                     {item.label}
                     <ChevronDown 
@@ -112,21 +116,21 @@ export default function Header({
                 ) : (
                   <Link
                     href={item.href}
-                    className="hover:text-horizon-cyan transition-colors duration-300 text-sm font-medium tracking-[0.2em] flex items-center gap-1"
+                    className="px-5 h-full transition-colors duration-200 text-sm font-medium tracking-[0.2em] flex items-center gap-1 hover:text-horizon-cyan text-cloud-white"
                   >
                     {item.label}
                   </Link>
                 )}
 
-                {/* Dropdown menu for items with sub-items */}
+                {/* Dropdown menu - Now set to w-full to perfectly match the button width */}
                 {item.dropdownItems && activeDropdown === item.label && (
-                  <div className="absolute top-full left-0 mt-1 bg-deep-space text-cloud-white rounded shadow-lg min-w-[140px] z-50 opacity-0 animate-fadeIn border border-horizon-cyan/20">
-                    <div className="py-1">
+                  <div className="absolute top-full left-0 w-full bg-[#151515] rounded-b-md shadow-2xl z-50 overflow-hidden">
+                    <div className="py-2 flex flex-col">
                       {item.dropdownItems.map((dropdownItem) => (
                         <Link
                           key={dropdownItem.label}
                           href={dropdownItem.href}
-                          className="block px-3 py-1.5 hover:text-horizon-cyan transition-colors text-xs tracking-wide"
+                          className="block w-full py-3 px-2 hover:bg-white/10 transition-colors text-sm text-gray-300 hover:text-white tracking-widest text-center"
                           onClick={() => setActiveDropdown(null)}
                         >
                           {dropdownItem.label}
