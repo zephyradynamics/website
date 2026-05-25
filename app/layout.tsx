@@ -14,8 +14,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Zephyra Dynamics",
-  description: "Designing and Developing Next-Generation eVTOL Aircraft", // [cite: 40]
+  metadataBase: new URL('https://www.zephyradynamics.com'),
+  title: {
+    default: "Zephyra Dynamics",
+    template: "%s | Zephyra Dynamics",
+  },
+  description: "Zephyra Dynamics is building next-generation eVTOL aircraft and urban air traffic management software for India's future air mobility network.",
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "Zephyra Dynamics",
+    description: "Next-generation eVTOL aircraft and urban air traffic management software for India's future air mobility network.",
+    url: 'https://www.zephyradynamics.com',
+    siteName: 'Zephyra Dynamics',
+    type: 'website',
+  },
   icons: {
     icon: '/logo.ico',
   },
@@ -28,17 +42,21 @@ const navigationItems = [
     href: '/'
   },
   {
-    label: 'Vehicles',
+    label: 'Product',
     href: '#',
     dropdownItems: [
       {
         label: 'Kestrel X2',
         href: '/kestrel-x2'
+      },
+      {
+        label: 'LAMINAR',
+        href: '/laminar'
       }
     ]
   },
   {
-    label: 'Explore',
+    label: 'Company',
     href: '#',
     dropdownItems: [
       {

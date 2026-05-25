@@ -3,20 +3,20 @@
 import Link from 'next/link';
 import { Linkedin, Instagram, MapPin } from 'lucide-react';
 
-export default function Footer() {
-  // Custom X (Twitter) Icon Component
-  const XIcon = ({ size = 20 }: { size?: number }) => (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="inline-block"
-    >
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-    </svg>
-  );
+// Custom X (Twitter) Icon Component
+const XIcon = ({ size = 20 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="inline-block"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+);
 
+export default function Footer() {
   return (
     <footer id="footer" className="bg-deep-space text-cloud-white w-full border-t border-horizon-cyan/20 relative overflow-hidden">
       {/* Decorative top gradient */}
@@ -24,7 +24,7 @@ export default function Footer() {
 
       {/* Content */}
       <div className="py-12 px-6 lg:px-24 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Column 1: Brand */}
           <div className="space-y-4">
             <div>
@@ -53,13 +53,23 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Company */}
+          {/* Column 2: Product */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-cloud-white uppercase tracking-widest">Company</h3>
+            <h3 className="text-sm font-bold text-cloud-white uppercase tracking-widest">Product</h3>
             <div className="flex flex-col gap-3">
               <Link href="/kestrel-x2" className="text-stratosphere-silver hover:text-horizon-cyan transition-colors text-sm">
                 Kestrel X2
               </Link>
+              <Link href="/laminar" className="text-stratosphere-silver hover:text-horizon-cyan transition-colors text-sm">
+                LAMINAR
+              </Link>
+            </div>
+          </div>
+
+          {/* Column 3: Company */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-bold text-cloud-white uppercase tracking-widest">Company</h3>
+            <div className="flex flex-col gap-3">
               <Link href="/about" className="text-stratosphere-silver hover:text-horizon-cyan transition-colors text-sm">
                 About
               </Link>
@@ -69,7 +79,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3: Connect */}
+          {/* Column 4: Connect */}
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-cloud-white uppercase tracking-widest">Connect</h3>
             <div className="flex flex-col gap-3">
