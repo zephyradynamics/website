@@ -1,109 +1,41 @@
-'use client';
-
 import Link from 'next/link';
+import Image from 'next/image';
 
-interface CTAButton {
-  label: string;
-  href: string;
-  variant: 'primary' | 'secondary';
-}
-
-interface HeroProps {
-  videoSrc: string;
-  heading: string;
-  subheading?: string;
-  ctaButtons?: CTAButton[];
-  overlayOpacity?: number;
-  minHeight?: string;
-}
-
-export default function Hero({
-  videoSrc,
-  heading,
-  subheading,
-  ctaButtons,
-  overlayOpacity = 0.5,
-  minHeight = '100vh',
-}: HeroProps) {
-  const handleButtonClick = (href: string) => {
-    if (href.startsWith('#')) {
-      const element = document.getElementById(href.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
-
+/**
+ * Landing hero. One still, no video.
+ * The previous hero.mp4 was 20 MB; this render is around 60 KB.
+ */
+export default function Hero() {
   return (
-    <section 
-      className="relative flex flex-col items-center justify-center text-center px-6"
-      style={{ minHeight }}
-    >
-      {/* Video Background with reduced brightness */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover -z-20 brightness-50"
-      >
-        <source src={videoSrc} type="video/mp4" />
-      </video>
+    <section className="border-b border-rule bg-plate">
+      <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-20 lg:pt-[92px]">
+        <p className="tag mb-7">Sustainable Air Mobility for Modern Cities in India</p>
 
-      {/* Dark Overlay for text readability */}
-      <div
-        className="absolute inset-0 bg-deep-space -z-10"
-        style={{ opacity: overlayOpacity }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl">
-        <h1 className="font-heading text-3xl md:text-5xl lg:text-7xl font-bold tracking-wide text-cloud-white">
-          {heading}
+        <h1 className="max-w-[18ch] text-display text-ink">
+          Shaping the Future of{' '}
+          <span className="text-signal">Urban Air Mobility</span>
         </h1>
 
-        {subheading && (
-          <p className="mt-8 text-lg md:text-xl lg:text-2xl font-body font-normal tracking-wider max-w-3xl mx-auto text-cloud-white/95 leading-relaxed">
-            {subheading}
-          </p>
-        )}
+        <div className="mt-9">
+          <Link
+            href="/kestrel-x2"
+            className="inline-flex h-[50px] items-center bg-signal px-[30px] text-sm font-medium text-plate transition-colors hover:bg-signal-dark"
+          >
+            Explore Kestrel X2
+          </Link>
+        </div>
+      </div>
 
-        {/* CTA Buttons */}
-        {ctaButtons && ctaButtons.length > 0 && (
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center cta-buttons">
-            {ctaButtons.map((button, index) => (
-              button.href.startsWith('#') ? (
-                <button
-                  key={index}
-                  onClick={() => handleButtonClick(button.href)}
-                  className={`
-                    px-8 py-3 font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer
-                    ${button.variant === 'primary'
-                      ? 'border-2 border-cloud-white bg-transparent text-cloud-white hover:bg-cloud-white/10 animate-pulseGlow hover:border-horizon-cyan'
-                      : 'border-2 border-cloud-white text-cloud-white hover:bg-cloud-white hover:text-deep-space'
-                    }
-                  `}
-                >
-                  {button.label}
-                </button>
-              ) : (
-                <Link
-                  key={index}
-                  href={button.href}
-                  className={`
-                    px-8 py-3 font-semibold tracking-wider uppercase transition-all duration-300
-                    ${button.variant === 'primary'
-                      ? 'border-2 border-cloud-white bg-transparent text-cloud-white hover:bg-cloud-white/10 animate-pulseGlow hover:border-horizon-cyan'
-                      : 'border-2 border-cloud-white text-cloud-white hover:bg-cloud-white hover:text-deep-space'
-                    }
-                  `}
-                >
-                  {button.label}
-                </Link>
-              )
-            ))}
-          </div>
-        )}
+      <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-10 pb-(--spacing-section) lg:pt-14">
+        <Image
+          src="/img/kestrel-side-view.webp"
+          alt="Kestrel X2, a single-seat autonomous eVTOL, shown in three-quarter view"
+          width={1800}
+          height={764}
+          priority
+          sizes="(min-width: 1440px) 1328px, 100vw"
+          className="h-auto w-full"
+        />
       </div>
     </section>
   );

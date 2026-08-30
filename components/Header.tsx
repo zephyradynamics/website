@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
-// TypeScript interfaces for Header component props
 interface DropdownItem {
   label: string;
   href: string;
@@ -23,192 +22,219 @@ interface HeaderProps {
   navItems: NavItem[];
 }
 
-export default function Header({
-  logoSrc,
-  brandName,
-  navItems,
-}: HeaderProps) {
+export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileActiveDropdown, setMobileActiveDropdown] = useState<string | null>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
+
+  const navRef = useRef<HTMLElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const mobilePanelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (!target.closest('.desktop-nav')) {
+    const onClick = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
       }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    document.addEventListener('click', handleClickOutside);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('click', handleClickOutside);
-    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
   }, []);
 
-  // Prevent scrolling when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      if (activeDropdown) setActiveDropdown(null);
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [activeDropdown, isMobileMenuOpen]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isMobileMenuOpen]);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    if (!isMobileMenuOpen) setMobileActiveDropdown(null);
-  };
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const panel = mobilePanelRef.current;
+    if (!panel) return;
+    const focusables = Array.from(
+      panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+    );
+    focusables[0]?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab' || focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    panel.addEventListener('keydown', onKeyDown);
+    return () => panel.removeEventListener('keydown', onKeyDown);
+  }, [isMobileMenuOpen]);
 
-  const toggleMobileDropdown = (label: string) => {
-    setMobileActiveDropdown(mobileActiveDropdown === label ? null : label);
-  };
+  const closeMobile = useCallback(() => {
+    setIsMobileMenuOpen(false);
+    setMobileActiveDropdown(null);
+  }, []);
 
   return (
-    <header
-      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 text-cloud-white ${
-        isScrolled && !isMobileMenuOpen
-          ? 'backdrop-blur-md !bg-deep-space/30 border-b border-horizon-cyan/20'
-          : '!bg-transparent border-b border-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-6 lg:px-12 py-1">
-        <div className="flex items-center justify-between h-16 md:h-12 relative z-[60]">
-          {/* Logo/Brand - Left side */}
-          <div className="flex items-center justify-start h-full">
-            <div className="flex items-center gap-3">
-              {logoSrc ? (
-                <Image 
-                  src={logoSrc} 
-                  alt="Zephyra Dynamics" 
-                  width={200} 
-                  height={65}
-                  className="h-10 w-auto object-contain"
-                  priority
-                />
-              ) : brandName ? (
-                <span className="text-base font-semibold tracking-widest uppercase">{brandName}</span>
-              ) : null}
-            </div>
-          </div>
+    <header className="sticky top-0 z-50 w-full border-b border-rule bg-canvas">
+      <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-(--spacing-gutter)">
+        <Link href="/" aria-label="Zephyra Dynamics, home" className="flex items-center">
+          {logoSrc ? (
+            <Image
+              src={logoSrc}
+              alt="Zephyra Dynamics"
+              width={430}
+              height={151}
+              sizes="112px"
+              priority
+              className="h-[38px] w-auto object-contain"
+            />
+          ) : brandName ? (
+            <span className="text-lg font-medium tracking-tight">{brandName}</span>
+          ) : null}
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-stretch justify-end space-x-1 desktop-nav h-full">
-            {navItems.map((item) => (
-              <div key={item.label} className="relative flex items-stretch">
+        <nav ref={navRef} aria-label="Main" className="hidden items-center gap-8 md:flex">
+          {navItems.map((item) => {
+            const isOpen = activeDropdown === item.label;
+            return (
+              <div key={item.label} className="relative">
                 {item.dropdownItems ? (
                   <button
-                    onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
-                    className={`px-5 h-full transition-colors duration-200 text-sm font-medium tracking-[0.2em] flex items-center gap-1 ${
-                      activeDropdown === item.label 
-                        ? 'bg-[#151515] text-cloud-white rounded-t-md' 
-                        : 'hover:text-horizon-cyan text-cloud-white'
+                    type="button"
+                    onClick={() => setActiveDropdown(isOpen ? null : item.label)}
+                    aria-expanded={isOpen}
+                    aria-haspopup="true"
+                    aria-controls={`menu-${item.label}`}
+                    className={`flex items-center gap-1.5 text-sm transition-colors ${
+                      isOpen ? 'text-ink' : 'text-ink-soft hover:text-ink'
                     }`}
                   >
                     {item.label}
-                    <ChevronDown size={16} className={`transition-transform duration-200 ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
+                    <ChevronDown
+                      size={14}
+                      aria-hidden="true"
+                      className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                    />
                   </button>
                 ) : (
-                  <Link
-                    href={item.href}
-                    className="px-5 h-full transition-colors duration-200 text-sm font-medium tracking-[0.2em] flex items-center gap-1 hover:text-horizon-cyan text-cloud-white"
-                  >
+                  <Link href={item.href} className="text-sm text-ink-soft transition-colors hover:text-ink">
                     {item.label}
                   </Link>
                 )}
 
-                {item.dropdownItems && activeDropdown === item.label && (
-                  <div className="absolute top-full left-0 w-full bg-[#151515] rounded-b-md shadow-2xl z-50 overflow-hidden border-t border-white/5">
-                    <div className="py-2 flex flex-col">
-                      {item.dropdownItems.map((dropdownItem) => (
-                        <Link
-                          key={dropdownItem.label}
-                          href={dropdownItem.href}
-                          className="block w-full px-5 py-3 hover:bg-white/10 transition-colors text-sm text-gray-300 hover:text-white tracking-widest text-center"
-                          onClick={() => setActiveDropdown(null)}
-                        >
-                          {dropdownItem.label}
-                        </Link>
-                      ))}
-                    </div>
+                {item.dropdownItems && isOpen && (
+                  <div
+                    id={`menu-${item.label}`}
+                    className="absolute top-[calc(100%+18px)] left-0 min-w-[170px] border border-rule bg-plate"
+                  >
+                    {item.dropdownItems.map((dropdownItem) => (
+                      <Link
+                        key={dropdownItem.label}
+                        href={dropdownItem.href}
+                        onClick={() => setActiveDropdown(null)}
+                        className="block border-b border-rule px-5 py-3 text-sm text-ink-soft transition-colors last:border-b-0 hover:bg-canvas hover:text-ink"
+                      >
+                        {dropdownItem.label}
+                      </Link>
+                    ))}
                   </div>
                 )}
               </div>
-            ))}
-          </nav>
+            );
+          })}
 
-          {/* Mobile Hamburger Menu Button */}
-          <button
-            onClick={toggleMobileMenu}
-            className="md:hidden p-2 hover:text-horizon-cyan transition-colors"
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          <Link
+            href="/#contact"
+            className="inline-flex h-[34px] items-center border border-signal px-[18px] text-xs font-medium text-signal transition-colors hover:bg-signal hover:text-plate"
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
+            Get in touch
+          </Link>
+        </nav>
 
-        {/* Mobile Menu Overlay - Full screen black blur including upper section */}
-        {isMobileMenuOpen && (
-          <div className="fixed inset-0 z-[55] bg-black/90 backdrop-blur-2xl md:hidden flex flex-col animate-fadeIn">
-            <nav className="flex flex-col pt-24 px-8 space-y-8 overflow-y-auto" role="navigation">
-              {navItems.map((item) => (
-                <div key={item.label} className="border-b border-white/10 pb-4">
+        <button
+          ref={menuButtonRef}
+          type="button"
+          onClick={() => setIsMobileMenuOpen((open) => !open)}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          className="-mr-2 p-2 text-ink md:hidden"
+        >
+          {isMobileMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+        </button>
+      </div>
+
+      {isMobileMenuOpen && (
+        <div id="mobile-menu" ref={mobilePanelRef} className="fixed inset-0 top-[76px] z-40 bg-canvas md:hidden">
+          <nav aria-label="Mobile" className="flex flex-col px-(--spacing-gutter) pt-6">
+            {navItems.map((item) => {
+              const isOpen = mobileActiveDropdown === item.label;
+              return (
+                <div key={item.label} className="border-b border-rule py-5">
                   {item.dropdownItems ? (
-                    <button
-                      className="w-full flex items-center justify-between py-2 text-white transition-colors text-xl font-medium tracking-[0.2em]"
-                      onClick={() => toggleMobileDropdown(item.label)}
-                    >
-                      {item.label}
-                      <ChevronDown 
-                        size={20} 
-                        className={`transition-transform duration-300 ${
-                          mobileActiveDropdown === item.label ? 'rotate-180' : ''
-                        }`} 
-                      />
-                    </button>
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => setMobileActiveDropdown(isOpen ? null : item.label)}
+                        aria-expanded={isOpen}
+                        className="flex w-full items-center justify-between text-xl font-medium tracking-tight text-ink"
+                      >
+                        {item.label}
+                        <ChevronDown
+                          size={18}
+                          aria-hidden="true"
+                          className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+                      {isOpen && (
+                        <div className="mt-4 flex flex-col gap-4 pl-4">
+                          {item.dropdownItems.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.label}
+                              href={dropdownItem.href}
+                              onClick={closeMobile}
+                              className="text-base text-ink-soft"
+                            >
+                              {dropdownItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
                   ) : (
-                    <Link
-                      href={item.href}
-                      className="block py-2 text-white transition-colors text-xl font-medium tracking-[0.2em]"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
+                    <Link href={item.href} onClick={closeMobile} className="block text-xl font-medium tracking-tight text-ink">
                       {item.label}
                     </Link>
                   )}
-
-                  {/* Mobile dropdown items - Closed by default */}
-                  {item.dropdownItems && mobileActiveDropdown === item.label && (
-                    <div className="ml-4 mt-4 space-y-5 animate-fadeIn">
-                      {item.dropdownItems.map((dropdownItem) => (
-                        <Link
-                          key={dropdownItem.label}
-                          href={dropdownItem.href}
-                          className="block text-stratosphere-silver hover:text-horizon-cyan transition-colors text-base tracking-widest"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          {dropdownItem.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
                 </div>
-              ))}
-            </nav>
-          </div>
-        )}
-      </div>
+              );
+            })}
+            <Link
+              href="/#contact"
+              onClick={closeMobile}
+              className="mt-8 inline-flex h-12 items-center justify-center bg-signal text-sm font-medium text-plate"
+            >
+              Get in touch
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

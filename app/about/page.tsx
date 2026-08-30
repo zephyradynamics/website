@@ -1,137 +1,150 @@
-import Footer from "@/components/Footer";
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description:
+    'Learn about Zephyra Dynamics, our mission, our approach to aerospace engineering and the people guiding our work.',
+  alternates: { canonical: '/about' },
+};
 
 const team = [
   {
-    name: "Sadiq Ali Mir",
-    role: "Founder & Chief Executive Officer",
-    image: "/Sadiq Ali Mir (Founder).jpeg",
-    linkedIn: "https://www.linkedin.com/in/sadiqalimir/",
+    name: 'Sadiq Ali Mir',
+    role: 'Founder & Chief Executive Officer',
+    image: '/sadiq-ali-mir-white.png',
+    linkedIn: 'https://www.linkedin.com/in/sadiqalimir/',
   },
   {
-    name: "Dr. Promio Charles F",
-    role: "Mentor & Senior Aerospace Advisor",
-    image: "/promio.png",
-    linkedIn: "https://www.linkedin.com/in/dr-promio-charles-194a6b32/",
+    name: 'Dr. Promio Charles F',
+    role: 'Mentor & Senior Aerospace Advisor',
+    image: '/promio.png',
+    linkedIn: 'https://www.linkedin.com/in/dr-promio-charles-194a6b32/',
   },
   {
-    name: "Dr. Ravindra S Kulkarni",
-    role: "Mentor & Technical Advisor",
-    image: "/ravindra.png",
-    linkedIn: "https://www.linkedin.com/in/dr-ravindra-s-kulkarni-90181ab0/",
+    name: 'Dr. Ravindra S Kulkarni',
+    role: 'Mentor & Technical Advisor',
+    image: '/ravindra.png',
+    linkedIn: 'https://www.linkedin.com/in/dr-ravindra-s-kulkarni-90181ab0/',
   },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col font-body bg-deep-space text-cloud-white min-h-screen">
-
-      {/* 01 OUR VISION PANEL */}
-      <section className="px-6 lg:px-24 py-20 max-w-7xl mx-auto w-full relative overflow-hidden">
-        {/* Fixed positioning for background number to prevent clipping */}
-        <div className="absolute top-12 left-4 opacity-[0.08] text-8xl md:text-9xl font-light pointer-events-none z-0">01</div>
-        
-        <div className="space-y-6 text-center relative z-10">
-          <h2 className="font-sans text-4xl md:text-6xl font-bold tracking-wide leading-tight drop-shadow-2xl text-white uppercase">
-            OUR VISION
-          </h2>
-          <p className="text-stratosphere-silver text-lg leading-relaxed text-center max-w-4xl mx-auto">
-            The ground is full. The sky is not. India's urban air mobility ecosystem is nascent, which means it can be built correctly from the start. We are building the machine that carries a single person safely, silently, and swiftly above it all.
-          </p>
-        </div>
-      </section>
-
-      {/* DIVIDER */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-horizon-cyan to-transparent mx-auto max-w-5xl"></div>
-
-      {/* 02 OUR MISSION PANEL */}
-      <section className="px-6 lg:px-24 py-20 max-w-7xl mx-auto w-full relative overflow-hidden">
-        {/* Fixed positioning for background number to prevent clipping */}
-        <div className="absolute top-12 right-4 opacity-[0.08] text-8xl md:text-9xl font-light pointer-events-none z-0">02</div>
-        
-        <div className="space-y-6 text-center relative z-10">
-          <h2 className="font-sans text-4xl md:text-6xl font-bold tracking-wide leading-tight drop-shadow-2xl text-white uppercase">
-            OUR MISSION
-          </h2>
-          <p className="text-stratosphere-silver text-lg leading-relaxed text-center max-w-4xl mx-auto">
-            To engineer and deliver India's first purpose-engineered single-passenger eVTOL aircraft, Kestrel X2, from first principles. We are committed to developing a certifiable, fully autonomous electric aircraft that meets the highest safety and engineering standards, while enabling scalable urban air mobility solutions for modern Indian cities.
-          </p>
-        </div>
-      </section>
-
-      {/* DIVIDER */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-horizon-cyan to-transparent mx-auto max-w-5xl"></div>
-
-      {/* 03 ABOUT ZEPHYRA DYNAMICS PANEL (OUR COMPANY) */}
-      <section className="px-6 lg:px-24 py-20 max-w-7xl mx-auto w-full relative overflow-hidden">
-        {/* Fixed positioning for background number to prevent clipping */}
-        <div className="absolute bottom-12 left-4 opacity-[0.08] text-8xl md:text-9xl font-light pointer-events-none z-0">03</div>
-        
-        {/* Heading */}
-        <div className="text-center mb-12 relative z-10">
-          <p className="text-stratosphere-silver text-xs font-bold uppercase tracking-widest mb-4">Our Company</p>
-          <h1 className="font-sans text-4xl md:text-6xl font-bold tracking-wide leading-tight drop-shadow-2xl text-white">
-            Built by Believers
-          </h1>
-        </div>
-
-        {/* Content */}
-        <div className="max-w-3xl mx-auto relative z-10 text-center space-y-6">
-          <p className="text-stratosphere-silver text-lg leading-relaxed text-center">
-            Zephyra Dynamics was founded on the conviction that India's urban mobility crisis is fundamentally an aerospace problem. The most important constraint on urban air mobility in India is not technology, it is conviction. The conviction to build something genuinely new, to subject it to the highest engineering standards, and to bring it to market with absolute integrity.
-          </p>
-          <p className="text-stratosphere-silver text-lg leading-relaxed text-center">
-            Our team is small, deliberately. Every individual at Zephyra Dynamics was selected not for what they have done, but for what they are capable of building. We combine cutting-edge first-principles aerospace engineering with direct mentorship from experienced aerospace faculty to build the future of autonomous flight.
-          </p>
-        </div>
-      </section>
-
-      {/* DIVIDER */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-horizon-cyan to-transparent mx-auto max-w-5xl"></div>
-
-      {/* 04 TEAM */}
-      <section id="team" className="px-6 lg:px-24 py-20 max-w-7xl mx-auto w-full relative overflow-hidden">
-        {/* Fixed positioning for background number to prevent clipping */}
-        <div className="absolute bottom-20 right-4 opacity-[0.08] text-8xl md:text-9xl font-light pointer-events-none z-0">04</div>
-        
-        <h2 className="font-sans text-4xl md:text-6xl font-bold tracking-wide leading-tight drop-shadow-2xl text-white text-center mb-4 relative z-10 uppercase">
-          LEADERSHIP & ADVISORS
-        </h2>
-        <p className="text-center text-stratosphere-silver text-base max-w-2xl mx-auto mb-16 relative z-10">
-          World-class aerospace expertise guiding Kestrel X2 development
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-          {team.map((member, index) => (
-            <div
-              key={index}
-              className="space-y-4 group"
-            >
-              {/* Square Image Box - Clickable */}
-              <a
-                href={member.linkedIn}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full aspect-square bg-orbital-blue/20 border border-horizon-cyan/30 rounded-lg overflow-hidden flex items-center justify-center cursor-pointer block hover:border-horizon-cyan hover:shadow-lg hover:shadow-horizon-cyan/20 transition-all duration-300"
-              >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover object-top group-hover:opacity-80 transition-opacity duration-300"
-                />
-              </a>
-              <div className="space-y-1 text-center">
-                <h3 className="font-heading text-lg font-bold text-cloud-white tracking-wide">
-                  {member.name}
-                </h3>
-                <p className="text-horizon-cyan text-xs font-semibold uppercase tracking-wider">
-                  {member.role}
-                </p>
-              </div>
+    <>
+      {/* ---------- ORIGIN ---------- */}
+      <section className="border-b border-rule bg-plate py-(--spacing-section)">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-[72px]">
+            <div className="lg:order-2">
+              <p className="tag mb-6">Origin</p>
+              <h1 className="max-w-[18ch] text-display text-ink">Built in India, under one roof.</h1>
+              <p className="mt-6 max-w-[46ch] text-lede text-ink-soft">
+                Our aircraft are designed, built and tested at our facility in India, keeping
+                engineering and hands-on development closely connected.
+              </p>
             </div>
-          ))}
+
+            <div className="lg:order-1">
+              <Image
+                src="/image/kestral_front-white.png"
+                alt="Front view of the Kestrel X2 aircraft"
+                width={1672}
+                height={941}
+                priority
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="h-auto w-full object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- VISION ---------- */}
+      <section className="border-b border-rule bg-canvas py-(--spacing-section)">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
+          <p className="tag mb-6">Our vision</p>
+          <h2 className="max-w-[20ch] text-section text-ink">A better way to move through growing cities.</h2>
+          <p className="mt-6 max-w-[70ch] text-lede text-ink-soft">
+            The ground is full. The sky is not. India&apos;s urban air mobility ecosystem is nascent,
+            which means it can be built correctly from the start. We are building the machine that
+            carries a single person safely, silently, and swiftly above it all.
+          </p>
+        </div>
+      </section>
+
+      {/* ---------- MISSION ---------- */}
+      <section className="border-b border-rule bg-plate py-(--spacing-section)">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
+          <p className="tag mb-6">Our mission</p>
+          <h2 className="max-w-[22ch] text-section text-ink">Build the aircraft and the system around it.</h2>
+          <p className="mt-6 max-w-[70ch] text-lede text-ink-soft">
+            Our mission is to develop safe autonomous electric aircraft and the systems required to
+            operate them. We apply rigorous engineering and a clear path to certification to make
+            urban air mobility practical for modern cities.
+          </p>
+        </div>
+      </section>
+
+      {/* ---------- COMPANY ---------- */}
+      <section className="border-b border-rule bg-canvas py-(--spacing-section)">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-[72px]">
+            <div>
+              <p className="tag mb-6">Our company</p>
+              <h2 className="max-w-[16ch] text-section text-ink">Built by people who believe in the work.</h2>
+            </div>
+            <div className="space-y-5">
+              <p className="text-lede text-ink-soft">
+                Zephyra Dynamics was founded to develop urban air mobility technology for India from
+                first principles. Our work brings aircraft engineering, autonomous systems and
+                airspace software together within one company.
+              </p>
+              <p className="text-lede text-ink-soft">
+                We are a focused team supported by experienced aerospace mentors and advisors. The
+                close connection between design, analysis and testing helps us learn quickly and make
+                informed engineering decisions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- TEAM ---------- */}
+      <section id="team" className="bg-plate py-(--spacing-section)">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
+          <p className="tag mb-6">Leadership and advisors</p>
+          <h2 className="max-w-[20ch] text-section text-ink">The people guiding our work.</h2>
+
+          <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-3 lg:gap-12">
+            {team.map((member) => (
+              <article key={member.name}>
+                <a
+                  href={member.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${member.name} on LinkedIn`}
+                  className="group block aspect-square overflow-hidden border border-rule bg-canvas transition-colors hover:border-signal"
+                >
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    width={720}
+                    height={720}
+                    sizes="(min-width: 768px) 30vw, 100vw"
+                    className="h-full w-full object-cover object-top transition-opacity group-hover:opacity-90"
+                  />
+                </a>
+                <h3 className="mt-5 text-[22px] font-medium tracking-tight text-ink">{member.name}</h3>
+                <p className="meta mt-2 text-signal">{member.role}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <Footer />
-    </div>
+    </>
   );
 }

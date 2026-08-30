@@ -1,95 +1,84 @@
 import type { Metadata } from "next";
-import { Montserrat, Inter } from "next/font/google";
+import { Chivo, Chivo_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+const chivo = Chivo({
+  variable: "--font-chivo",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const chivoMono = Chivo_Mono({
+  variable: "--font-chivo-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.zephyradynamics.com'),
+  metadataBase: new URL("https://www.zephyradynamics.com"),
   title: {
     default: "Zephyra Dynamics",
     template: "%s | Zephyra Dynamics",
   },
-  description: "Zephyra Dynamics is building next-generation eVTOL aircraft and urban air traffic management software for India's future air mobility network.",
-  alternates: {
-    canonical: '/',
-  },
+  description:
+    "Kestrel X2 is a single-seat autonomous eVTOL engineered from first principles for Indian cities, paired with LAMINAR, our cloud urban air traffic management platform.",
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Zephyra Dynamics",
-    description: "Next-generation eVTOL aircraft and urban air traffic management software for India's future air mobility network.",
-    url: 'https://www.zephyradynamics.com',
-    siteName: 'Zephyra Dynamics',
-    type: 'website',
+    description:
+      "A single-seat autonomous eVTOL for Indian cities, and the airspace software that keeps a fleet of them apart.",
+    url: "https://www.zephyradynamics.com",
+    siteName: "Zephyra Dynamics",
+    type: "website",
   },
-  icons: {
-    icon: '/logo.ico',
-  },
+  icons: { icon: "/logo.ico" },
 };
 
-// Navigation configuration
 const navigationItems = [
+  { label: "Home", href: "/" },
   {
-    label: 'Home',
-    href: '/'
-  },
-  {
-    label: 'Product',
-    href: '#',
+    label: "Product",
+    href: "#",
     dropdownItems: [
-      {
-        label: 'Kestrel X2',
-        href: '/kestrel-x2'
-      },
-      {
-        label: 'LAMINAR',
-        href: '/laminar'
-      }
-    ]
+      { label: "Kestrel X2", href: "/kestrel-x2" },
+      { label: "LAMINAR", href: "/laminar" },
+    ],
   },
   {
-    label: 'Company',
-    href: '#',
+    label: "Company",
+    href: "#",
     dropdownItems: [
-      {
-        label: 'About',
-        href: '/about'
-      },
-      {
-        label: 'Careers',
-        href: '/careers'
-      }
-    ]
+      { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
+    ],
   },
   {
-    label: 'Contact',
-    href: '/#footer'
-  }
+    label: "Blogs",
+    href: "#",
+    dropdownItems: [
+      { label: "Urban Air Mobility", href: "/blogs/uam-fundamentals-india" },
+      { label: "Our Story", href: "/blogs/zephyra-vision" },
+    ],
+  },
 ];
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${montserrat.variable} ${inter.variable} font-sans antialiased bg-deep-space text-cloud-white overflow-x-hidden`}
-      >
-        <Header 
-          logoSrc="/logo.png"
-          navItems={navigationItems}
-        />
-        {children}
+    <html lang="en">
+      <body className={`${chivo.variable} ${chivoMono.variable} font-sans bg-canvas text-ink overflow-x-hidden`}>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:text-canvas"
+        >
+          Skip to content
+        </a>
+        <Header logoSrc="/img/logo-ink.png" navItems={navigationItems} />
+        <main id="main">{children}</main>
       </body>
     </html>
   );

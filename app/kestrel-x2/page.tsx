@@ -1,247 +1,153 @@
-'use client';
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Footer from '@/components/Footer';
 
-import { useState, useEffect } from 'react';
+export const metadata: Metadata = {
+  title: 'Kestrel X2',
+  description:
+    'Kestrel X2 is a single-seat autonomous eVTOL: eight rotors in coaxial pairs, 35 to 40 km of range, under 65 dB at hover, engineered to ARP4754A for Indian cities.',
+  alternates: { canonical: '/kestrel-x2' },
+};
 
-const backgroundImages = [
-  {
-    image: '/ambulance.png',
-    title: 'Air Ambulance',
-    description: 'Emergency medical response'
-  },
-  // Removed the urban air taxi (uber.png) variant as requested
-  {
-    image: '/personal.png',
-    title: 'Personal Vehicle',
-    description: 'Individual urban mobility solution'
-  }
-];
+const callouts = [
+  { label: 'MTOW', value: '292 kg', side: 'left', top: 'top-[24%]' },
+  { label: 'Configuration', value: 'Multi-rotor', side: 'right', top: 'top-[24%]' },
+  { label: 'Passenger capacity', value: '1', side: 'left', top: 'top-[50%]' },
+  { label: 'Endurance', value: '25 minutes', side: 'right', top: 'top-[50%]' },
+  { label: 'Range', value: '35 km', side: 'left', top: 'top-[76%]' },
+  { label: 'Primary mode', value: 'Autonomous', side: 'right', top: 'top-[76%]' },
+] as const;
 
-// Restored your original technical data into the bubble layout
-const keySpecs = [
+const variants = [
   {
-    label: 'MTOW',
-    value: '292 kg',
-    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+    name: 'Passenger transport',
+    body: 'The standard configuration carries one passenger on short urban routes.',
   },
   {
-    label: 'Configuration',
-    value: 'Multi-rotor',
-    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
+    name: 'Emergency services',
+    body: 'A planned configuration for medical support and other time sensitive response missions.',
   },
   {
-    label: 'Passenger Capacity',
-    value: '1',
-    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+    name: 'Survey and logistics',
+    body: 'A planned configuration for aerial observation, inspection and light cargo transport.',
   },
-  {
-    label: 'Endurance',
-    value: '25 minutes',
-    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-  },
-  {
-    label: 'Range',
-    value: '35 km',
-    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z" />
-  },
-  {
-    label: 'Primary Mode',
-    value: 'Autonomous',
-    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-  }
 ];
 
 export default function KestrelX2Page() {
-  const [showTitle, setShowTitle] = useState(true);
-  const [showArrow, setShowArrow] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowTitle(false);
-      setShowArrow(true);
-    }, 5000);
-
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setShowArrow(false);
-      } else if (window.scrollY <= 50) {
-        setTimeout(() => {
-          if (window.scrollY <= 50) {
-            setShowArrow(true);
-          }
-        }, 0);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const imageInterval = setInterval(() => {
-      setCurrentImageIndex(() => {
-        // Generate random index based on array length
-        return Math.floor(Math.random() * backgroundImages.length);
-      });
-    }, 3000); // Change image every 3 seconds
-
-    return () => clearInterval(imageInterval);
-  }, []);
-
   return (
-    <div className="relative font-body bg-deep-space text-cloud-white">
-      {/* NORMAL FLOW HERO SECTION */}
-      <section className="relative w-full h-screen flex items-center justify-center text-center overflow-hidden">
-        {/* Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/overview.mp4" type="video/mp4" />
-        </video>
-        
-        {/* Dark Overlay - Set to 80% to reduce brightness for text visibility */}
-        <div className="absolute inset-0 bg-deep-space/80"></div>
-
-        {/* Title Content - Fades out after 5 seconds */}
-        <div
-          className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${
-            showTitle ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <div className="relative z-10 max-w-5xl px-6">
-            {/* Updated to match the home page style: font-body, text-4xl/6xl, normal case */}
-            <h1 className="font-body text-4xl md:text-6xl font-bold tracking-wide mb-6 leading-tight drop-shadow-2xl text-white">
-              Engineered for One<br />Perfected for All
-            </h1>
-          </div>
+    <>
+      {/* ---------- HERO ---------- */}
+      <section className="border-b border-rule bg-plate">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-20 lg:pt-[92px]">
+          <h1 className="max-w-[20ch] text-display text-ink">
+            Engineered for one. <span className="text-signal">Perfected for all.</span>
+          </h1>
         </div>
 
-        {/* Animated Down Arrow - Appears after title fades */}
-        <div 
-          className={`absolute bottom-20 left-0 right-0 z-10 flex justify-center transition-opacity duration-1000 ${
-            showArrow ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <div className="animate-bounce">
-            <svg
-              className="w-12 h-12 text-cloud-white drop-shadow-[0_0_15px_rgba(0,174,239,0.8)]"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              style={{ filter: 'drop-shadow(0 0 10px rgba(0, 174, 239, 0.6)) drop-shadow(0 0 20px rgba(0, 174, 239, 0.4))' }}
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
+        {/* Annotated drawing. The figures are callouts on the aircraft, not a table. */}
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pb-(--spacing-section)">
+          <div className="relative mx-auto w-full max-w-[1360px] py-10 lg:py-16">
+            <Image
+              src="/image/kestral_front-white.png"
+              alt="Front elevation of Kestrel X2"
+              width={1672}
+              height={941}
+              priority
+              quality={90}
+              sizes="(min-width: 1024px) 850px, 100vw"
+              className="mx-auto h-auto w-full lg:w-[62%]"
+            />
+
+            {callouts.map((callout) => (
+              <div
+                key={callout.label}
+                className={`absolute hidden w-[190px] lg:block ${callout.top} ${
+                  callout.side === 'left' ? 'left-0 text-right' : 'right-0'
+                }`}
+              >
+                <p className="meta">{callout.label}</p>
+                <p className="mt-1 text-[18px] leading-snug font-medium tracking-tight text-ink">
+                  {callout.value}
+                </p>
+                <span
+                  aria-hidden="true"
+                  className={`absolute top-3 h-px w-[54px] bg-signal ${
+                    callout.side === 'left' ? '-right-[62px]' : '-left-[62px]'
+                  }`}
+                />
+                <span
+                  aria-hidden="true"
+                  className={`absolute top-[9px] h-[7px] w-[7px] rounded-full border border-signal bg-plate ${
+                    callout.side === 'left' ? '-right-[66px]' : '-left-[66px]'
+                  }`}
+                />
+              </div>
+            ))}
+
+            <p className="meta absolute bottom-2 left-1/2 hidden -translate-x-1/2 lg:block">
+              Kestrel X2
+            </p>
+          </div>
+
+          {/* Below 1024px the callouts stack under the drawing */}
+          <div className="flex flex-col gap-5 lg:hidden">
+            {callouts.map((callout) => (
+              <div key={callout.label} className="border-t border-rule pt-3.5">
+                <p className="meta">{callout.label}</p>
+                <p className="mt-1 text-[19px] font-medium tracking-tight text-ink">{callout.value}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* SCROLLABLE CONTENT CONTAINER */}
-      <div className="relative w-full">
-
-        {/* TECHNICAL SPECIFICATIONS (NEW BUBBLE DESIGN) */}
-        <section id="tech-specs" className="w-full py-24 px-6 lg:px-12 min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-deep-space font-sans">
-          {/* Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/Zephyr One Rendered.jpg.jpeg')" }}
-          ></div>
-          
-          {/* Dark Overlay - Set to 80% to reduce brightness for text visibility */}
-          <div className="absolute inset-0 bg-deep-space/80"></div>
-
-          <div className="w-full max-w-screen-2xl mx-auto relative z-10 flex flex-col items-center">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-16 text-center tracking-wide drop-shadow-lg">
-              Key Specifications
-            </h2>
-
-            {/* Bubble Grid Container - Expanded full width and increased gap */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16 w-full">
-              {keySpecs.map((spec, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/5 hover:bg-white/10 transition-colors duration-300 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex items-center space-x-5 shadow-2xl"
-                >
-                  {/* Icon Box */}
-                  <div className="bg-white/10 p-4 rounded-xl flex-shrink-0 text-gray-200">
-                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      {spec.icon}
-                    </svg>
-                  </div>
-                  
-                  {/* Text Details */}
-                  <div className="flex flex-col">
-                    <span className="text-xs md:text-sm text-gray-400 uppercase tracking-widest font-semibold mb-1">
-                      {spec.label}
-                    </span>
-                    <span className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-                      {spec.value}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FUTURE VARIANTS */}
-        <section className="w-full min-h-screen flex flex-col relative overflow-hidden bg-deep-space">
-          {/* Solid Background Base */}
-          <div className="absolute inset-0 bg-deep-space"></div>
-
-          {/* Background Images - Rotating - Full Cover */}
-          {backgroundImages.map((item, index) => (
-            <div
-              key={item.image}
-              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-              style={{ backgroundImage: `url('${item.image}')` }}
-            />
-          ))}
-
-          {/* Dark Overlay - Set to 80% to reduce brightness for text visibility */}
-          <div className="absolute inset-0 bg-deep-space/80"></div>
-
-          {/* Title at Top Center - Fixed */}
-          <div className="relative z-10 pt-20 pb-8 flex justify-center">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold uppercase tracking-widest text-center text-cloud-white drop-shadow-lg">
-              Future Variants
-            </h2>
+      {/* ---------- MISSION PROFILE ---------- */}
+      <section className="border-b border-rule bg-canvas py-(--spacing-section)">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
+          <div className="mb-5 flex items-baseline gap-5">
+            <p className="tag">Mission profile</p>
+            <span aria-hidden="true" className="h-px flex-grow bg-rule" />
           </div>
 
-          {/* Spacer to push content */}
-          <div className="flex-1"></div>
+          <h2 className="max-w-[22ch] text-section text-ink">Designed for a seamless journey.</h2>
+          <p className="mt-4 max-w-[62ch] text-lede text-ink-soft">
+            Kestrel X2 is a single seat autonomous aircraft designed for short urban journeys. It
+            takes off and lands vertically, allowing it to operate without a runway.
+          </p>
 
-          {/* Tagline at Bottom - Associated with Image */}
-          <div className="relative z-10 pb-12 px-6">
-            {backgroundImages[currentImageIndex] && (
-              <div className="text-center space-y-1">
-                <h3 className="text-xl md:text-2xl font-heading font-semibold text-cloud-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
-                  {backgroundImages[currentImageIndex].title}
-                </h3>
-                <p className="text-base md:text-lg text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
-                  {backgroundImages[currentImageIndex].description}
-                </p>
+          <Image
+            src="/img/mission-profile-gray.png"
+            alt="Kestrel X2 mission profile: vertical ascent, cruise across the city skyline, descent and vertical landing"
+            width={1800}
+            height={1098}
+            sizes="(min-width: 1024px) 1240px, 100vw"
+            className="mx-auto mt-10 h-auto w-full max-w-[1240px]"
+          />
+
+        </div>
+      </section>
+
+      {/* ---------- VARIANTS ---------- */}
+      <section className="bg-plate py-(--spacing-section)">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
+          <p className="tag mb-6">Future variants</p>
+          <h2 className="max-w-[24ch] text-section text-ink">Designed to adapt.</h2>
+          <p className="mt-4 max-w-[62ch] text-lede text-ink-soft">
+            Its flexible design allows the aircraft to be adapted for different operational needs.
+          </p>
+
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12">
+            {variants.map((variant) => (
+              <div key={variant.name} className="border-t border-rule-strong pt-5">
+                <p className="text-[22px] font-medium tracking-tight text-ink">{variant.name}</p>
+                <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{variant.body}</p>
               </div>
-            )}
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 }

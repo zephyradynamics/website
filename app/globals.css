@@ -1,248 +1,112 @@
 @import "tailwindcss";
 
-:root {
-  /* Primary Colours */
-  --deep-space-navy: #0A1628;
-  --deep-space-darker: #050D14;
-  --orbital-blue: #0D2B55;
-  --horizon-cyan: #00AEEF;
+/* ============================================================
+   ZEPHYRA DYNAMICS
+   Light mineral palette. Signal red for action only.
+   ============================================================ */
 
-  /* Neutral & Support Colours */
-  --stratosphere-silver: #8A9BB5;
-  --cloud-white: #FFFFFF;
-  --mist: #EEF2F7;
-  --graphite: #2C3E50;
+@theme {
+  /* surfaces */
+  --color-canvas:      #EFF1F2;
+  --color-plate:       #FFFFFF;
+  --color-band:        #E3E7E9;
 
-  /* Legacy refs for compatibility */
-  --bg-deep-space: #0A1628;
-  --bg-midnight: #0D2B55;
-  --text-pure-white: #FFFFFF;
-  --text-aero-silver: #8A9BB5;
-  --accent-electric-blue: #00AEEF;
-  --accent-sky-cyan: #00AEEF;
-  --royal-blue: #00AEEF;
-  --royal-blue-dark: #0D2B55;
-  --royal-blue-light: #00AEEF;
+  /* ink */
+  --color-ink:         #101215;
+  --color-ink-soft:    #4E585E;
+  --color-ink-muted:   #646F75;
+  --color-ink-faint:   #98A2A8;
+
+  /* lines */
+  --color-rule:        #D3D9DC;
+  --color-rule-strong: #C2CACE;
+  --color-field:       #B6BEC3;
+
+  /* action */
+  --color-signal:      #B02510;
+  --color-signal-dark: #8E1D0C;
+
+  /* state */
+  --color-error:       #B02510;
+  --color-ok:          #1E6B3A;
+
+  /* type */
+  --font-sans: var(--font-chivo), system-ui, sans-serif;
+  --font-mono: var(--font-chivo-mono), ui-monospace, monospace;
+
+  --text-display: clamp(2.5rem, 5.2vw, 4.625rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.04em;
+  --text-display--font-weight: 700;
+
+  --text-section: clamp(2rem, 3.6vw, 3.25rem);
+  --text-section--line-height: 1.03;
+  --text-section--letter-spacing: -0.035em;
+  --text-section--font-weight: 700;
+
+  --text-lede: 1.0625rem;
+  --text-lede--line-height: 1.7;
+
+  /* space */
+  --spacing-section: clamp(64px, 8vw, 104px);
+  --spacing-gutter:  clamp(20px, 4vw, 56px);
 }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
-  background-color: var(--deep-space-navy);
-  color: var(--cloud-white);
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom utility classes for typography */
-.font-heading {
-  font-family: var(--font-montserrat), sans-serif;
-}
-.font-body {
-  font-family: var(--font-inter), sans-serif;
+::selection { background-color: var(--color-ink); color: var(--color-canvas); }
+
+:focus-visible { outline: 2px solid var(--color-signal); outline-offset: 2px; }
+
+/* Mono label with the short accent rule beside it */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-signal);
 }
 
-/* Colour utilities */
-.bg-deep-space {
-  background-color: var(--deep-space-navy);
-}
-.bg-deep-space-darker {
-  background-color: var(--deep-space-darker);
-}
-.bg-orbital-blue {
-  background-color: var(--orbital-blue);
-}
-.text-horizon-cyan {
-  color: var(--horizon-cyan);
-}
-.text-stratosphere-silver {
-  color: var(--stratosphere-silver);
-}
-.border-horizon-cyan {
-  border-color: var(--horizon-cyan);
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
 }
 
-/* Royal Blue utility classes for compatibility */
-.bg-royal-blue {
-  background-color: var(--horizon-cyan);
-}
-.bg-royal-blue-dark {
-  background-color: var(--orbital-blue);
-}
-.bg-royal-blue-light {
-  background-color: var(--horizon-cyan);
-}
-.text-royal-blue {
-  color: var(--horizon-cyan);
-}
-.border-royal-blue {
-  border-color: var(--horizon-cyan);
-}
-
-/* Smooth dropdown animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.2s ease-out forwards;
-}
+/* ============================================================
+   LEGACY SHIM  ·  TEMPORARY
+   Keeps /kestrel-x2, /laminar, /about and /careers rendering on
+   the old dark palette until each is rebuilt on the system above.
+   Delete this whole block once every page is converted.
+   ============================================================ */
 
-/* Mobile menu slide-in animation */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-    max-height: 0;
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    max-height: 500px;
-  }
-}
-
-.animate-slideDown {
-  animation: slideDown 0.3s ease-out forwards;
-}
-
-/* Pulsing glow animation for buttons */
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(0, 174, 239, 0.5), 0 0 30px rgba(0, 174, 239, 0.3), 0 0 45px rgba(0, 174, 239, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(0, 174, 239, 0.8), 0 0 50px rgba(0, 174, 239, 0.5), 0 0 75px rgba(0, 174, 239, 0.3);
-  }
-}
-
-.animate-pulseGlow {
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-/* Movie credits scrolling animation for Applications section */
-@keyframes scroll-up {
-  0% {
-    transform: translateY(100vh);
-  }
-  100% {
-    transform: translateY(-150vh);
-  }
-}
-
-.animate-scroll-up {
-  animation: scroll-up 20s linear forwards;
-}
-
-/* Fade in animation for Overview cards */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Fade in and out loop animation for Overview cards - 18s for 6 items */
-@keyframes fadeInOutLoop {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  3% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  14% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  16% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-}
-
-/* Fade in and out loop animation for Applications - 12s for 4 items */
-@keyframes fadeInOutLoopApp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  4% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  21% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  25% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
-}
-
-.animate-fade-loop {
-  animation: fadeInOutLoop 18s ease-in-out infinite;
-  opacity: 0;
-}
-
-.animate-fade-loop-app {
-  animation: fadeInOutLoopApp 12s ease-in-out infinite;
-  opacity: 0;
-}
-
-.delay-100 {
-  animation-delay: 0s;
-}
-
-.delay-200 {
-  animation-delay: 3s;
-}
-
-.delay-300 {
-  animation-delay: 6s;
-}
-
-.delay-400 {
-  animation-delay: 9s;
-}
-
-.delay-500 {
-  animation-delay: 12s;
-}
-
-.delay-600 {
-  animation-delay: 15s;
-}
-
-/* Section number styling for visual rhythm */
-.section-number {
-  position: relative;
-  font-size: 8rem;
-  font-weight: 300;
-  opacity: 0.08;
-  line-height: 1;
-  pointer-events: none;
-}
-
+.bg-deep-space        { background-color: #0A1628; color: #FFFFFF; }
+.bg-deep-space-darker { background-color: #050D14; color: #FFFFFF; }
+.bg-orbital-blue      { background-color: #0D2B55; color: #FFFFFF; }
+.text-horizon-cyan        { color: #00AEEF; }
+.text-stratosphere-silver { color: #8A9BB5; }
+.text-cloud-white         { color: #FFFFFF; }
+.border-horizon-cyan      { border-color: rgb(0 174 239 / 0.3); }
+.font-heading { font-family: var(--font-chivo), sans-serif; }
+.font-body    { font-family: var(--font-chivo), sans-serif; }
