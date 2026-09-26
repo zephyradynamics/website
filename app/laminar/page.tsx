@@ -29,7 +29,7 @@ export default function LaminarPage() {
     <>
       {/* ---------- HERO ---------- */}
       <section className="border-b border-rule bg-plate">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-20 lg:pt-[92px]">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-12 lg:pt-16">
           <p className="tag mb-7">Urban air traffic management</p>
           <h1 className="max-w-[19ch] text-display text-ink">
             One clear view of the <span className="text-signal">urban sky.</span>

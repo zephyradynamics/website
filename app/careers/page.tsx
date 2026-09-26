@@ -77,7 +77,7 @@ export default function CareersPage() {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      <section className="border-b border-rule bg-plate py-(--spacing-section)">
+      <section className="border-b border-rule bg-plate pt-12 pb-(--spacing-section) lg:pt-16">
         <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
           <p className="tag mb-7">Careers</p>
           <h1 className="max-w-[17ch] text-display text-ink">

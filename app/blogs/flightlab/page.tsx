@@ -15,9 +15,9 @@ export default function FlightLabBlogPage() {
       title="FlightLab: building a traceable SITL platform for Kestrel development"
       summary="A closer look at the simulation and evidence workflow supporting Kestrel development."
       articlePath="/blogs/flightlab"
-      image="/image/Flight Lab (1).png"
+      image="/image/Flight Lab Blog.png"
       imageAlt="FlightLab simulation and validation environment"
-      imageWidth={1672}
+      imageWidth={1671}
       imageHeight={941}
     >
       <p>

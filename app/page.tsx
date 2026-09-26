@@ -47,11 +47,11 @@ export default function Home() {
 
             <div className="relative aspect-[16/9] overflow-hidden border border-rule-strong bg-plate">
               <Image
-                src="/image/hero.png"
-                alt="Kestrel X2 emerging through atmospheric mist"
+                src="/image/kestrel_hero.png"
+                alt="Kestrel X2 aircraft displayed beneath the Indian flag"
                 fill
                 sizes="(min-width: 1024px) 55vw, 100vw"
-                className="object-cover object-center"
+                className="origin-top -translate-y-4 scale-[1.1] object-cover object-top"
               />
             </div>
           </div>

@@ -30,7 +30,7 @@ const stages = [
 export default function FlightLabPage() {
   return (
     <>
-      <section className="border-b border-rule bg-plate py-(--spacing-section)">
+      <section className="border-b border-rule bg-plate pt-12 pb-(--spacing-section) lg:pt-16">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-12 px-(--spacing-gutter) lg:grid-cols-[0.78fr_1.22fr] lg:gap-[72px]">
           <div>
             <p className="tag mb-7">FlightLab</p>

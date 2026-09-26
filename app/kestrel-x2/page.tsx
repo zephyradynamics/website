@@ -47,7 +47,7 @@ export default function KestrelX2Page() {
     <>
       {/* ---------- HERO ---------- */}
       <section className="border-b border-rule bg-plate">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-20 lg:pt-[92px]">
+        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-12 lg:pt-16">
           <h1 className="max-w-[20ch] text-display text-ink">
             Engineered for one. <span className="text-signal">Perfected for all.</span>
           </h1>

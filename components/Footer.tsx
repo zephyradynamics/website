@@ -46,17 +46,25 @@ export default function Footer() {
       <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-14 pb-10">
         <div className="flex flex-col justify-between gap-12 lg:flex-row">
           <div>
-            <Image
-              src="/img/logo-ink.png"
-              alt="Zephyra Dynamics"
-              width={430}
-              height={151}
-              sizes="104px"
-              className="h-8 w-auto object-contain"
-            />
-            <p className="mt-4 max-w-[30ch] text-sm leading-relaxed text-ink-soft">
-              Department of Aerospace Engineering, RV College of Engineering, 560059, Bengaluru,
-              Karnataka, India
+            <div className="w-fit max-w-full">
+              <Image
+                src="/img/logo-ink.png"
+                alt="Zephyra Dynamics"
+                width={430}
+                height={151}
+                sizes="145px"
+                className="-ml-2 h-auto w-[145px] object-contain"
+              />
+              <p className="-mt-0.5 whitespace-nowrap text-[7px] leading-none font-medium tracking-[0.01em] text-ink uppercase">
+                Shaping the Future of Urban Air Mobility in India
+              </p>
+            </div>
+            <p className="mt-5 max-w-[520px] text-sm leading-relaxed text-ink-soft">
+              Department of Aerospace Engineering ,
+              <br />
+              RV College of Engineering,
+              <br />
+              560059, Bengaluru, Karnataka, India
             </p>
           </div>
 

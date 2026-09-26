@@ -11,15 +11,6 @@ export const metadata: Metadata = {
 
 const articles = [
   {
-    label: 'Urban Air Mobility',
-    title: 'The fundamentals of urban air mobility and where India stands',
-    summary: "A practical introduction to eVTOL aircraft, airspace systems and India's developing UAM ecosystem.",
-    href: '/blogs/uam-fundamentals-india',
-    image: '/image/Blog.png',
-    width: 1672,
-    height: 941,
-  },
-  {
     label: 'Our Story',
     title: 'Why we exist: the Zephyra Dynamics vision',
     summary: 'How one difficult commute became an aerospace question and then a company built to answer it.',
@@ -29,12 +20,21 @@ const articles = [
     height: 3906,
   },
   {
+    label: 'Urban Air Mobility',
+    title: 'The fundamentals of urban air mobility and where India stands',
+    summary: "A practical introduction to eVTOL aircraft, airspace systems and India's developing UAM ecosystem.",
+    href: '/blogs/uam-fundamentals-india',
+    image: '/image/Blog.png',
+    width: 1672,
+    height: 941,
+  },
+  {
     label: 'Flight Validation',
     title: 'FlightLab: building a traceable simulation platform',
     summary: 'How FlightLab brings repeatable simulation, testing and engineering evidence into one workflow.',
     href: '/blogs/flightlab',
-    image: '/image/Flight Lab (1).png',
-    width: 1672,
+    image: '/image/Flight Lab Blog.png',
+    width: 1671,
     height: 941,
   },
 ];
@@ -42,18 +42,6 @@ const articles = [
 export default function BlogsPage() {
   return (
     <>
-      <section className="border-b border-rule bg-plate py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-7">Blogs</p>
-          <h1 className="max-w-[18ch] text-display text-ink">
-            Notes from the <span className="text-signal">workshop.</span>
-          </h1>
-          <p className="mt-7 max-w-[58ch] text-lede text-ink-soft">
-            Explore our writing on aircraft, airspace, validation and the work behind Zephyra Dynamics.
-          </p>
-        </div>
-      </section>
-
       <section className="bg-canvas py-(--spacing-section)">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 px-(--spacing-gutter) md:grid-cols-2 xl:grid-cols-3">
           {articles.map((article) => (

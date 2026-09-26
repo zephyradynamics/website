@@ -8,7 +8,7 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="border-b border-rule bg-plate">
-      <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-20 lg:pt-[92px]">
+      <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-12 lg:pt-16">
         <p className="tag mb-7">Sustainable Air Mobility for Modern Cities in India</p>
 
         <h1 className="max-w-[18ch] text-display text-ink">
