@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     const resumeBase64 = Buffer.from(resumeBuffer).toString('base64');
 
     // Send email using Resend with attachment
-    const data = await resend.emails.send({
+    await resend.emails.send({
       from: 'Zephyra Dynamics <career@zephyradynamics.com>',
       to: 'career@zephyradynamics.com',
       reply_to: email,
@@ -98,11 +98,10 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(
-      { success: true, message: 'Application submitted successfully', data },
+      { success: true, message: 'Application submitted successfully' },
       { status: 200 }
     );
-  } catch (error) {
-    console.error('Career application error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to submit application' },
       { status: 500 }

@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Send email using Resend
-    const data = await resend.emails.send({
+    await resend.emails.send({
       from: 'Zephyra Dynamics <info@zephyradynamics.com>',
       to: 'info@zephyradynamics.com',
       reply_to: email,
@@ -46,11 +46,10 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(
-      { success: true, message: 'Email sent successfully', data },
+      { success: true, message: 'Email sent successfully' },
       { status: 200 }
     );
-  } catch (error) {
-    console.error('Email sending error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to send email' },
       { status: 500 }

@@ -42,21 +42,37 @@ export default function BlogInteractions({ articlePath, title }: BlogInteraction
 
   useEffect(() => {
     let active = true;
+    let local = emptyInteractions;
     try {
       const stored = window.localStorage.getItem(storageKey);
       if (stored) {
-        const parsed = JSON.parse(stored) as StoredInteractions;
-        queueMicrotask(() => {
-          if (active) setInteractions(parsed);
-        });
+        local = JSON.parse(stored) as StoredInteractions;
+        queueMicrotask(() => active && setInteractions(local));
       }
     } catch {
       // Keep the controls usable when browser storage is unavailable.
     }
+
+    fetch(`/api/blog-interactions?articlePath=${encodeURIComponent(articlePath)}`)
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((publicData: Pick<StoredInteractions, 'likes' | 'shares' | 'comments'>) => {
+        if (!active) return;
+        setInteractions({
+          liked: local.liked,
+          saved: local.saved,
+          likes: publicData.likes,
+          shares: publicData.shares,
+          comments: publicData.comments,
+        });
+      })
+      .catch(() => {
+        // Retain the locally stored values if the shared service is unavailable.
+      });
+
     return () => {
       active = false;
     };
-  }, [storageKey]);
+  }, [articlePath, storageKey]);
 
   useEffect(() => {
     const closeMenu = (event: MouseEvent) => {
@@ -77,18 +93,50 @@ export default function BlogInteractions({ articlePath, title }: BlogInteraction
     }
   };
 
+  const syncPublic = async (
+    action: 'like' | 'share' | 'comment',
+    details: { delta?: number; name?: string; message?: string } = {},
+  ) => {
+    try {
+      const response = await fetch('/api/blog-interactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ articlePath, action, ...details }),
+      });
+      if (!response.ok) return;
+      const publicData = (await response.json()) as Pick<
+        StoredInteractions,
+        'likes' | 'shares' | 'comments'
+      >;
+      setInteractions((current) => {
+        const next = { ...current, ...publicData };
+        try {
+          window.localStorage.setItem(storageKey, JSON.stringify(next));
+        } catch {
+          // Shared storage remains authoritative when local storage is unavailable.
+        }
+        return next;
+      });
+    } catch {
+      // The optimistic local update remains visible until a later refresh.
+    }
+  };
+
   const toggleLike = () => {
+    const delta = interactions.liked ? -1 : 1;
     persist({
       ...interactions,
       liked: !interactions.liked,
-      likes: Math.max(0, interactions.likes + (interactions.liked ? -1 : 1)),
+      likes: Math.max(0, interactions.likes + delta),
     });
+    void syncPublic('like', { delta });
   };
 
   const toggleSaved = () => persist({ ...interactions, saved: !interactions.saved });
 
   const countShare = () => {
     persist({ ...interactions, shares: interactions.shares + 1 });
+    void syncPublic('share');
     setShareOpen(false);
   };
 
@@ -100,11 +148,15 @@ export default function BlogInteractions({ articlePath, title }: BlogInteraction
   };
 
   const openNativeShare = async () => {
-    if (navigator.share) {
-      await navigator.share({ title, url: articleUrl });
-      countShare();
-    } else {
-      await copyLink();
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, url: articleUrl });
+        countShare();
+      } else {
+        await copyLink();
+      }
+    } catch {
+      // Closing the native share sheet should not increment the count.
     }
   };
 
@@ -118,6 +170,7 @@ export default function BlogInteractions({ articlePath, title }: BlogInteraction
       ...interactions,
       comments: [...interactions.comments, { name: cleanName, message: cleanMessage }],
     });
+    void syncPublic('comment', { name: cleanName, message: cleanMessage });
     setName('');
     setMessage('');
   };

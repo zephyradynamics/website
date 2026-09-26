@@ -33,34 +33,6 @@ const team = [
 export default function AboutPage() {
   return (
     <>
-      {/* ---------- ORIGIN ---------- */}
-      <section className="border-b border-rule bg-plate py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-[72px]">
-            <div className="lg:order-2">
-              <p className="tag mb-6">Origin</p>
-              <h1 className="max-w-[18ch] text-display text-ink">Built in India, under one roof.</h1>
-              <p className="mt-6 max-w-[46ch] text-lede text-ink-soft">
-                Our aircraft are designed, built and tested at our facility in India, keeping
-                engineering and hands-on development closely connected.
-              </p>
-            </div>
-
-            <div className="lg:order-1">
-              <Image
-                src="/image/kestral_front-white.png"
-                alt="Front view of the Kestrel X2 aircraft"
-                width={1672}
-                height={941}
-                priority
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="h-auto w-full object-contain"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ---------- VISION ---------- */}
       <section className="border-b border-rule bg-canvas py-(--spacing-section)">
         <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">

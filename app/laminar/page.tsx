@@ -44,7 +44,6 @@ export default function LaminarPage() {
               width={1919}
               height={1079}
               priority
-              quality={90}
               sizes="(min-width: 1440px) 1328px, 100vw"
               className="h-auto w-full"
             />

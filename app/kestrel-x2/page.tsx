@@ -18,18 +18,27 @@ const callouts = [
   { label: 'Primary mode', value: 'Autonomous', side: 'right', top: 'top-[76%]' },
 ] as const;
 
-const variants = [
+const family = [
   {
-    name: 'Passenger transport',
-    body: 'The standard configuration carries one passenger on short urban routes.',
+    name: 'Kestrel X2',
+    status: 'Personal urban mobility',
+    description:
+      'A single-seat electric aircraft created for direct journeys across busy cities. Vertical takeoff and landing allow it to operate from compact urban locations without a runway.',
+    image: '/image/kestral_front-white.png',
   },
   {
-    name: 'Emergency services',
-    body: 'A planned configuration for medical support and other time sensitive response missions.',
+    name: 'Kestrel Air Ambulance',
+    status: 'Emergency medical transport',
+    description:
+      'A medical transport configuration designed to support faster movement during time-sensitive situations, particularly where road access is slow or limited.',
+    image: '/image/kESTREL Air Ambulance.png',
   },
   {
-    name: 'Survey and logistics',
-    body: 'A planned configuration for aerial observation, inspection and light cargo transport.',
+    name: 'Kestrel Defence Aircraft',
+    status: 'Specialised mission support',
+    description:
+      'A mission-focused configuration designed for observation, logistics and operations that benefit from rapid access and a compact operating footprint.',
+    image: '/image/kESTREL Defence.png',
   },
 ];
 
@@ -46,102 +55,93 @@ export default function KestrelX2Page() {
 
         {/* Annotated drawing. The figures are callouts on the aircraft, not a table. */}
         <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pb-(--spacing-section)">
-          <div className="relative mx-auto w-full max-w-[1360px] py-10 lg:py-16">
+          <div className="relative mx-auto h-[430px] w-full max-w-[1360px] sm:h-[520px] lg:h-auto lg:py-16">
             <Image
               src="/image/kestral_front-white.png"
               alt="Front elevation of Kestrel X2"
               width={1672}
               height={941}
               priority
-              quality={90}
               sizes="(min-width: 1024px) 850px, 100vw"
-              className="mx-auto h-auto w-full lg:w-[62%]"
+              className="absolute top-1/2 left-1/2 h-auto w-[46%] -translate-x-1/2 -translate-y-1/2 sm:w-[50%] lg:static lg:mx-auto lg:w-[62%] lg:translate-x-0 lg:translate-y-0"
             />
 
             {callouts.map((callout) => (
               <div
                 key={callout.label}
-                className={`absolute hidden w-[190px] lg:block ${callout.top} ${
+                className={`absolute block w-[25%] sm:w-[170px] lg:w-[190px] ${callout.top} ${
                   callout.side === 'left' ? 'left-0 text-right' : 'right-0'
                 }`}
               >
-                <p className="meta">{callout.label}</p>
-                <p className="mt-1 text-[18px] leading-snug font-medium tracking-tight text-ink">
+                <p className="meta text-[9px] leading-tight sm:text-[11px] lg:text-[12px]">{callout.label}</p>
+                <p className="mt-1 text-[13px] leading-snug font-medium tracking-tight text-ink sm:text-[15px] lg:text-[18px]">
                   {callout.value}
                 </p>
                 <span
                   aria-hidden="true"
-                  className={`absolute top-3 h-px w-[54px] bg-signal ${
+                  className={`absolute top-3 hidden h-px w-[54px] bg-signal lg:block ${
                     callout.side === 'left' ? '-right-[62px]' : '-left-[62px]'
                   }`}
                 />
                 <span
                   aria-hidden="true"
-                  className={`absolute top-[9px] h-[7px] w-[7px] rounded-full border border-signal bg-plate ${
+                  className={`absolute top-[9px] hidden h-[7px] w-[7px] rounded-full border border-signal bg-plate lg:block ${
                     callout.side === 'left' ? '-right-[66px]' : '-left-[66px]'
                   }`}
                 />
               </div>
             ))}
 
-            <p className="meta absolute bottom-2 left-1/2 hidden -translate-x-1/2 lg:block">
+            <p className="meta absolute bottom-2 left-1/2 -translate-x-1/2">
               Kestrel X2
             </p>
           </div>
-
-          {/* Below 1024px the callouts stack under the drawing */}
-          <div className="flex flex-col gap-5 lg:hidden">
-            {callouts.map((callout) => (
-              <div key={callout.label} className="border-t border-rule pt-3.5">
-                <p className="meta">{callout.label}</p>
-                <p className="mt-1 text-[19px] font-medium tracking-tight text-ink">{callout.value}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* ---------- MISSION PROFILE ---------- */}
-      <section className="border-b border-rule bg-canvas py-(--spacing-section)">
+      {/* ---------- KESTREL FAMILY ---------- */}
+      <section className="bg-canvas py-(--spacing-section)">
         <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <div className="mb-5 flex items-baseline gap-5">
-            <p className="tag">Mission profile</p>
-            <span aria-hidden="true" className="h-px flex-grow bg-rule" />
-          </div>
-
-          <h2 className="max-w-[22ch] text-section text-ink">Designed for a seamless journey.</h2>
+          <p className="tag mb-6">The Kestrel family</p>
+          <h2 className="max-w-[24ch] text-section text-ink">One platform. More missions ahead.</h2>
           <p className="mt-4 max-w-[62ch] text-lede text-ink-soft">
-            Kestrel X2 is a single seat autonomous aircraft designed for short urban journeys. It
-            takes off and lands vertically, allowing it to operate without a runway.
+            Kestrel X2 establishes the foundation of the Kestrel aircraft family. Additional
+            configurations are being developed around the platform for future mission requirements.
           </p>
 
-          <Image
-            src="/img/mission-profile-gray.png"
-            alt="Kestrel X2 mission profile: vertical ascent, cruise across the city skyline, descent and vertical landing"
-            width={1800}
-            height={1098}
-            sizes="(min-width: 1024px) 1240px, 100vw"
-            className="mx-auto mt-10 h-auto w-full max-w-[1240px]"
-          />
-
-        </div>
-      </section>
-
-      {/* ---------- VARIANTS ---------- */}
-      <section className="bg-plate py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-6">Future variants</p>
-          <h2 className="max-w-[24ch] text-section text-ink">Designed to adapt.</h2>
-          <p className="mt-4 max-w-[62ch] text-lede text-ink-soft">
-            Its flexible design allows the aircraft to be adapted for different operational needs.
-          </p>
-
-          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12">
-            {variants.map((variant) => (
-              <div key={variant.name} className="border-t border-rule-strong pt-5">
-                <p className="text-[22px] font-medium tracking-tight text-ink">{variant.name}</p>
-                <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{variant.body}</p>
-              </div>
+          <div className="mt-12 space-y-8">
+            {family.map((aircraft, index) => (
+              <article
+                key={aircraft.name}
+                className="grid grid-cols-1 overflow-hidden rounded-[28px] border border-rule bg-plate lg:grid-cols-2"
+              >
+                <div
+                  className={`relative min-h-[300px] bg-white sm:min-h-[390px] ${
+                    index % 2 === 1 ? 'lg:order-1' : 'lg:order-2'
+                  }`}
+                >
+                  <Image
+                    src={aircraft.image}
+                    alt={`${aircraft.name} aircraft`}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-contain p-4 sm:p-7"
+                  />
+                </div>
+                <div
+                  className={`flex flex-col justify-center border-t border-rule p-8 sm:p-12 lg:border-t-0 ${
+                    index % 2 === 1
+                      ? 'lg:order-2 lg:border-l'
+                      : 'lg:order-1 lg:border-r'
+                  }`}
+                >
+                  <p className="tag mb-5">{aircraft.status}</p>
+                  <h3 className="text-[32px] leading-tight font-medium tracking-tight text-ink sm:text-[38px]">
+                    {aircraft.name}
+                  </h3>
+                  <p className="mt-5 max-w-[48ch] text-lede text-ink-soft">{aircraft.description}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>

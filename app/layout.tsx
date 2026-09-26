@@ -24,12 +24,12 @@ export const metadata: Metadata = {
     template: "%s | Zephyra Dynamics",
   },
   description:
-    "Kestrel X2 is a single-seat autonomous eVTOL engineered from first principles for Indian cities, paired with LAMINAR, our cloud urban air traffic management platform.",
+    "Zephyra Dynamics develops Kestrel X2, LAMINAR airspace software and FlightLab validation technology as one integrated urban air mobility system.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Zephyra Dynamics",
     description:
-      "A single-seat autonomous eVTOL for Indian cities, and the airspace software that keeps a fleet of them apart.",
+      "Aircraft, airspace and validation technology engineered as one urban air mobility system.",
     url: "https://www.zephyradynamics.com",
     siteName: "Zephyra Dynamics",
     type: "website",
@@ -39,37 +39,19 @@ export const metadata: Metadata = {
 
 const navigationItems = [
   { label: "Home", href: "/" },
-  {
-    label: "Product",
-    href: "#",
-    dropdownItems: [
-      { label: "Kestrel X2", href: "/kestrel-x2" },
-      { label: "LAMINAR", href: "/laminar" },
-    ],
-  },
-  {
-    label: "Company",
-    href: "#",
-    dropdownItems: [
-      { label: "About", href: "/about" },
-      { label: "Careers", href: "/careers" },
-    ],
-  },
-  {
-    label: "Blogs",
-    href: "#",
-    dropdownItems: [
-      { label: "Urban Air Mobility", href: "/blogs/uam-fundamentals-india" },
-      { label: "Our Story", href: "/blogs/zephyra-vision" },
-    ],
-  },
+  { label: "Kestrel", href: "/kestrel-x2" },
+  { label: "LAMINAR", href: "/laminar" },
+  { label: "FlightLab", href: "/flightlab" },
+  { label: "Blogs", href: "/blogs" },
+  { label: "Careers", href: "/careers" },
+  { label: "About Us", href: "/about" },
 ];
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${chivo.variable} ${chivoMono.variable} font-sans bg-canvas text-ink overflow-x-hidden`}>
         <a
           href="#main"

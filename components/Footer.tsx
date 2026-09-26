@@ -10,10 +10,11 @@ const XIcon = ({ size = 18 }: { size?: number }) => (
 
 const columns = [
   {
-    heading: 'Product',
+    heading: 'Technology',
     links: [
       { label: 'Kestrel X2', href: '/kestrel-x2' },
       { label: 'LAMINAR', href: '/laminar' },
+      { label: 'FlightLab', href: '/flightlab' },
     ],
   },
   {
@@ -21,13 +22,14 @@ const columns = [
     links: [
       { label: 'About', href: '/about' },
       { label: 'Careers', href: '/careers' },
+      { label: 'Blogs', href: '/blogs' },
     ],
   },
   {
-    heading: 'Blog',
+    heading: 'Connect',
     links: [
-      { label: 'Urban Air Mobility', href: '/blogs/uam-fundamentals-india' },
-      { label: 'Our Story', href: '/blogs/zephyra-vision' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/zephyradynamics/' },
+      { label: 'Contact', href: '/#contact' },
     ],
   },
 ];
@@ -53,7 +55,8 @@ export default function Footer() {
               className="h-8 w-auto object-contain"
             />
             <p className="mt-4 max-w-[30ch] text-sm leading-relaxed text-ink-soft">
-              Shaping the future of urban air mobility.
+              Department of Aerospace Engineering, RV College of Engineering, 560059, Bengaluru,
+              Karnataka, India
             </p>
           </div>
 

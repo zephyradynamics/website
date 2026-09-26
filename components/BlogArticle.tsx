@@ -49,6 +49,12 @@ export default function BlogArticle({
               <span className="meta shrink-0">Article</span>
             </header>
 
+            <div className="mx-auto max-w-[920px] py-7 sm:py-9">
+              <h1 className="max-w-[24ch] text-[clamp(2rem,4.2vw,3.5rem)] leading-[1.06] font-bold tracking-[-0.04em] text-ink">
+                {title}
+              </h1>
+            </div>
+
             <div className="mx-auto max-w-[920px] overflow-hidden">
               <Image
                 src={image}
@@ -62,11 +68,7 @@ export default function BlogArticle({
             </div>
 
             <div className="mx-auto max-w-[720px] py-8 sm:py-10">
-              <p className="tag mb-4">{category}</p>
-              <h1 className="max-w-[24ch] text-[clamp(2rem,3.4vw,2.75rem)] leading-[1.08] font-bold tracking-[-0.035em] text-ink">
-                {title}
-              </h1>
-              <p className="mt-4 max-w-[62ch] text-[16px] leading-[1.7] text-ink-soft">{summary}</p>
+              <p className="max-w-[62ch] text-[17px] leading-[1.75] text-ink-soft">{summary}</p>
 
               <BlogInteractions articlePath={articlePath} title={title} />
             </div>

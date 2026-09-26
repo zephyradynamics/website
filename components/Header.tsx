@@ -109,7 +109,7 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
           ) : null}
         </Link>
 
-        <nav ref={navRef} aria-label="Main" className="hidden items-center gap-8 md:flex">
+        <nav ref={navRef} aria-label="Main" className="hidden items-center gap-5 lg:flex xl:gap-7">
           {navItems.map((item) => {
             const isOpen = activeDropdown === item.label;
             return (
@@ -159,12 +159,6 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
             );
           })}
 
-          <Link
-            href="/#contact"
-            className="inline-flex h-[34px] items-center border border-signal px-[18px] text-xs font-medium text-signal transition-colors hover:bg-signal hover:text-plate"
-          >
-            Get in touch
-          </Link>
         </nav>
 
         <button
@@ -174,14 +168,14 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-          className="-mr-2 p-2 text-ink md:hidden"
+          className="-mr-2 p-2 text-ink lg:hidden"
         >
           {isMobileMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
         </button>
       </div>
 
       {isMobileMenuOpen && (
-        <div id="mobile-menu" ref={mobilePanelRef} className="fixed inset-0 top-[76px] z-40 bg-canvas md:hidden">
+        <div id="mobile-menu" ref={mobilePanelRef} className="fixed inset-0 top-[76px] z-40 bg-canvas lg:hidden">
           <nav aria-label="Mobile" className="flex flex-col px-(--spacing-gutter) pt-6">
             {navItems.map((item) => {
               const isOpen = mobileActiveDropdown === item.label;
@@ -225,13 +219,6 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
                 </div>
               );
             })}
-            <Link
-              href="/#contact"
-              onClick={closeMobile}
-              className="mt-8 inline-flex h-12 items-center justify-center bg-signal text-sm font-medium text-plate"
-            >
-              Get in touch
-            </Link>
           </nav>
         </div>
       )}
