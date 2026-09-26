@@ -25,8 +25,38 @@ export default function BlogArticle({
   imageHeight,
   children,
 }: BlogArticleProps) {
+  const articleUrl = `https://www.zephyradynamics.com${articlePath}`;
+  const articleImage = image.startsWith('http')
+    ? image
+    : `https://www.zephyradynamics.com${image}`;
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: summary,
+    image: articleImage,
+    mainEntityOfPage: articleUrl,
+    author: {
+      '@type': 'Organization',
+      name: 'Zephyra Dynamics',
+      url: 'https://www.zephyradynamics.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Zephyra Dynamics',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.zephyradynamics.com/img/logo-ink.png',
+      },
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }}
+      />
       <article className="border-b border-rule bg-plate py-[clamp(48px,6vw,76px)]">
         <div className="mx-auto max-w-[1080px] px-(--spacing-gutter)">
           <div>

@@ -37,7 +37,7 @@ export default function AboutPage() {
       <section className="border-b border-rule bg-canvas py-(--spacing-section)">
         <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
           <p className="tag mb-6">Our vision</p>
-          <h2 className="max-w-[20ch] text-section text-ink">A better way to move through growing cities.</h2>
+          <h1 className="max-w-[20ch] text-section text-ink">A better way to move through growing cities.</h1>
           <p className="mt-6 max-w-[70ch] text-lede text-ink-soft">
             The ground is full. The sky is not. India&apos;s urban air mobility ecosystem is nascent,
             which means it can be built correctly from the start. We are building the machine that
