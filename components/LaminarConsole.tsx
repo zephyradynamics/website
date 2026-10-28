@@ -55,7 +55,7 @@ type Phase = keyof typeof PHASE;
 const AMBER = '#D07A1E';
 const RED = '#D22B1F';
 const VEX = 3; // vertical exaggeration in 3D
-const CRUISE_KMH = 122;
+const CRUISE_KMH = 135;
 
 const BOUNDS: [LngLat, LngLat] = [
   [77.55, 12.83],

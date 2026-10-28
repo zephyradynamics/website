@@ -8,7 +8,7 @@ import { Button, Container, Heading, Figure } from '@/components/ui';
 export const metadata: Metadata = pageMeta({
   title: 'Kestrel X2, a single-seat autonomous eVTOL',
   description:
-    'Kestrel X2 is a single-seat, fully autonomous electric eVTOL for Indian cities: eight rotors in four coaxial pairs, 35–45 km range and 80–135 km/h cruise.',
+    'Kestrel X2 is a single-seat, fully autonomous electric eVTOL for Indian cities: eight rotors in four coaxial pairs, 45 km range and 135 km/h cruise.',
   path: '/kestrel-x2',
 });
 
@@ -77,8 +77,8 @@ export default function KestrelX2Page() {
         </div>
         <Container className="pb-(--spacing-section)">
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
-            <Figure value="35–45" unit="km" label="Range" />
-            <Figure value="80–135" unit="km/h" label="Cruise speed" />
+            <Figure value="45" unit="km" label="Range" />
+            <Figure value="135" unit="km/h" label="Cruise speed" />
             <Figure value="8" label="Rotors in four coaxial pairs" />
             <Figure value="1" label="Seat, no pilot required" />
           </div>
@@ -86,17 +86,18 @@ export default function KestrelX2Page() {
       </section>
 
       {/* ---------- ANATOMY (studio film) ---------- */}
-      {/* same treatment as every text-on-media band: dark type, top left, on a soft light wash */}
+      {/* tablet and up: dark type top left on a soft wash over the film; phones: the line sits above it,
+          because the band is too short to hold both without covering the aircraft */}
       <section className="relative isolate overflow-hidden bg-cloud">
-        <div className="aspect-[16/9] w-full lg:aspect-[21/9]">
-          <LoopVideo name="kestrel-studio" label="Kestrel X2 hovering in a bright studio with rotors spinning" />
-        </div>
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-cloud/90 to-transparent" />
-        <Container className="absolute inset-x-0 top-0 pt-[clamp(40px,8vh,96px)]">
+        <Container className="relative pt-12 pb-6 md:absolute md:inset-x-0 md:top-0 md:z-10 md:pt-[clamp(40px,8vh,96px)] md:pb-0">
           <p className="font-wide max-w-[22ch] text-section text-balance text-carbon">
             Every part of Kestrel X2 is designed for flying over a city.
           </p>
         </Container>
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 hidden h-1/2 bg-gradient-to-b from-cloud/90 to-transparent md:block" />
+        <div className="aspect-[16/9] w-full lg:aspect-[21/9]">
+          <LoopVideo name="kestrel-studio" label="Kestrel X2 hovering in a bright studio with rotors spinning" />
+        </div>
       </section>
 
       {/* ---------- FRONT DRAWING ---------- */}
@@ -148,7 +149,8 @@ export default function KestrelX2Page() {
           width={2880}
           height={1200}
           sizes="100vw"
-          className="h-[min(78svh,760px)] min-h-[420px] w-full object-cover"
+          // Kestrel sits right of centre; on narrow crops keep it in frame
+          className="h-[min(78svh,760px)] min-h-[420px] w-full object-cover object-[74%_50%] md:object-center"
         />
         <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-sky/85 to-transparent" />
         <Container className="absolute inset-x-0 top-0 pt-[clamp(40px,8vh,96px)]">

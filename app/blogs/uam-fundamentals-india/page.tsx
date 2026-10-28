@@ -59,7 +59,7 @@ export default function Page() {
         The first services will be short, frequent trips: journeys of a few tens of kilometres that
         take an hour or more by road but only minutes by air. Whitefield to Electronic City is about
         17 km in a straight line. At rush hour, that can easily take well over an hour by road. In
-        Kestrel X2, it would be a flight of around a quarter of an hour, including take-off and
+        Kestrel X2, it would be a flight of around ten minutes, including take-off and
         landing.
       </p>
 

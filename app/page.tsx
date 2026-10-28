@@ -150,8 +150,8 @@ export default function Home() {
         </div>
         <Container className="pb-(--spacing-section)">
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
-            <Figure value="35–45" unit="km" label="Range" />
-            <Figure value="80–135" unit="km/h" label="Cruise speed" />
+            <Figure value="45" unit="km" label="Range" />
+            <Figure value="135" unit="km/h" label="Cruise speed" />
             <Figure value="8" label="Rotors in four coaxial pairs" />
             <Figure value="1" label="Seat, fully autonomous" />
           </div>

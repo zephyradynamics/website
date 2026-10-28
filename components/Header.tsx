@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -186,8 +187,10 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
         </button>
       </div>
 
-      {isMobileMenuOpen && (
-        <div id="mobile-menu" ref={mobilePanelRef} className="fixed inset-0 top-[68px] z-40 bg-sky lg:hidden">
+      {/* drawn on <body>, outside the header: the header's own blur would otherwise trap this fixed panel inside
+          the 68px bar. Frosted like the header, so the page softly shows through */}
+      {isMobileMenuOpen && createPortal(
+        <div id="mobile-menu" ref={mobilePanelRef} className="fixed inset-x-0 top-[68px] bottom-0 z-[60] overflow-y-auto bg-sky/80 pb-10 backdrop-blur-2xl backdrop-saturate-150 lg:hidden">
           <nav aria-label="Mobile" className="flex flex-col px-(--spacing-gutter) pt-6">
             {navItems.map((item) => {
               const isOpen = mobileActiveDropdown === item.label;
@@ -239,7 +242,8 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
               Contact us
             </Link>
           </nav>
-        </div>
+        </div>,
+        document.body
       )}
     </header>
   );

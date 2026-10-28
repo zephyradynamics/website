@@ -45,9 +45,9 @@ export default function Page() {
         time, the daily trip across the city, is usually made alone.
       </p>
       <p>
-        With a range of 35 to 45 km and a cruise speed of 80 to 135 km/h, Kestrel X2 is sized for
+        With a range of 45 km and a cruise speed of 135 km/h, Kestrel X2 is sized for
         exactly that trip. Whitefield to Electronic City is about 17 km in a straight line, a flight
-        of around a quarter of an hour including take-off and landing.
+        of around ten minutes including take-off and landing.
       </p>
 
       <h2>Without a pilot, the seat belongs to the passenger</h2>

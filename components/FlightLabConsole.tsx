@@ -206,7 +206,7 @@ export default function FlightLabConsole() {
   const faulted = proc.fault !== undefined && t > 0.42;
   const caution = t > 0.4 && t < 0.97 && proc.id !== 'DGCA-01';
   const airborne = alt > 0.3;
-  const speed = airborne ? (proc.id === 'DGCA-07' && t > 0.46 ? 4 : t > 0.2 && t < 0.78 ? 80 : 18) : 0;
+  const speed = airborne ? (proc.id === 'DGCA-07' && t > 0.46 ? 4 : t > 0.2 && t < 0.78 ? 135 : 18) : 0;
   const flightMode = !airborne ? (t > 0.9 ? 'Landed' : 'Ready') : proc.events.slice().reverse().find(([at]) => t >= at)?.[1].split('.')[0] ?? 'Mission';
 
   const launch = () => {
@@ -348,7 +348,7 @@ export default function FlightLabConsole() {
                   <Rows rows={[['Procedure', proc.id], ['Result', step === 2 ? 'Pass' : 'In progress'], ['Detail', proc.result]]} />
                 </Card>
                 <Card title="Aero twin" action={<button type="button" onClick={() => setTab('aero')} className="text-[12px] font-semibold text-kestrel">Open Aero twin</button>}>
-                  <Rows rows={[['Case', 'Cruise, 80 km/h, level'], ['Use', 'Advisory engineering data, kept separate from the evidence ledger']]} />
+                  <Rows rows={[['Case', 'Cruise, 135 km/h, level'], ['Use', 'Advisory engineering data, kept separate from the evidence ledger']]} />
                 </Card>
               </div>
             </div>
@@ -370,7 +370,7 @@ export default function FlightLabConsole() {
                   ))}
                 </ul>
                 <Card title={mission}>
-                  <Rows rows={[['Take-off', '30 m AGL'], ['Climb rate', '3.0 m/s'], ['Cruise', '150 m AGL'], ['Cruise speed', '80 km/h'], ['Departure', 'Current home position'], ['Mission end', 'Return to launch']]} />
+                  <Rows rows={[['Take-off', '30 m AGL'], ['Climb rate', '3.0 m/s'], ['Cruise', '150 m AGL'], ['Cruise speed', '135 km/h'], ['Departure', 'Current home position'], ['Mission end', 'Return to launch']]} />
                   <p className="mt-4 rounded-lg bg-ok/10 px-3 py-2 text-[12px] font-medium text-ok">Within range, with energy reserve</p>
                   <button type="button" onClick={launch} className="mt-3 rounded-full bg-carbon px-4 py-2 text-[12.5px] font-semibold text-white hover:bg-kestrel">Upload and fly in simulation</button>
                 </Card>
@@ -554,7 +554,7 @@ export default function FlightLabConsole() {
                 </div>
                 <div className="space-y-3">
                   <Card title="Case">
-                    <Rows rows={[['Condition', 'Cruise, 80 km/h'], ['Attitude', 'Level, 6° nose-down'], ['Status', 'Converged']]} />
+                    <Rows rows={[['Condition', 'Cruise, 135 km/h'], ['Attitude', 'Level, 6° nose-down'], ['Status', 'Converged']]} />
                   </Card>
                   <Card title="Airframe loads">
                     <dl className="space-y-2">
