@@ -1,13 +1,15 @@
 import type { Metadata } from 'next';
+import { pageMeta } from '@/lib/seo';
 import Footer from '@/components/Footer';
 import CareerApplyModal from '@/components/CareerApplyModal';
+import { Container, Heading } from '@/components/ui';
 
-export const metadata: Metadata = {
-  title: 'Careers',
+export const metadata: Metadata = pageMeta({
+  title: 'Careers and aerospace internships',
   description:
-    'Explore aerospace engineering internships and career opportunities at Zephyra Dynamics.',
-  alternates: { canonical: '/careers' },
-};
+    'Join Zephyra Dynamics. Remote internships in DGCA compliance, systems engineering and aircraft design, working on Kestrel X2 from the first week.',
+  path: '/careers',
+});
 
 const positions = [
   {
@@ -69,94 +71,77 @@ const positions = [
 const workDetails = [
   { label: 'Location', value: 'Remote' },
   { label: 'Position type', value: 'Internship' },
-  { label: 'Duration', value: 'Flexible' },
-  { label: 'Commitment', value: 'Part time or full time' },
 ];
+
+function Bullets({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <h4 className="label-mono text-slate">{title}</h4>
+      <ul className="mt-4 space-y-3">
+        {items.map((item) => (
+          <li key={item} className="flex gap-3 text-[15px] leading-relaxed text-slate">
+            <span aria-hidden="true" className="mt-[11px] h-0.5 w-3 shrink-0 bg-kestrel" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default function CareersPage() {
   return (
     <>
-      {/* ---------- HERO ---------- */}
-      <section className="border-b border-rule bg-plate pt-12 pb-(--spacing-section) lg:pt-16">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-7">Careers</p>
-          <h1 className="max-w-[17ch] text-display text-ink">
-            Build what comes <span className="text-signal">next.</span>
+      <section className="bg-sky pt-[clamp(48px,8vh,96px)] pb-(--spacing-section)">
+        <Container>
+          <p className="kicker rise mb-4">Careers</p>
+          <h1 className="font-wide rise max-w-[22ch] text-display text-balance text-carbon">
+            Help us build a new kind of aircraft for India.
           </h1>
-          <p className="mt-7 max-w-[62ch] text-lede text-ink-soft">
-            Join a multidisciplinary team working on electric aircraft, autonomous systems and the
-            infrastructure needed for urban air mobility.
+          <p className="rise rise-2 mt-7 max-w-[60ch] text-lede text-slate">
+            We are a team of engineers in Bengaluru working on electric aircraft, autonomy, airspace
+            software and simulation. Our internships put you on real work from the first week.
           </p>
-        </div>
+        </Container>
       </section>
 
-      {/* ---------- POSITIONS ---------- */}
-      <section className="border-b border-rule bg-canvas py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-6">Open positions</p>
-          <h2 className="max-w-[20ch] text-section text-ink">Find your place on the team.</h2>
+      <section className="bg-cloud py-(--spacing-section)">
+        <Container>
+          <Heading kicker="Open positions" title="Internships open now." />
 
-          <div className="mt-12 flex flex-col gap-7">
-            {positions.map((position, index) => (
-              <article key={position.id} className="border border-rule bg-plate p-6 sm:p-8 lg:p-10">
+          <div className="mt-12 flex flex-col gap-6">
+            {positions.map((position) => (
+              <article key={position.id} className="rounded-[18px] bg-sky p-6 ring-1 ring-line sm:p-8 lg:p-10">
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
-                  <div className="max-w-[760px]">
-                    <p className="meta text-signal">Position {String(index + 1).padStart(2, '0')}</p>
-                    <h3 className="mt-3 text-[28px] font-medium leading-tight tracking-tight text-ink">
-                      {position.title}
-                    </h3>
-                    <p className="mt-4 text-[16px] leading-relaxed text-ink-soft">
-                      {position.description}
-                    </p>
+                  <div className="max-w-[720px]">
+                    <h3 className="font-semiwide text-[26px] text-carbon">{position.title}</h3>
+                    <p className="mt-3 text-[16px] leading-relaxed text-slate">{position.description}</p>
                   </div>
                   <CareerApplyModal position={position} />
                 </div>
 
-                <div className="mt-9 grid grid-cols-1 gap-8 border-t border-rule pt-8 md:grid-cols-2 md:gap-12">
-                  <div>
-                    <h4 className="meta text-ink">Key responsibilities</h4>
-                    <ul className="mt-4 space-y-3">
-                      {position.responsibilities.map((item) => (
-                        <li key={item} className="flex gap-3 text-[14px] leading-relaxed text-ink-soft">
-                          <span aria-hidden="true" className="mt-[10px] h-1 w-1 shrink-0 bg-signal" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="meta text-ink">Requirements</h4>
-                    <ul className="mt-4 space-y-3">
-                      {position.requirements.map((item) => (
-                        <li key={item} className="flex gap-3 text-[14px] leading-relaxed text-ink-soft">
-                          <span aria-hidden="true" className="mt-[10px] h-1 w-1 shrink-0 bg-signal" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div className="mt-8 grid grid-cols-1 gap-8 border-t border-line pt-8 md:grid-cols-2 md:gap-12">
+                  <Bullets title="What you will do" items={position.responsibilities} />
+                  <Bullets title="What we look for" items={position.requirements} />
                 </div>
               </article>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* ---------- WORK DETAILS ---------- */}
-      <section className="bg-plate py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-6">Work details</p>
-          <h2 className="max-w-[20ch] text-section text-ink">How these roles work.</h2>
-
-          <div className="mt-10 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="bg-sky py-(--spacing-section)">
+        <Container>
+          <Heading kicker="How internships work" title="Our internships are remote, so you can work with us from anywhere." />
+          <dl className="mt-10 grid max-w-[720px] grid-cols-1 gap-7 sm:grid-cols-2">
             {workDetails.map((detail) => (
-              <div key={detail.label} className="border-t border-rule-strong pt-4">
-                <p className="meta">{detail.label}</p>
-                <p className="mt-2 text-[19px] font-medium tracking-tight text-ink">{detail.value}</p>
+              <div key={detail.label} className="border-t border-line-strong pt-4">
+                <dt className="label-mono text-slate">{detail.label}</dt>
+                <dd className="font-semiwide mt-3 text-[24px] text-carbon">{detail.value}</dd>
               </div>
             ))}
-          </div>
-        </div>
+          </dl>
+        </Container>
       </section>
 
       <Footer />

@@ -1,109 +1,84 @@
-import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
+import { getResend, escapeHtml, safeUrl, isEmail, emailFrame, row } from '@/lib/email';
 
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+const MAX_RESUME_BYTES = 8 * 1024 * 1024;
+const RESUME_TYPES = new Set([
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+]);
 
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
+    const field = (key: string) => String(formData.get(key) ?? '').trim();
 
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const phone = formData.get('phone') as string;
-    const education = formData.get('education') as string;
-    const experience = formData.get('experience') as string;
-    const portfolio = formData.get('portfolio') as string;
-    const message = formData.get('message') as string;
-    const position = formData.get('position') as string;
-    const resume = formData.get('resume') as File;
+    const name = field('name');
+    const email = field('email');
+    const phone = field('phone');
+    const education = field('education');
+    const experience = field('experience');
+    const portfolio = safeUrl(field('portfolio'));
+    const message = field('message');
+    const position = field('position') || 'General application';
+    const resume = formData.get('resume');
 
-    // Validate required fields
-    if (!name || !email || !phone || !resume) {
+    if (!name || !phone || !isEmail(email) || !(resume instanceof File)) {
       return NextResponse.json(
-        { error: 'Name, email, phone, and resume are required' },
+        { error: 'Add your name, a valid email, a phone number and your resume.' },
+        { status: 400 }
+      );
+    }
+    if (resume.size > MAX_RESUME_BYTES || (resume.type && !RESUME_TYPES.has(resume.type))) {
+      return NextResponse.json(
+        { error: 'Upload your resume as a PDF or Word file under 8 MB.' },
         { status: 400 }
       );
     }
 
-    // Convert resume to buffer
-    const resumeBuffer = await resume.arrayBuffer();
-    const resumeBase64 = Buffer.from(resumeBuffer).toString('base64');
+    const resumeBase64 = Buffer.from(await resume.arrayBuffer()).toString('base64');
 
-    // Send email using Resend with attachment
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'Zephyra Dynamics <career@zephyradynamics.com>',
       to: 'career@zephyradynamics.com',
       reply_to: email,
-      subject: `New Career Application: ${position}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #00AEEF; margin-bottom: 20px;">New Career Application</h2>
-
-          <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-            <p style="margin: 10px 0;"><strong>Position:</strong> ${position}</p>
-            <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
-            <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
-            <p style="margin: 10px 0;"><strong>Phone:</strong> ${phone}</p>
-            ${education ? `<p style="margin: 10px 0;"><strong>Education:</strong> ${education}</p>` : ''}
-            ${experience ? `<p style="margin: 10px 0;"><strong>Experience:</strong> ${experience}</p>` : ''}
-            ${portfolio ? `<p style="margin: 10px 0;"><strong>Portfolio:</strong> <a href="${portfolio}">${portfolio}</a></p>` : ''}
-          </div>
-
-          ${message ? `
-            <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #00AEEF;">
-              <h3 style="color: #333; margin-top: 0;">Cover Letter:</h3>
-              <p style="color: #555; white-space: pre-wrap; line-height: 1.6;">${message}</p>
-            </div>
-          ` : ''}
-
-          <p style="color: #999; font-size: 12px; margin-top: 20px;">
-            Resume file attached to this email.
-          </p>
-        </div>
-      `,
-      attachments: [
-        {
-          filename: resume.name,
-          content: resumeBase64,
-        }
-      ],
+      subject: `Application: ${position.slice(0, 80)} (${name.slice(0, 60)})`,
+      html: emailFrame(
+        'New career application',
+        [
+          row('Position', escapeHtml(position)),
+          row('Name', escapeHtml(name)),
+          row('Email', escapeHtml(email)),
+          row('Phone', escapeHtml(phone)),
+          education ? row('Education', escapeHtml(education)) : '',
+          experience ? row('Experience', escapeHtml(experience)) : '',
+          portfolio ? row('Portfolio', `<a href="${escapeHtml(portfolio)}">${escapeHtml(portfolio)}</a>`) : '',
+          message
+            ? `<p style="margin: 20px 0 0; white-space: pre-wrap; line-height: 1.6;">${escapeHtml(message)}</p>`
+            : '',
+          '<p style="color: #5A6670; font-size: 13px; margin-top: 20px;">Resume attached.</p>',
+        ].join('')
+      ),
+      attachments: [{ filename: resume.name.replace(/[^\w.\- ]/g, '_'), content: resumeBase64 }],
     });
 
-    // Optional: Also send confirmation email to applicant
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'Zephyra Dynamics <career@zephyradynamics.com>',
       to: email,
-      subject: `Application Received - ${position} | Zephyra Dynamics`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #00AEEF; margin-bottom: 20px;">Application Received</h2>
-          <p style="color: #555; font-size: 16px; line-height: 1.6;">
-            Hi ${name},
-          </p>
-          <p style="color: #555; font-size: 16px; line-height: 1.6;">
-            Thank you for applying for the <strong>${position}</strong> position at Zephyra Dynamics. We've received your application and will review it carefully.
-          </p>
-          <p style="color: #555; font-size: 16px; line-height: 1.6;">
-            We typically respond within 5-7 business days. If we feel you're a good fit, we'll reach out to schedule an interview.
-          </p>
-          <p style="color: #555; font-size: 16px; line-height: 1.6;">
-            Best regards,<br>
-            The Zephyra Dynamics Team
-          </p>
-          <p style="color: #999; font-size: 12px; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 20px;">
-            Zephyra Dynamics Pvt. Ltd. | Building the future of Urban Air Mobility
-          </p>
-        </div>
-      `,
+      subject: `Application received: ${position.slice(0, 80)} at Zephyra Dynamics`,
+      html: emailFrame(
+        'Application received',
+        `<p style="line-height: 1.6;">Hi ${escapeHtml(name)},</p>
+         <p style="line-height: 1.6;">Thank you for applying for the <strong>${escapeHtml(position)}</strong> role at Zephyra Dynamics. We've received your application and will review it carefully.</p>
+         <p style="line-height: 1.6;">We usually reply within 5 to 7 business days. If there's a fit, we'll reach out to arrange a conversation.</p>
+         <p style="line-height: 1.6;">The Zephyra Dynamics team</p>`
+      ),
     });
 
-    return NextResponse.json(
-      { success: true, message: 'Application submitted successfully' },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch {
     return NextResponse.json(
-      { error: 'Failed to submit application' },
+      { error: 'The application could not be sent. Email career@zephyradynamics.com instead.' },
       { status: 500 }
     );
   }

@@ -1,119 +1,108 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { pageMeta } from '@/lib/seo';
 import Footer from '@/components/Footer';
+import LoopVideo from '@/components/LoopVideo';
+import FlightLabConsole from '@/components/FlightLabConsole';
+import Image from 'next/image';
+import { Button, Container, Heading, Figure } from '@/components/ui';
 
-export const metadata: Metadata = {
-  title: 'FlightLab',
+export const metadata: Metadata = pageMeta({
+  title: 'FlightLab virtual twin and flight testing',
   description:
-    'FlightLab is Zephyra Dynamics integrated environment for repeatable aircraft simulation, testing and engineering review.',
-  alternates: { canonical: '/flightlab' },
-};
+    'FlightLab is our virtual twin of Kestrel X2, built on NVIDIA Omniverse and Isaac Sim. Every flight is tested in simulation before it happens for real.',
+  path: '/flightlab',
+});
 
-const stages = [
+const steps = [
   {
-    number: '01',
-    title: 'Aircraft model',
-    body: 'A representative aircraft model supports controlled evaluation before physical flight testing.',
+    title: 'Build the virtual twin',
+    body: 'A virtual Kestrel X2 that runs its real flight software, with the virtual twin in NVIDIA Omniverse and Isaac Sim adding its sensors and the city around it. LAMINAR plans the routes it flies.',
   },
   {
-    number: '02',
-    title: 'Scenario setup',
-    body: 'Repeatable scenarios allow the team to review missions and operating conditions consistently.',
+    title: 'Fly the scenarios',
+    body: 'We set the weather, payload and centre of gravity, then fly mission presets or inject failures such as a lost motor. The same tests run with real flight hardware on the bench.',
   },
   {
-    number: '03',
-    title: 'Review and analysis',
-    body: 'Each session captures observations and outcomes for structured engineering review.',
+    title: 'Record the evidence',
+    body: 'Every run is saved with its exact configuration and result in an evidence ledger organised around India’s DGCA, with EASA and FAA references alongside.',
   },
 ];
 
 export default function FlightLabPage() {
   return (
     <>
-      <section className="border-b border-rule bg-plate pt-12 pb-(--spacing-section) lg:pt-16">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-12 px-(--spacing-gutter) lg:grid-cols-[0.78fr_1.22fr] lg:gap-[72px]">
-          <div>
-            <p className="tag mb-7">FlightLab</p>
-            <h1 className="max-w-[16ch] text-display text-ink">
-              Validation before <span className="text-signal">first flight.</span>
-            </h1>
-            <p className="mt-7 max-w-[50ch] text-lede text-ink-soft">
-              FlightLab gives our engineering team a controlled environment for evaluating aircraft
-              behaviour, mission scenarios and operating conditions before physical flight testing.
-            </p>
+      {/* ---------- HERO ---------- */}
+      <section className="bg-sky pt-[clamp(48px,8vh,96px)] pb-(--spacing-section)">
+        <Container>
+          <div className="rise mb-5 flex items-center gap-3">
+            <Image src="/brand/flightlab-icon.png" alt="FlightLab logo" width={48} height={48} className="h-12 w-12 rounded-xl" priority />
+            <p className="kicker">FlightLab · Simulation and validation</p>
           </div>
-
-          <div className="relative aspect-[16/9] overflow-hidden border border-rule-strong bg-canvas">
-            <Image
-              src="/image/Flight Lab (1).png"
-              alt="FlightLab simulation and validation platform"
-              fill
-              priority
-              sizes="(min-width: 1024px) 57vw, 100vw"
-              className="object-cover object-center"
-            />
+          <h1 className="font-wide rise max-w-[22ch] text-display text-balance text-carbon">Every flight is tested in simulation before Kestrel X2 leaves the ground.</h1>
+          <p className="rise rise-2 mt-7 max-w-[52ch] text-lede text-slate">
+            In FlightLab, Kestrel X2 faces strong winds, equipment faults and night landings long
+            before it meets them in the real sky. Choose a scenario below to watch a test run.
+          </p>
+          <div className="rise rise-3 mt-14">
+            <FlightLabConsole />
+            <p className="caption mt-3">Zephyra FlightLab, redrawn for the web. Choose a test or open Missions and Evidence. Illustrative values.</p>
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="border-b border-rule bg-canvas py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-6">Connected validation</p>
-          <h2 className="max-w-[20ch] text-section text-ink">A consistent process from setup to review.</h2>
-
-          <div className="mt-12 grid grid-cols-1 gap-7 md:grid-cols-3">
-            {stages.map((stage) => (
-              <article key={stage.number} className="border-t border-rule-strong pt-5">
-                <p className="meta text-signal">{stage.number}</p>
-                <h3 className="mt-3 text-[22px] font-medium tracking-tight text-ink">{stage.title}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{stage.body}</p>
-              </article>
+      {/* ---------- PROCESS ---------- */}
+      <section className="border-t border-line bg-cloud py-(--spacing-section)">
+        <Container>
+          <Heading kicker="How it works" title="Three steps take every idea from a model to evidence we can trust." className="max-w-[820px]" />
+          <ol className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-3">
+            {steps.map((s, i) => (
+              <li key={s.title} className="border-t border-line-strong pt-6">
+                <p className="tabular text-[14px] font-semibold text-kestrel">Step {i + 1}</p>
+                <h3 className="font-semiwide mt-2 text-[26px] tracking-tight text-carbon">{s.title}</h3>
+                <p className="mt-3 text-[16px] leading-relaxed text-slate">{s.body}</p>
+              </li>
             ))}
-          </div>
-        </div>
+          </ol>
+        </Container>
       </section>
 
-      <section className="border-b border-rule bg-plate py-(--spacing-section)">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-(--spacing-gutter) lg:grid-cols-2 lg:gap-[72px]">
+      {/* ---------- TWIN FILM ---------- */}
+      <section className="bg-carbon py-(--spacing-section) text-white">
+        <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
+          <figure>
+            <div className="aspect-video overflow-hidden rounded-[18px] bg-black">
+              <LoopVideo name="flightlab-twin" label="Kestrel X2 virtual twin with thrust vectors and sensor fields of view" />
+            </div>
+            <figcaption className="caption mt-3 !text-white/60">Kestrel X2’s virtual twin in its test bay.</figcaption>
+          </figure>
           <div>
-            <p className="tag mb-6">Test evidence</p>
-            <h2 className="max-w-[18ch] text-section text-ink">Every flight becomes structured engineering evidence.</h2>
-            <p className="mt-6 max-w-[50ch] text-lede text-ink-soft">
-              Each simulation records the test setup, observed behaviour and outcome in a consistent
-              format. The resulting report supports engineering decisions, follow-up work and the
-              careful development of reviewable evidence.
+            <p className="mb-5 text-[15px] font-semibold text-[#FF6A5C]">Built with NVIDIA Omniverse and Isaac Sim</p>
+            <h2 className="font-wide text-section text-balance">A virtual twin that behaves like the real aircraft.</h2>
+            <p className="mt-6 max-w-[46ch] text-lede text-white/70">
+              Thrust on all eight rotors, airflow, sensor fields and the city itself. Because the twin
+              behaves like the real Kestrel, we can also use it to train people for flight, virtually.
             </p>
           </div>
-
-          <div className="border border-rule-strong bg-canvas p-7 sm:p-9">
-            <p className="meta text-signal">Flight review report</p>
-            <div className="mt-7 space-y-5">
-              {['Test objective and setup', 'Scenario and operating conditions', 'Observed behaviour and key events', 'Review notes and follow-up actions'].map((item) => (
-                <div key={item} className="flex items-center gap-4 border-b border-rule pb-4 last:border-0 last:pb-0">
-                  <span aria-hidden="true" className="h-2 w-2 shrink-0 bg-signal" />
-                  <p className="text-sm text-ink">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="bg-canvas py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-6">Progress</p>
-          <h2 className="max-w-[20ch] text-section text-ink">Building experience through repeatable simulation.</h2>
-          <div className="mt-10 grid max-w-[720px] grid-cols-1 gap-8 sm:grid-cols-2">
-            <div className="border-t border-rule-strong pt-5">
-              <p className="text-[42px] font-bold tracking-tight text-ink">50+</p>
-              <p className="meta mt-2">Simulation flights completed</p>
-            </div>
-            <div className="border-t border-rule-strong pt-5">
-              <p className="text-[42px] font-bold tracking-tight text-ink">20+</p>
-              <p className="meta mt-2">Simulation hours completed</p>
-            </div>
+      {/* ---------- PROGRESS ---------- */}
+      <section className="bg-sky py-(--spacing-section)">
+        <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:items-end">
+          <Heading kicker="Progress" title="Our simulation experience grows with every test we run." />
+          <div className="grid grid-cols-2 gap-6">
+            <Figure value="50+" label="Simulated flights" />
+            <Figure value="20+" label="Simulation hours" />
           </div>
-        </div>
+        </Container>
+      </section>
+
+      {/* ---------- CTA ---------- */}
+      <section className="border-t border-line bg-cloud py-[clamp(64px,8vw,112px)]">
+        <Container className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+          <p className="font-wide max-w-[20ch] text-section text-balance text-carbon">Are you a research or testing partner? We would like to work with you.</p>
+          <Button href="/#contact" className="w-fit">Contact the team</Button>
+        </Container>
       </section>
 
       <Footer />

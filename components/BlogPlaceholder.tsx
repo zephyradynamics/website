@@ -14,14 +14,14 @@ export default function BlogPlaceholder({ tag, headline, accent, body }: BlogPla
       <section className="border-b border-rule bg-plate py-(--spacing-section)">
         <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
           <p className="tag mb-7">{tag}</p>
-          <h1 className="max-w-[20ch] text-display text-ink">
-            {headline} <span className="text-signal">{accent}</span>
+          <h1 className="max-w-[20ch] font-wide text-display text-balance text-carbon">
+            {headline} {accent}
           </h1>
           <p className="mt-8 max-w-[52ch] text-lede text-ink-soft">{body}</p>
           <div className="mt-9">
             <Link
               href="/#contact"
-              className="inline-flex h-[50px] items-center bg-signal px-[30px] text-sm font-medium text-plate transition-colors hover:bg-signal-dark"
+              className="inline-flex h-12 items-center rounded-full bg-kestrel px-6 text-[15px] font-semibold text-white transition-colors hover:bg-kestrel-deep"
             >
               Get in touch
             </Link>

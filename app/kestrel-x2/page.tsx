@@ -1,150 +1,220 @@
 import type { Metadata } from 'next';
+import { pageMeta } from '@/lib/seo';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
+import LoopVideo from '@/components/LoopVideo';
+import { Button, Container, Heading, Figure } from '@/components/ui';
 
-export const metadata: Metadata = {
-  title: 'Kestrel X2',
+export const metadata: Metadata = pageMeta({
+  title: 'Kestrel X2, a single-seat autonomous eVTOL',
   description:
-    'Kestrel X2 is a single-seat autonomous eVTOL: eight rotors in coaxial pairs, 35 to 40 km of range, under 65 dB at hover, engineered to ARP4754A for Indian cities.',
-  alternates: { canonical: '/kestrel-x2' },
-};
+    'Kestrel X2 is a single-seat, fully autonomous electric eVTOL for Indian cities: eight rotors in four coaxial pairs, 35–45 km range and 80–135 km/h cruise.',
+  path: '/kestrel-x2',
+});
 
 const callouts = [
-  { label: 'MTOW', value: '292 kg', side: 'left', top: 'top-[24%]' },
-  { label: 'Configuration', value: 'Multi-rotor', side: 'right', top: 'top-[24%]' },
-  { label: 'Passenger capacity', value: '1', side: 'left', top: 'top-[50%]' },
-  { label: 'Endurance', value: '25 minutes', side: 'right', top: 'top-[50%]' },
-  { label: 'Range', value: '35 km', side: 'left', top: 'top-[76%]' },
-  { label: 'Primary mode', value: 'Autonomous', side: 'right', top: 'top-[76%]' },
+  { label: 'Rear-hinged canopy', x: '44%', y: '30%', side: 'left' },
+  { label: 'LED signature line', x: '55.5%', y: '50%', side: 'right' },
+  { label: 'Coaxial rotor pair', x: '29%', y: '42%', side: 'left' },
+  { label: 'Skid landing gear', x: '59%', y: '70%', side: 'right' },
 ] as const;
 
-const family = [
+const engineered = [
   {
-    name: 'Kestrel X2',
-    status: 'Personal urban mobility',
-    description:
-      'A single-seat electric aircraft created for direct journeys across busy cities. Vertical takeoff and landing allow it to operate from compact urban locations without a runway.',
-    image: '/image/kestral_front-white.png',
+    video: 'engineered-reveal',
+    title: 'Light, stiff, simple',
+    body: 'A minimal welded frame carries carbon composite panels and a carbon fibre skin. The battery sits in the floor, keeping the centre of gravity low.',
+    label: 'The Kestrel X2 body turns translucent to reveal the welded spaceframe inside',
   },
   {
-    name: 'Kestrel Air Ambulance',
-    status: 'Emergency medical transport',
-    description:
-      'A medical transport configuration designed to support faster movement during time-sensitive situations, particularly where road access is slow or limited.',
-    image: '/image/kESTREL Air Ambulance.png',
+    video: 'propulsion',
+    title: 'Distributed electric propulsion',
+    body: 'Eight motors on four folding arms. Each coaxial pair can carry the load if its partner stops, and thrust is redistributed automatically.',
+    label: 'Kestrel X2 on a ground run with all eight rotors spinning',
   },
   {
-    name: 'Kestrel Defence Aircraft',
-    status: 'Specialised mission support',
-    description:
-      'A mission-focused configuration designed for observation, logistics and operations that benefit from rapid access and a compact operating footprint.',
-    image: '/image/kESTREL Defence.png',
+    video: 'cockpit',
+    title: 'A cabin for one',
+    body: 'No controls to learn. Choose a destination, sit back, and watch the city pass beneath a wide canopy.',
+    label: 'The passenger view from the Kestrel X2 cabin, cruising over Bengaluru',
   },
+  {
+    video: 'redundancy',
+    title: 'Redundant by design',
+    body: 'Dual flight computers, layered sensing and protection built in layer by layer. Proven first in the FlightLab virtual twin.',
+    label: 'Inside the Kestrel X2 avionics bay: dual flight computers and their supporting electronics',
+  },
+];
+
+const routes = [
+  { from: 'Whitefield', to: 'Outer Ring Road tech park', km: 15 },
+  { from: 'HSR Layout', to: 'Electronic City', km: 12 },
+  { from: 'Central Bengaluru', to: 'Kempegowda International Airport', km: 33 },
 ];
 
 export default function KestrelX2Page() {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      <section className="border-b border-rule bg-plate">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-12 lg:pt-16">
-          <h1 className="max-w-[20ch] text-display text-ink">
-            Engineered for one. <span className="text-signal">Perfected for all.</span>
-          </h1>
+      <section className="overflow-hidden bg-sky pt-[clamp(48px,8vh,96px)]">
+        <Container>
+          <p className="kicker rise mb-4">Single-seat autonomous eVTOL</p>
+          <h1 className="font-wide caps rise text-[clamp(2.75rem,9vw,7.5rem)] leading-[0.88] tracking-[-0.055em] text-carbon">Kestrel X2</h1>
+          <p className="rise rise-2 mt-6 max-w-[44ch] text-lede text-slate">
+            A fully autonomous, all-electric aircraft designed from the ground up to carry one person across an Indian city, from one rooftop to another.
+          </p>
+        </Container>
+        <div className="relative mx-auto mt-4 max-w-[1700px]">
+          <Image
+            src="/kestrel/kestrel-hero.webp"
+            alt="Kestrel X2, three-quarter front view in a white studio"
+            width={2400}
+            height={1350}
+            priority
+            sizes="(min-width: 1700px) 1700px, 100vw"
+            className="h-auto w-full"
+          />
         </div>
-
-        {/* Annotated drawing. The figures are callouts on the aircraft, not a table. */}
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pb-(--spacing-section)">
-          <div className="relative mx-auto h-[430px] w-full max-w-[1360px] sm:h-[520px] lg:h-auto lg:py-16">
-            <Image
-              src="/image/kestral_front-white.png"
-              alt="Front elevation of Kestrel X2"
-              width={1672}
-              height={941}
-              priority
-              sizes="(min-width: 1024px) 850px, 100vw"
-              className="absolute top-1/2 left-1/2 h-auto w-[46%] -translate-x-1/2 -translate-y-1/2 sm:w-[50%] lg:static lg:mx-auto lg:w-[62%] lg:translate-x-0 lg:translate-y-0"
-            />
-
-            {callouts.map((callout) => (
-              <div
-                key={callout.label}
-                className={`absolute block w-[25%] sm:w-[170px] lg:w-[190px] ${callout.top} ${
-                  callout.side === 'left' ? 'left-0 text-right' : 'right-0'
-                }`}
-              >
-                <p className="meta text-[9px] leading-tight sm:text-[11px] lg:text-[12px]">{callout.label}</p>
-                <p className="mt-1 text-[13px] leading-snug font-medium tracking-tight text-ink sm:text-[15px] lg:text-[18px]">
-                  {callout.value}
-                </p>
-                <span
-                  aria-hidden="true"
-                  className={`absolute top-3 hidden h-px w-[54px] bg-signal lg:block ${
-                    callout.side === 'left' ? '-right-[62px]' : '-left-[62px]'
-                  }`}
-                />
-                <span
-                  aria-hidden="true"
-                  className={`absolute top-[9px] hidden h-[7px] w-[7px] rounded-full border border-signal bg-plate lg:block ${
-                    callout.side === 'left' ? '-right-[66px]' : '-left-[66px]'
-                  }`}
-                />
-              </div>
-            ))}
-
-            <p className="meta absolute bottom-2 left-1/2 -translate-x-1/2">
-              Kestrel X2
-            </p>
+        <Container className="pb-(--spacing-section)">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
+            <Figure value="35–45" unit="km" label="Range" />
+            <Figure value="80–135" unit="km/h" label="Cruise speed" />
+            <Figure value="8" label="Rotors in four coaxial pairs" />
+            <Figure value="1" label="Seat, no pilot required" />
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* ---------- KESTREL FAMILY ---------- */}
-      <section className="bg-canvas py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-6">The Kestrel family</p>
-          <h2 className="max-w-[24ch] text-section text-ink">One platform. More missions ahead.</h2>
-          <p className="mt-4 max-w-[62ch] text-lede text-ink-soft">
-            Kestrel X2 establishes the foundation of the Kestrel aircraft family. Additional
-            configurations are being developed around the platform for future mission requirements.
+      {/* ---------- ANATOMY (studio film) ---------- */}
+      {/* same treatment as every text-on-media band: dark type, top left, on a soft light wash */}
+      <section className="relative isolate overflow-hidden bg-cloud">
+        <div className="aspect-[16/9] w-full lg:aspect-[21/9]">
+          <LoopVideo name="kestrel-studio" label="Kestrel X2 hovering in a bright studio with rotors spinning" />
+        </div>
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-cloud/90 to-transparent" />
+        <Container className="absolute inset-x-0 top-0 pt-[clamp(40px,8vh,96px)]">
+          <p className="font-wide max-w-[22ch] text-section text-balance text-carbon">
+            Every part of Kestrel X2 is designed for flying over a city.
           </p>
+        </Container>
+      </section>
 
-          <div className="mt-12 space-y-8">
-            {family.map((aircraft, index) => (
-              <article
-                key={aircraft.name}
-                className="grid grid-cols-1 overflow-hidden rounded-[28px] border border-rule bg-plate lg:grid-cols-2"
+      {/* ---------- FRONT DRAWING ---------- */}
+      <section className="bg-cloud py-(--spacing-section)">
+        <Container>
+          <Heading
+            kicker="Design"
+            title="Small enough to take off and land on a city rooftop."
+            lede="The cabin is shaped around a single passenger. Four arms hold the eight rotors well away from the body, and simple skids let it settle on any flat landing pad."
+            className="max-w-[860px]"
+          />
+          <div className="relative mt-14">
+            <Image
+              src="/kestrel/kestrel-front.webp"
+              alt="Kestrel X2 front elevation"
+              width={2400}
+              height={1350}
+              sizes="(min-width: 1440px) 1328px, 100vw"
+              className="h-auto w-full rounded-[22px] bg-sky"
+            />
+            {callouts.map((c) => (
+              <div
+                key={c.label}
+                className="absolute hidden md:flex md:items-center md:gap-2"
+                style={{ left: c.x, top: c.y, transform: c.side === 'left' ? 'translate(calc(-100% + 5px), -50%)' : 'translate(-5px, -50%)', flexDirection: c.side === 'left' ? 'row-reverse' : 'row' }}
               >
-                <div
-                  className={`relative min-h-[300px] bg-white sm:min-h-[390px] ${
-                    index % 2 === 1 ? 'lg:order-1' : 'lg:order-2'
-                  }`}
-                >
-                  <Image
-                    src={aircraft.image}
-                    alt={`${aircraft.name} aircraft`}
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-contain p-4 sm:p-7"
-                  />
+                <span className="h-2.5 w-2.5 rounded-full border-2 border-kestrel bg-cloud" aria-hidden="true" />
+                <span className="h-px w-10 bg-kestrel" aria-hidden="true" />
+                <span className="rounded-full bg-cloud px-3 py-1 text-[13px] font-semibold text-carbon shadow-sm ring-1 ring-line">{c.label}</span>
+              </div>
+            ))}
+          </div>
+          <ul className="mt-6 grid grid-cols-2 gap-3 text-[14px] text-slate md:hidden">
+            {callouts.map((c) => (
+              <li key={c.label} className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-kestrel" aria-hidden="true" />
+                {c.label}
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* ---------- ON THE PAD ---------- */}
+      <section className="relative isolate overflow-hidden bg-haze">
+        <Image
+          src="/kestrel/kestrel-rooftop-dawn.webp"
+          alt="Kestrel X2 parked on a rooftop vertiport in Whitefield, Bengaluru, at first light"
+          width={2880}
+          height={1200}
+          sizes="100vw"
+          className="h-[min(78svh,760px)] min-h-[420px] w-full object-cover"
+        />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-sky/85 to-transparent" />
+        <Container className="absolute inset-x-0 top-0 pt-[clamp(40px,8vh,96px)]">
+          <p className="font-wide max-w-[24ch] text-section text-balance text-carbon">
+            A rooftop pad is all Kestrel X2 needs to start a journey.
+          </p>
+        </Container>
+      </section>
+
+      {/* ---------- ENGINEERED ---------- */}
+      <section className="border-t border-line bg-sky py-(--spacing-section)">
+        <Container>
+          <Heading
+            kicker="Engineered"
+            title="Built simply wherever possible, with backups wherever safety depends on it."
+            className="max-w-[900px]"
+          />
+          <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2">
+            {engineered.map((item) => (
+              <article key={item.title}>
+                <div className="aspect-video overflow-hidden rounded-[18px] bg-carbon">
+                  <LoopVideo name={item.video} label={item.label} />
                 </div>
-                <div
-                  className={`flex flex-col justify-center border-t border-rule p-8 sm:p-12 lg:border-t-0 ${
-                    index % 2 === 1
-                      ? 'lg:order-2 lg:border-l'
-                      : 'lg:order-1 lg:border-r'
-                  }`}
-                >
-                  <p className="tag mb-5">{aircraft.status}</p>
-                  <h3 className="text-[32px] leading-tight font-medium tracking-tight text-ink sm:text-[38px]">
-                    {aircraft.name}
-                  </h3>
-                  <p className="mt-5 max-w-[48ch] text-lede text-ink-soft">{aircraft.description}</p>
-                </div>
+                <h3 className="font-semiwide mt-6 text-[24px] tracking-tight text-carbon">{item.title}</h3>
+                <p className="mt-3 max-w-[52ch] text-[16px] leading-relaxed text-slate">{item.body}</p>
               </article>
             ))}
           </div>
-        </div>
+        </Container>
+      </section>
+
+      {/* ---------- A DAY IN THE SKY ---------- */}
+      <section className="bg-carbon py-(--spacing-section) text-white">
+        <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+          <div>
+            <p className="mb-5 text-[15px] font-semibold text-[#FF6A5C]">A day in the sky</p>
+            <h2 className="font-wide text-section text-balance">Everyday journeys across Bengaluru, from one rooftop to another.</h2>
+            <p className="mt-6 max-w-[48ch] text-lede text-white/70">
+              These are real Bengaluru routes we fly in simulation, from the morning commute to the last flight home at night. Every one of them is well within Kestrel X2&apos;s range.
+            </p>
+            <ul className="mt-10 divide-y divide-white/15 border-y border-white/15">
+              {routes.map((r) => (
+                <li key={r.from} className="flex items-baseline justify-between gap-6 py-4">
+                  <span className="text-[16px]">
+                    {r.from} <span className="text-white/50">to</span> {r.to}
+                  </span>
+                  <span className="font-semiwide tabular shrink-0 text-[18px]">~{r.km} <span className="normal-case">km</span></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <figure>
+            <div className="aspect-video overflow-hidden rounded-[18px] bg-black">
+              <LoopVideo name="day-montage" label="One Kestrel X2 through a day in Bengaluru: dawn on the rooftop, a daytime cruise, an afternoon landing and a night flight home" />
+            </div>
+            <figcaption className="caption mt-3 !text-white/60">Dawn to night over Bengaluru.</figcaption>
+          </figure>
+        </Container>
+      </section>
+
+      {/* ---------- CTA ---------- */}
+      <section className="bg-cloud py-[clamp(64px,8vw,112px)]">
+        <Container className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+          <p className="font-wide max-w-[24ch] text-section text-balance text-carbon">Are you an operator, a city or an investor? We would like to hear from you.</p>
+          <Button href="/#contact" className="w-fit">Register interest</Button>
+        </Container>
       </section>
 
       <Footer />

@@ -203,7 +203,7 @@ export default function BlogInteractions({ articlePath, title }: BlogInteraction
             onClick={toggleLike}
             aria-label={interactions.liked ? 'Unlike this article' : 'Like this article'}
             aria-pressed={interactions.liked}
-            className={`flex items-center gap-2 text-sm transition-colors ${interactions.liked ? 'text-signal' : 'text-ink hover:text-signal'}`}
+            className={`flex min-h-11 items-center gap-2 text-sm transition-colors ${interactions.liked ? 'text-signal' : 'text-ink hover:text-signal'}`}
           >
             <Heart size={23} fill={interactions.liked ? 'currentColor' : 'none'} aria-hidden="true" />
             <span>{interactions.likes}</span>
@@ -214,7 +214,7 @@ export default function BlogInteractions({ articlePath, title }: BlogInteraction
             onClick={() => setCommentsOpen((open) => !open)}
             aria-label="Show comments"
             aria-expanded={commentsOpen}
-            className="flex items-center gap-2 text-sm text-ink transition-colors hover:text-signal"
+            className="flex min-h-11 items-center gap-2 text-sm text-ink transition-colors hover:text-signal"
           >
             <MessageCircle size={23} aria-hidden="true" />
             <span>{interactions.comments.length}</span>
@@ -226,14 +226,14 @@ export default function BlogInteractions({ articlePath, title }: BlogInteraction
               onClick={() => setShareOpen((open) => !open)}
               aria-label="Share this article"
               aria-expanded={shareOpen}
-              className="flex items-center gap-2 text-sm text-ink transition-colors hover:text-signal"
+              className="flex min-h-11 items-center gap-2 text-sm text-ink transition-colors hover:text-signal"
             >
               <Send size={23} aria-hidden="true" />
               <span>{interactions.shares}</span>
             </button>
 
             {shareOpen && (
-              <div className="absolute top-[calc(100%+12px)] left-0 z-20 w-52 border border-rule-strong bg-plate py-2 shadow-xl">
+              <div className="absolute top-[calc(100%+4px)] left-0 z-20 w-52 overflow-hidden rounded-xl bg-cloud py-2 shadow-xl ring-1 ring-line">
                 {shareLinks.map((link) => (
                   <a
                     key={link.label}
@@ -270,7 +270,7 @@ export default function BlogInteractions({ articlePath, title }: BlogInteraction
           onClick={toggleSaved}
           aria-label={interactions.saved ? 'Remove saved article' : 'Save this article'}
           aria-pressed={interactions.saved}
-          className={`transition-colors ${interactions.saved ? 'text-signal' : 'text-ink hover:text-signal'}`}
+          className={`flex min-h-11 min-w-11 items-center justify-center transition-colors ${interactions.saved ? 'text-signal' : 'text-ink hover:text-signal'}`}
         >
           <Bookmark size={23} fill={interactions.saved ? 'currentColor' : 'none'} aria-hidden="true" />
         </button>

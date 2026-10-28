@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zephyra Dynamics website
 
-## Getting Started
+Shaping the future of Urban Air Mobility in India.
 
-First, run the development server:
+Next.js 16 (App Router), React 19, Tailwind CSS 4. Light-only "daylight" brand system.
+
+## Run
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Use |
+|---|---|
+| `RESEND_API_KEY` | Server-only key for the contact and careers forms. Do **not** prefix it with `NEXT_PUBLIC_`, which would expose it in the browser. The old `NEXT_PUBLIC_RESEND_API_KEY` is read as a fallback until Vercel is updated. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Where things live
 
-## Learn More
+- `app/globals.css`: brand tokens (Sky, Cloud, Haze, Carbon, Slate, Kestrel Red) and type scale. Archivo with its width axis; `.font-wide` is the expanded display cut.
+- `components/LoopVideo.tsx`: muted looping clips that play only on screen and fall back to a poster for reduced motion.
+- `components/LaminarConsole.tsx`, `components/FlightLabConsole.tsx`: the coded LAMINAR and FlightLab product UIs.
+- `public/video/*.mp4` and `public/poster/*.jpg`: web loops cut from the master films (H.264, no audio, 0.5–6 MB each).
+- `public/kestrel/*.webp`: Kestrel X2 studio renders. Source script: `../renders/studio_stills.py` (Blender, Cycles).
 
-To learn more about Next.js, take a look at the following resources:
+## Approved public facts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Kestrel X2: single seat, fully autonomous, electric, eight rotors in four coaxial pairs, 35–45 km range, 80–135 km/h cruise.
+Also approved: floor battery, dual flight computers, thrust redistributed to the coaxial partner on a motor fault.
+Partners: Member of NVIDIA Inception; Dassault Systèmes. Anything beyond this needs sign-off before it goes on the site.

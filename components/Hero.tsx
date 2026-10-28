@@ -1,41 +1,44 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import LoopVideo from '@/components/LoopVideo';
+import { Button } from '@/components/ui';
 
 /**
- * Landing hero. One still, no video.
- * The previous hero.mp4 was 20 MB; this render is around 60 KB.
+ * Landing hero: Kestrel X2 crossing Bengaluru at dawn, with the tagline
+ * written into the sky above it. The only page-load motion on the site.
+ * Phones get a portrait crop centred on Kestrel: tagline at the top, aircraft in the middle, actions at the bottom.
  */
 export default function Hero() {
   return (
-    <section className="border-b border-rule bg-plate">
-      <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-12 lg:pt-16">
-        <p className="tag mb-7">Sustainable Air Mobility for Modern Cities in India</p>
+    <section className="relative isolate h-[min(94svh,980px)] min-h-[620px] overflow-hidden bg-[#DCD9DC]">
+      <LoopVideo
+        name="hero"
+        mobileName="hero-mobile"
+        eager
+        label="Kestrel X2 flying over Bengaluru at dawn, the city still lit below"
+        className="absolute inset-0 -z-10"
+      />
+      {/* keep the sky bright behind the type; the aircraft and city stay untouched */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 -z-10 h-[42%] bg-gradient-to-b from-sky/95 via-sky/70 to-transparent md:h-[62%] md:from-sky/85 md:via-sky/55"
+      />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-[36%] bg-gradient-to-t from-sky/90 via-sky/55 to-transparent md:hidden" />
 
-        <h1 className="max-w-[18ch] text-display text-ink">
-          Shaping the Future of{' '}
-          <span className="text-signal">Urban Air Mobility</span>
+      <div className="mx-auto flex h-full max-w-[1440px] flex-col px-(--spacing-gutter) pt-[clamp(40px,9vh,110px)] pb-6 md:pb-8">
+        <h1 className="font-wide rise max-w-[16ch] text-hero text-balance text-carbon">
+          Shaping the future of Urban Air Mobility in India.
         </h1>
-      </div>
-
-      <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-10 lg:pt-14">
-        <Image
-          src="/img/kestrel-side-view.webp"
-          alt="Kestrel X2, a single-seat autonomous eVTOL, shown in three-quarter view"
-          width={1800}
-          height={764}
-          priority
-          sizes="(min-width: 1440px) 1328px, 100vw"
-          className="h-auto w-full"
-        />
-      </div>
-
-      <div className="mx-auto max-w-[1440px] px-(--spacing-gutter) pt-8 pb-(--spacing-section)">
-        <Link
-          href="/about"
-          className="inline-flex h-[50px] items-center bg-signal px-[30px] text-sm font-medium text-plate transition-colors hover:bg-signal-dark"
-        >
-          Explore Zephyra
-        </Link>
+        {/* set straight on the image, no panel: the washes keep it readable */}
+        <div className="rise rise-2 mt-auto max-w-[500px] md:mt-6">
+          {/* phones show the tagline, the aircraft and the actions; the line stays for screen readers */}
+          <p className="text-lede text-carbon max-md:sr-only">
+            Zephyra Dynamics builds the aircraft, the airspace software and the virtual twin for
+            electric, autonomous flight over Indian cities.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3 md:mt-7">
+            <Button href="/kestrel-x2">Meet Kestrel X2</Button>
+            <Button href="/#contact" variant="quiet">Partner with us</Button>
+          </div>
+        </div>
       </div>
     </section>
   );

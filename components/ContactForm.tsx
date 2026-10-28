@@ -3,7 +3,7 @@
 import { useState, useCallback } from 'react';
 import Select from '@/components/Select';
 
-const enquiryTypes = ['General', 'Investor', 'Partnership', 'Media', 'Technical'];
+const enquiryTypes = ['General', 'Investor', 'Partnership', 'Media', 'Careers', 'Technical'];
 
 const initialState = {
   name: '',
@@ -14,9 +14,9 @@ const initialState = {
   message: '',
 };
 
-const label = 'meta mb-2 block';
+const label = 'mb-2 block text-[13px] font-medium text-slate';
 const field =
-  'h-11 w-full border-0 border-b border-field bg-transparent text-base text-ink placeholder:text-ink-faint transition-colors focus:border-signal focus:outline-none';
+  'h-12 w-full rounded-xl border-0 bg-cloud px-4 text-base text-carbon ring-1 ring-line placeholder:text-steel transition-shadow focus:ring-2 focus:ring-kestrel focus:outline-none';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState(initialState);
@@ -53,36 +53,40 @@ export default function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      if (!response.ok) throw new Error('Failed to send message.');
+      if (!response.ok) {
+        const body = await response.json().catch(() => ({}));
+        throw new Error(body.error || 'The message could not be sent. Email info@zephyradynamics.com instead.');
+      }
       setSuccess(true);
       setFormData(initialState);
       setTimeout(() => setSuccess(false), 6000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong.');
+      setError(err instanceof Error ? err.message : 'The message could not be sent. Email info@zephyradynamics.com instead.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section id="contact" className="border-t border-rule bg-band py-(--spacing-section)">
+    <section id="contact" className="scroll-mt-16 border-t border-line bg-mist py-(--spacing-section)">
       <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-24">
           <div>
-            <h2 className="max-w-[17ch] text-section text-ink">The era begins with a single seat.</h2>
-            <p className="mt-6 max-w-[44ch] text-lede text-ink-soft">
-              Kestrel X2 is accepting expressions of interest from early access partners,
-              institutional collaborators and potential operators.
+            <p className="kicker mb-5">Contact</p>
+            <h2 className="font-wide max-w-[20ch] text-section text-balance text-carbon">Talk to us about the future of flight in your city.</h2>
+            <p className="mt-6 max-w-[44ch] text-lede text-slate">
+              We are talking with investors, operators, cities and research partners. Tell us
+              what you have in mind and the right person will reply.
             </p>
             <div className="mt-9 flex flex-col gap-2 text-[15px]">
-              <span className="font-medium text-ink">Srinagar, India</span>
+              <span className="font-medium text-carbon">Bengaluru, India</span>
               <a
                 href="mailto:info@zephyradynamics.com"
-                className="text-signal transition-colors hover:text-signal-dark"
+                className="text-kestrel transition-colors hover:text-kestrel-deep"
               >
                 info@zephyradynamics.com
               </a>
-              <p className="meta mt-1.5">We respond within 24 hours</p>
+              <p className="mt-1.5 text-[14px] text-slate">We usually reply within two working days.</p>
             </div>
           </div>
 
@@ -123,15 +127,15 @@ export default function ContactForm() {
 
             <div>
               <label htmlFor="cf-message" className={label}>Message</label>
-              <textarea id="cf-message" name="message" rows={3} value={formData.message}
+              <textarea id="cf-message" name="message" rows={5} value={formData.message}
                 onChange={handleChange} placeholder="Tell us what you have in mind" required
-                className="w-full resize-none border-0 border-b border-field bg-transparent py-2.5 text-base text-ink placeholder:text-ink-faint transition-colors focus:border-signal focus:outline-none" />
+                className="w-full resize-none rounded-xl border-0 bg-cloud px-4 py-3 text-base text-carbon ring-1 ring-line placeholder:text-steel transition-shadow focus:ring-2 focus:ring-kestrel focus:outline-none" />
             </div>
 
             {error && <p role="alert" className="text-sm text-error">{error}</p>}
             {success && (
               <p role="status" className="text-sm text-ok">
-                Message sent. We will respond within 24 hours.
+                Message sent. We&apos;ll reply within two working days.
               </p>
             )}
 
@@ -139,9 +143,9 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex h-[50px] items-center bg-signal px-8 text-sm font-medium text-plate transition-colors hover:bg-signal-dark disabled:bg-rule-strong disabled:text-ink-muted"
+                className="inline-flex h-12 items-center rounded-full bg-kestrel px-7 text-[15px] font-semibold text-white transition-colors hover:bg-kestrel-deep disabled:bg-line-strong disabled:text-slate"
               >
-                {loading ? 'Sending' : 'Send message'}
+                {loading ? 'Sending…' : 'Send message'}
               </button>
             </div>
           </form>

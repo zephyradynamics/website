@@ -1,119 +1,153 @@
 import type { Metadata } from 'next';
+import { pageMeta } from '@/lib/seo';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
+import LoopVideo from '@/components/LoopVideo';
+import { Button, Container, Heading } from '@/components/ui';
 
-export const metadata: Metadata = {
-  title: 'About',
+export const metadata: Metadata = pageMeta({
+  title: 'About us, urban air mobility from Bengaluru',
   description:
-    'Learn about Zephyra Dynamics, our mission, our approach to aerospace engineering and the people guiding our work.',
-  alternates: { canonical: '/about' },
-};
+    'Zephyra Dynamics is a Bengaluru aerospace company building Kestrel X2, LAMINAR and FlightLab to shape the future of Urban Air Mobility in India.',
+  path: '/about',
+});
 
 const team = [
   {
     name: 'Sadiq Ali Mir',
-    role: 'Founder & Chief Executive Officer',
+    role: 'Founder and Chief Executive Officer',
     image: '/sadiq-ali-mir-white.png',
     linkedIn: 'https://www.linkedin.com/in/sadiqalimir/',
   },
   {
     name: 'Dr. Promio Charles F',
-    role: 'Mentor & Senior Aerospace Advisor',
+    role: 'Mentor and Senior Aerospace Advisor',
     image: '/promio.png',
     linkedIn: 'https://www.linkedin.com/in/dr-promio-charles-194a6b32/',
   },
   {
     name: 'Dr. Ravindra S Kulkarni',
-    role: 'Mentor & Technical Advisor',
+    role: 'Mentor and Technical Advisor',
     image: '/ravindra.png',
     linkedIn: 'https://www.linkedin.com/in/dr-ravindra-s-kulkarni-90181ab0/',
+  },
+];
+
+const principles = [
+  {
+    title: 'Build the whole system',
+    body: 'An aircraft without an airspace is a demo. We design Kestrel X2, LAMINAR and FlightLab together, so each is built around the other two.',
+  },
+  {
+    title: 'Prove it in software first',
+    body: 'Every manoeuvre, gust and fault is flown in the virtual twin before it is flown for real. Evidence comes before claims.',
+  },
+  {
+    title: 'Design for India',
+    body: 'Dense cities, monsoon weather and rooftop landing pads. We start from the conditions Indian cities actually have.',
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      {/* ---------- VISION ---------- */}
-      <section className="border-b border-rule bg-canvas pt-12 pb-(--spacing-section) lg:pt-16">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-6">Our vision</p>
-          <h1 className="max-w-[20ch] text-section text-ink">A better way to move through growing cities.</h1>
-          <p className="mt-6 max-w-[70ch] text-lede text-ink-soft">
-            The ground is full. The sky is not. India&apos;s urban air mobility ecosystem is nascent,
-            which means it can be built correctly from the start. We are building the machine that
-            carries a single person safely, silently, and swiftly above it all.
+      {/* ---------- HERO ---------- */}
+      <section className="bg-sky pt-[clamp(48px,8vh,96px)] pb-(--spacing-section)">
+        <Container>
+          <p className="kicker rise mb-4">Company</p>
+          <h1 className="font-wide rise max-w-[22ch] text-display text-balance text-carbon">Indian cities are running out of room on the ground. The sky above them is still open.</h1>
+          <p className="rise rise-2 mt-7 max-w-[60ch] text-lede text-slate">
+            Zephyra Dynamics was founded in Bengaluru to build Urban Air Mobility for India from
+            first principles. India&apos;s ecosystem is still young, which means it can be built
+            correctly from the start. We intend to help build it.
           </p>
-        </div>
+        </Container>
+      </section>
+
+      <section className="relative isolate h-[min(70svh,720px)] min-h-[400px] overflow-hidden">
+        <LoopVideo name="city-approach" label="Kestrel X2 approaching over the Bengaluru skyline" className="absolute inset-0 -z-10" />
       </section>
 
       {/* ---------- MISSION ---------- */}
-      <section className="border-b border-rule bg-plate py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-6">Our mission</p>
-          <h2 className="max-w-[22ch] text-section text-ink">Build the aircraft and the system around it.</h2>
-          <p className="mt-6 max-w-[70ch] text-lede text-ink-soft">
-            Our mission is to develop safe autonomous electric aircraft and the systems required to
-            operate them. We apply rigorous engineering and a clear path to certification to make
-            urban air mobility practical for modern cities.
-          </p>
-        </div>
+      <section className="bg-cloud py-(--spacing-section)">
+        <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+          <Heading kicker="Mission" title="We build safe, self-flying electric aircraft and everything needed to operate them." />
+          <div className="space-y-6 text-lede text-slate lg:pt-12">
+            <p>
+              We develop safe, autonomous, electric aircraft and the systems required to operate
+              them: airspace management, vertiport scheduling and a validation platform that
+              produces evidence regulators can review.
+            </p>
+            <p>
+              We are a focused team supported by experienced aerospace mentors. Design, analysis
+              and testing sit side by side, so we learn quickly and decide on evidence.
+            </p>
+          </div>
+        </Container>
       </section>
 
-      {/* ---------- COMPANY ---------- */}
-      <section className="border-b border-rule bg-canvas py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-[72px]">
-            <div>
-              <p className="tag mb-6">Our company</p>
-              <h2 className="max-w-[16ch] text-section text-ink">Built by people who believe in the work.</h2>
-            </div>
-            <div className="space-y-5">
-              <p className="text-lede text-ink-soft">
-                Zephyra Dynamics was founded to develop urban air mobility technology for India from
-                first principles. Our work brings aircraft engineering, autonomous systems and
-                airspace software together within one company.
-              </p>
-              <p className="text-lede text-ink-soft">
-                We are a focused team supported by experienced aerospace mentors and advisors. The
-                close connection between design, analysis and testing helps us learn quickly and make
-                informed engineering decisions.
-              </p>
-            </div>
+      {/* ---------- PRINCIPLES ---------- */}
+      <section className="border-t border-line bg-sky py-(--spacing-section)">
+        <Container>
+          <Heading kicker="How we work" title="Three principles guide how we work." />
+          <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-3">
+            {principles.map((p) => (
+              <div key={p.title} className="border-t border-line-strong pt-6">
+                <h3 className="font-semiwide text-[24px] tracking-tight text-carbon">{p.title}</h3>
+                <p className="mt-3 text-[16px] leading-relaxed text-slate">{p.body}</p>
+              </div>
+            ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ---------- TEAM ---------- */}
-      <section id="team" className="bg-plate py-(--spacing-section)">
-        <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
-          <p className="tag mb-6">Leadership and advisors</p>
-          <h2 className="max-w-[20ch] text-section text-ink">The people guiding our work.</h2>
-
-          <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-3 lg:gap-12">
+      <section id="team" className="border-t border-line bg-cloud py-(--spacing-section)">
+        <Container>
+          <Heading kicker="Leadership and advisors" title="The people guiding our work." />
+          <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((member) => (
               <article key={member.name}>
                 <a
                   href={member.linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`View ${member.name} on LinkedIn`}
-                  className="group block aspect-square overflow-hidden border border-rule bg-canvas transition-colors hover:border-signal"
+                  aria-label={`${member.name} on LinkedIn`}
+                  className="group block aspect-[4/5] overflow-hidden rounded-[18px] bg-mist"
                 >
                   <Image
                     src={member.image}
                     alt={member.name}
                     width={720}
-                    height={720}
-                    sizes="(min-width: 768px) 30vw, 100vw"
-                    className="h-full w-full object-cover object-top transition-opacity group-hover:opacity-90"
+                    height={900}
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </a>
-                <h3 className="mt-5 text-[22px] font-medium tracking-tight text-ink">{member.name}</h3>
-                <p className="meta mt-2 text-signal">{member.role}</p>
+                <h3 className="font-semiwide mt-5 text-[22px] tracking-tight text-carbon">{member.name}</h3>
+                <p className="mt-1 text-[15px] text-slate">{member.role}</p>
               </article>
             ))}
           </div>
-        </div>
+        </Container>
+      </section>
+
+      {/* ---------- WHERE ---------- */}
+      <section className="border-t border-line bg-sky py-(--spacing-section)">
+        <Container className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
+          <div>
+            <Heading kicker="Where we are" title="We design and build in Bengaluru." />
+            <address className="mt-6 text-lede text-slate not-italic">
+              Department of Aerospace Engineering, RV College of Engineering
+              <br />
+              Bengaluru 560059, Karnataka, India
+            </address>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button href="/careers" variant="secondary">Join the team</Button>
+            <Button href="/#contact">Contact us</Button>
+          </div>
+        </Container>
       </section>
 
       <Footer />

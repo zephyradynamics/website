@@ -1,58 +1,41 @@
-import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
+import { getResend, escapeHtml, isEmail, emailFrame, row } from '@/lib/email';
 
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+const ENQUIRY_TYPES = new Set(['General', 'Investor', 'Partnership', 'Media', 'Careers', 'Technical']);
 
 export async function POST(request: NextRequest) {
   try {
     const { name, email, organisation, role, enquiryType, message } = await request.json();
 
-    // Validate all required fields
-    if (!name || !email || !message) {
+    if (!name || !message || !isEmail(email)) {
       return NextResponse.json(
-        { error: 'Name, email, and message are required' },
+        { error: 'Add your name, a valid email address and a message.' },
         { status: 400 }
       );
     }
 
-    // Send email using Resend
-    await resend.emails.send({
+    const type = ENQUIRY_TYPES.has(enquiryType) ? enquiryType : 'General';
+
+    await getResend().emails.send({
       from: 'Zephyra Dynamics <info@zephyradynamics.com>',
       to: 'info@zephyradynamics.com',
       reply_to: email,
-      subject: `New Contact Form Submission: ${enquiryType || 'General'}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #00AEEF; margin-bottom: 20px;">New Contact Form Submission</h2>
-
-          <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-            <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
-            <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
-            ${organisation ? `<p style="margin: 10px 0;"><strong>Organisation:</strong> ${organisation}</p>` : ''}
-            ${role ? `<p style="margin: 10px 0;"><strong>Role:</strong> ${role}</p>` : ''}
-            <p style="margin: 10px 0;"><strong>Enquiry Type:</strong> ${enquiryType || 'General'}</p>
-          </div>
-
-          <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #00AEEF;">
-            <h3 style="color: #333; margin-top: 0;">Message:</h3>
-            <p style="color: #555; white-space: pre-wrap; line-height: 1.6;">${message}</p>
-          </div>
-
-          <p style="color: #999; font-size: 12px; margin-top: 20px;">
-            This email was sent from the Zephyra Dynamics contact form.
-          </p>
-        </div>
-      `,
+      subject: `Website enquiry (${type}): ${String(name).slice(0, 80)}`,
+      html: emailFrame(
+        'New website enquiry',
+        [
+          row('Name', escapeHtml(name)),
+          row('Email', escapeHtml(email)),
+          organisation ? row('Organisation', escapeHtml(organisation)) : '',
+          role ? row('Role', escapeHtml(role)) : '',
+          row('Enquiry type', type),
+          `<p style="margin: 20px 0 0; white-space: pre-wrap; line-height: 1.6;">${escapeHtml(message)}</p>`,
+        ].join('')
+      ),
     });
 
-    return NextResponse.json(
-      { success: true, message: 'Email sent successfully' },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch {
-    return NextResponse.json(
-      { error: 'Failed to send email' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'The message could not be sent. Email info@zephyradynamics.com instead.' }, { status: 500 });
   }
 }

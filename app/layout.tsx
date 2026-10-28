@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
-import { Chivo, Chivo_Mono } from "next/font/google";
+// Self-hosted type: Archivo for headlines, Inter for reading, Space Mono for labels and controls
+import "@fontsource/archivo/latin-500.css";
+import "@fontsource/archivo/latin-600.css";
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/space-mono/latin-400.css";
+import "@fontsource/space-mono/latin-700.css";
 import "./globals.css";
 import Header from "@/components/Header";
 
-const chivo = Chivo({
-  variable: "--font-chivo",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  display: "swap",
-});
 
-const chivoMono = Chivo_Mono({
-  variable: "--font-chivo-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
+const tagline = "Shaping the future of Urban Air Mobility in India";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.zephyradynamics.com"),
@@ -24,11 +20,11 @@ export const metadata: Metadata = {
   creator: "Zephyra Dynamics",
   publisher: "Zephyra Dynamics",
   title: {
-    default: "Zephyra Dynamics",
+    default: `Zephyra Dynamics · ${tagline}`,
     template: "%s | Zephyra Dynamics",
   },
   description:
-    "Zephyra Dynamics develops Kestrel X2, LAMINAR airspace software and FlightLab validation technology as one integrated urban air mobility system.",
+    "Zephyra Dynamics builds Kestrel X2, a single-seat autonomous electric aircraft, with LAMINAR airspace software and the FlightLab virtual twin, in Bengaluru.",
   alternates: { canonical: "/" },
   robots: {
     index: true,
@@ -42,28 +38,26 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Zephyra Dynamics",
-    description:
-      "Aircraft, airspace and validation technology engineered as one urban air mobility system.",
+    title: `Zephyra Dynamics · ${tagline}`,
+    description: tagline,
     url: "https://www.zephyradynamics.com",
     siteName: "Zephyra Dynamics",
     type: "website",
     locale: "en_IN",
     images: [
       {
-        url: "/image/kestrel_hero.png",
+        url: "/og.jpg",
         width: 1200,
-        height: 733,
-        alt: "Zephyra Dynamics Kestrel aircraft",
+        height: 630,
+        alt: "Kestrel X2 by Zephyra Dynamics flying over Bengaluru at dawn",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zephyra Dynamics",
-    description:
-      "Aircraft, airspace and validation technology engineered for urban air mobility.",
-    images: ["/image/kestrel_hero.png"],
+    title: `Zephyra Dynamics · ${tagline}`,
+    description: tagline,
+    images: ["/og.jpg"],
   },
   icons: { icon: "/logo.ico" },
 };
@@ -78,7 +72,8 @@ const organizationSchema = {
       url: "https://www.zephyradynamics.com",
       logo: "https://www.zephyradynamics.com/img/logo-ink.png",
       description:
-        "Zephyra Dynamics develops aircraft, airspace and validation technology for urban air mobility.",
+        "Zephyra Dynamics builds aircraft, airspace and validation technology for Urban Air Mobility in India.",
+      slogan: tagline,
       address: {
         "@type": "PostalAddress",
         streetAddress: "Department of Aerospace Engineering, RV College of Engineering",
@@ -105,28 +100,27 @@ const organizationSchema = {
 };
 
 const navigationItems = [
-  { label: "Home", href: "/" },
-  { label: "Kestrel", href: "/kestrel-x2" },
+  { label: "Kestrel X2", href: "/kestrel-x2" },
   { label: "LAMINAR", href: "/laminar" },
   { label: "FlightLab", href: "/flightlab" },
-  { label: "Blogs", href: "/blogs" },
+  { label: "Company", href: "/about" },
   { label: "Careers", href: "/careers" },
-  { label: "About Us", href: "/about" },
+  { label: "Writing", href: "/blogs" },
 ];
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <body className={`${chivo.variable} ${chivoMono.variable} font-sans bg-canvas text-ink overflow-x-hidden`}>
+    <html lang="en-IN" data-scroll-behavior="smooth">
+      <body className="font-sans bg-sky text-carbon overflow-x-clip">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c") }}
         />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:text-canvas"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-carbon focus:px-5 focus:py-3 focus:text-sm focus:text-white"
         >
           Skip to content
         </a>

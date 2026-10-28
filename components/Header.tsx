@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 interface DropdownItem {
@@ -27,6 +28,7 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileActiveDropdown, setMobileActiveDropdown] = useState<string | null>(null);
 
+  const pathname = usePathname();
   const navRef = useRef<HTMLElement | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const mobilePanelRef = useRef<HTMLDivElement | null>(null);
@@ -91,8 +93,8 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-rule bg-canvas">
-      <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-(--spacing-gutter)">
+    <header className="sticky top-0 z-50 w-full border-b border-line/80 bg-sky/85 backdrop-blur-xl backdrop-saturate-150">
+      <div className="mx-auto flex h-[68px] max-w-[1440px] items-center justify-between px-(--spacing-gutter)">
         <Link href="/" aria-label="Zephyra Dynamics, home" className="flex items-center">
           {logoSrc ? (
             <Image
@@ -102,14 +104,14 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
               height={151}
               sizes="112px"
               priority
-              className="h-[38px] w-auto object-contain"
+              className="h-[34px] w-auto object-contain"
             />
           ) : brandName ? (
             <span className="text-lg font-medium tracking-tight">{brandName}</span>
           ) : null}
         </Link>
 
-        <nav ref={navRef} aria-label="Main" className="hidden items-center gap-5 lg:flex xl:gap-7">
+        <nav ref={navRef} aria-label="Main" className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) => {
             const isOpen = activeDropdown === item.label;
             return (
@@ -121,8 +123,8 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
                     aria-expanded={isOpen}
                     aria-haspopup="true"
                     aria-controls={`menu-${item.label}`}
-                    className={`flex items-center gap-1.5 text-sm transition-colors ${
-                      isOpen ? 'text-ink' : 'text-ink-soft hover:text-ink'
+                    className={`label-mono flex items-center gap-1.5 rounded-full px-3.5 py-2 transition-colors ${
+                      isOpen ? 'text-carbon' : 'text-slate hover:text-carbon'
                     }`}
                   >
                     {item.label}
@@ -133,7 +135,11 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
                     />
                   </button>
                 ) : (
-                  <Link href={item.href} className="text-sm text-ink-soft transition-colors hover:text-ink">
+                  <Link
+                    href={item.href}
+                    aria-current={pathname.startsWith(item.href) ? 'page' : undefined}
+                    className="label-mono rounded-full px-3.5 py-2 text-slate transition-colors hover:bg-mist hover:text-carbon aria-[current=page]:text-carbon aria-[current=page]:font-semibold"
+                  >
                     {item.label}
                   </Link>
                 )}
@@ -141,14 +147,14 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
                 {item.dropdownItems && isOpen && (
                   <div
                     id={`menu-${item.label}`}
-                    className="absolute top-[calc(100%+18px)] left-0 min-w-[170px] border border-rule bg-plate"
+                    className="absolute top-[calc(100%+18px)] left-0 min-w-[170px] border border-line bg-cloud"
                   >
                     {item.dropdownItems.map((dropdownItem) => (
                       <Link
                         key={dropdownItem.label}
                         href={dropdownItem.href}
                         onClick={() => setActiveDropdown(null)}
-                        className="block border-b border-rule px-5 py-3 text-sm text-ink-soft transition-colors last:border-b-0 hover:bg-canvas hover:text-ink"
+                        className="block border-b border-line px-5 py-3 text-sm text-slate transition-colors last:border-b-0 hover:bg-mist hover:text-carbon"
                       >
                         {dropdownItem.label}
                       </Link>
@@ -159,6 +165,12 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
             );
           })}
 
+          <Link
+            href="/#contact"
+            className="label-mono ml-4 inline-flex h-10 items-center rounded-full bg-carbon px-5 font-bold text-white transition-colors hover:bg-kestrel"
+          >
+            Contact us
+          </Link>
         </nav>
 
         <button
@@ -168,26 +180,26 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-          className="-mr-2 p-2 text-ink lg:hidden"
+          className="-mr-2 p-2 text-carbon lg:hidden"
         >
           {isMobileMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
         </button>
       </div>
 
       {isMobileMenuOpen && (
-        <div id="mobile-menu" ref={mobilePanelRef} className="fixed inset-0 top-[76px] z-40 bg-canvas lg:hidden">
+        <div id="mobile-menu" ref={mobilePanelRef} className="fixed inset-0 top-[68px] z-40 bg-sky lg:hidden">
           <nav aria-label="Mobile" className="flex flex-col px-(--spacing-gutter) pt-6">
             {navItems.map((item) => {
               const isOpen = mobileActiveDropdown === item.label;
               return (
-                <div key={item.label} className="border-b border-rule py-5">
+                <div key={item.label} className="border-b border-line py-5">
                   {item.dropdownItems ? (
                     <>
                       <button
                         type="button"
                         onClick={() => setMobileActiveDropdown(isOpen ? null : item.label)}
                         aria-expanded={isOpen}
-                        className="flex w-full items-center justify-between text-xl font-medium tracking-tight text-ink"
+                        className="font-semiwide flex w-full items-center justify-between text-2xl text-carbon"
                       >
                         {item.label}
                         <ChevronDown
@@ -203,7 +215,7 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
                               key={dropdownItem.label}
                               href={dropdownItem.href}
                               onClick={closeMobile}
-                              className="text-base text-ink-soft"
+                              className="text-base text-slate"
                             >
                               {dropdownItem.label}
                             </Link>
@@ -212,13 +224,20 @@ export default function Header({ logoSrc, brandName, navItems }: HeaderProps) {
                       )}
                     </>
                   ) : (
-                    <Link href={item.href} onClick={closeMobile} className="block text-xl font-medium tracking-tight text-ink">
+                    <Link href={item.href} onClick={closeMobile} className="font-semiwide block text-2xl tracking-tight text-carbon">
                       {item.label}
                     </Link>
                   )}
                 </div>
               );
             })}
+            <Link
+              href="/#contact"
+              onClick={closeMobile}
+              className="label-mono mt-8 inline-flex h-12 w-fit items-center rounded-full bg-kestrel px-6 font-bold text-white"
+            >
+              Contact us
+            </Link>
           </nav>
         </div>
       )}

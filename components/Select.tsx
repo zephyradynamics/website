@@ -39,15 +39,19 @@ export default function Select({ label, name, value, options, onChange }: Select
     [name, onChange, close]
   );
 
+  const openList = useCallback(() => {
+    setActiveIndex(Math.max(0, options.indexOf(value)));
+    setOpen(true);
+  }, [options, value]);
+
   useEffect(() => {
     if (!open) return;
-    setActiveIndex(Math.max(0, options.indexOf(value)));
     const onClickOutside = (event: MouseEvent) => {
       if (wrapRef.current && !wrapRef.current.contains(event.target as Node)) setOpen(false);
     };
     document.addEventListener('mousedown', onClickOutside);
     return () => document.removeEventListener('mousedown', onClickOutside);
-  }, [open, options, value]);
+  }, [open]);
 
   useEffect(() => {
     if (open) listRef.current?.focus();
@@ -61,12 +65,12 @@ export default function Select({ label, name, value, options, onChange }: Select
         break;
       case 'ArrowDown':
         event.preventDefault();
-        if (!open) setOpen(true);
+        if (!open) openList();
         else setActiveIndex((i) => (i + 1) % options.length);
         break;
       case 'ArrowUp':
         event.preventDefault();
-        if (!open) setOpen(true);
+        if (!open) openList();
         else setActiveIndex((i) => (i - 1 + options.length) % options.length);
         break;
       case 'Home':
@@ -78,7 +82,7 @@ export default function Select({ label, name, value, options, onChange }: Select
       case 'Enter':
       case ' ':
         event.preventDefault();
-        if (!open) setOpen(true);
+        if (!open) openList();
         else pick(options[activeIndex]);
         break;
       case 'Tab':
@@ -89,25 +93,25 @@ export default function Select({ label, name, value, options, onChange }: Select
 
   return (
     <div ref={wrapRef} className="relative">
-      <span id={`${id}-label`} className="meta mb-2 block">
+      <span id={`${id}-label`} className="mb-2 block text-[13px] font-medium text-slate">
         {label}
       </span>
 
       <button
         ref={buttonRef}
         type="button"
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => (open ? setOpen(false) : openList())}
         onKeyDown={onKeyDown}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-labelledby={`${id}-label ${id}-value`}
-        className="flex h-11 w-full items-center justify-between border-b border-field bg-transparent text-left text-base text-ink transition-colors hover:border-ink-muted focus:border-signal focus:outline-none"
+        className="flex h-12 w-full items-center justify-between rounded-xl bg-cloud px-4 text-left text-base text-carbon ring-1 ring-line transition-shadow focus:ring-2 focus:ring-kestrel focus:outline-none"
       >
         <span id={`${id}-value`}>{value}</span>
         <ChevronDown
           size={16}
           aria-hidden="true"
-          className={`text-ink-muted transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`text-slate transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
         />
       </button>
 
@@ -119,7 +123,7 @@ export default function Select({ label, name, value, options, onChange }: Select
           aria-labelledby={`${id}-label`}
           aria-activedescendant={`${id}-opt-${activeIndex}`}
           onKeyDown={onKeyDown}
-          className="absolute top-[calc(100%+4px)] left-0 z-30 w-full border border-rule bg-plate py-1 focus:outline-none"
+          className="absolute top-[calc(100%+6px)] left-0 z-30 w-full overflow-hidden rounded-xl bg-cloud py-1 shadow-[0_20px_40px_-20px_rgba(21,25,29,0.35)] ring-1 ring-line focus:outline-none"
         >
           {options.map((option, index) => {
             const selected = option === value;
@@ -134,8 +138,8 @@ export default function Select({ label, name, value, options, onChange }: Select
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => pick(option)}
                 className={`cursor-pointer px-4 py-2.5 text-[15px] transition-colors ${
-                  active ? 'bg-canvas' : ''
-                } ${selected ? 'font-medium text-signal' : 'text-ink-soft'}`}
+                  active ? 'bg-mist' : ''
+                } ${selected ? 'font-semibold text-kestrel' : 'text-carbon'}`}
               >
                 {option}
               </li>

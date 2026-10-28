@@ -114,7 +114,7 @@ export default function CareerApplyModal({ position }: CareerApplyModalProps) {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="inline-flex h-[46px] shrink-0 items-center justify-center bg-signal px-7 text-sm font-medium text-plate transition-colors hover:bg-signal-dark"
+        className="label-mono inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-kestrel px-6 font-bold text-white transition-colors hover:bg-kestrel-deep"
       >
         Apply now
       </button>
@@ -130,9 +130,9 @@ export default function CareerApplyModal({ position }: CareerApplyModalProps) {
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            className="max-h-[92vh] w-full max-w-[720px] overflow-y-auto border border-rule-strong bg-plate shadow-2xl"
+            className="max-h-[92vh] w-full max-w-[720px] overflow-y-auto rounded-[18px] bg-cloud shadow-2xl ring-1 ring-line"
           >
-            <header className="sticky top-0 z-10 flex items-start justify-between gap-6 border-b border-rule bg-plate px-6 py-5 sm:px-8">
+            <header className="sticky top-0 z-10 flex items-start justify-between gap-6 border-b border-line bg-cloud px-6 py-5 sm:px-8">
               <div>
                 <p className="tag">Application form</p>
                 <h2 id={titleId} className="mt-2 text-[23px] font-medium tracking-tight text-ink">
@@ -220,7 +220,7 @@ export default function CareerApplyModal({ position }: CareerApplyModalProps) {
 
               <div className="flex flex-wrap gap-3 border-t border-rule pt-6">
                 <button type="submit" disabled={loading}
-                  className="inline-flex h-[48px] items-center bg-signal px-8 text-sm font-medium text-plate transition-colors hover:bg-signal-dark disabled:bg-rule-strong disabled:text-ink-muted">
+                  className="inline-flex h-12 items-center rounded-full bg-kestrel px-7 text-[15px] font-semibold text-white transition-colors hover:bg-kestrel-deep disabled:bg-rule-strong disabled:text-ink-muted">
                   {loading ? 'Submitting' : 'Submit application'}
                 </button>
                 <button type="button" onClick={handleClose}

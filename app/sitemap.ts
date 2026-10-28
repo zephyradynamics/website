@@ -16,6 +16,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/blogs/uam-fundamentals-india', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/blogs/zephyra-vision', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/blogs/flightlab', changeFrequency: 'monthly', priority: 0.7 },
+    { path: '/blogs/why-one-seat', changeFrequency: 'monthly', priority: 0.7 },
+    { path: '/blogs/when-a-motor-stops', changeFrequency: 'monthly', priority: 0.7 },
+    { path: '/blogs/laminar-airspace', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/careers', changeFrequency: 'weekly', priority: 0.7 },
     { path: '/about', changeFrequency: 'monthly', priority: 0.7 },
   ];

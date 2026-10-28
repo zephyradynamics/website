@@ -1,89 +1,176 @@
 @import "tailwindcss";
 
+/* Three families, three jobs: Archivo headlines, Inter reading text, Space Mono labels and controls. */
+@theme inline {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Archivo", "Inter", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+}
+
 /* ============================================================
-   ZEPHYRA DYNAMICS
-   Light mineral palette. Signal red for action only.
+   ZEPHYRA DYNAMICS · daylight system
+   Open-sky neutrals. Kestrel Red is the aircraft's colour and the
+   only accent: primary actions and the aircraft itself.
    ============================================================ */
 
 @theme {
   /* surfaces */
-  --color-canvas:      #EFF1F2;
-  --color-plate:       #FFFFFF;
-  --color-band:        #E3E7E9;
+  --color-sky:    #F5F8FA;
+  --color-cloud:  #FFFFFF;
+  --color-haze:   #DCE5EB;
+  --color-mist:   #EBF0F3;
 
   /* ink */
-  --color-ink:         #101215;
-  --color-ink-soft:    #4E585E;
-  --color-ink-muted:   #646F75;
-  --color-ink-faint:   #98A2A8;
+  --color-carbon: #0F1317;
+  --color-slate:  #4A5560;
+  --color-steel:  #8A959D;
 
   /* lines */
-  --color-rule:        #D3D9DC;
-  --color-rule-strong: #C2CACE;
-  --color-field:       #B6BEC3;
+  --color-line:        #DCE3E8;
+  --color-line-strong: #C3CDD4;
 
-  /* action */
-  --color-signal:      #B02510;
-  --color-signal-dark: #8E1D0C;
+  /* accent */
+  --color-kestrel:      #D22B1F;
+  --color-kestrel-deep: #A81F15;
 
   /* state */
-  --color-error:       #B02510;
-  --color-ok:          #1E6B3A;
+  --color-error: #B3261E;
+  --color-ok:    #1D6B3F;
+
+  /* legacy names still used by blog and careers components */
+  --color-canvas:      #F5F8FA;
+  --color-plate:       #FFFFFF;
+  --color-band:        #EBF0F3;
+  --color-ink:         #15191D;
+  --color-ink-soft:    #5A6670;
+  --color-ink-muted:   #6B7680;
+  --color-ink-faint:   #98A2A8;
+  --color-rule:        #DCE3E8;
+  --color-rule-strong: #C3CDD4;
+  --color-field:       #B6C0C7;
+  --color-signal:      #D22B1F;
+  --color-signal-dark: #A81F15;
 
   /* type */
-  --font-sans: var(--font-chivo), system-ui, sans-serif;
-  --font-mono: var(--font-chivo-mono), ui-monospace, monospace;
 
-  --text-display: clamp(2.5rem, 5.2vw, 4.625rem);
-  --text-display--line-height: 0.98;
-  --text-display--letter-spacing: -0.04em;
-  --text-display--font-weight: 700;
+  --text-hero: clamp(2.375rem, 5vw, 4.75rem);
+  --text-hero--line-height: 1.02;
+  --text-hero--letter-spacing: -0.025em;
 
-  --text-section: clamp(2rem, 3.6vw, 3.25rem);
-  --text-section--line-height: 1.03;
-  --text-section--letter-spacing: -0.035em;
-  --text-section--font-weight: 700;
+  --text-display: clamp(2rem, 4vw, 3.6rem);
+  --text-display--line-height: 0.96;
+  --text-display--letter-spacing: -0.025em;
 
-  --text-lede: 1.0625rem;
-  --text-lede--line-height: 1.7;
+  --text-section: clamp(1.625rem, 2.7vw, 2.5rem);
+  --text-section--line-height: 0.98;
+  --text-section--letter-spacing: -0.02em;
+
+  --text-lede: clamp(1.0625rem, 1.25vw, 1.25rem);
+  --text-lede--line-height: 1.6;
 
   /* space */
-  --spacing-section: clamp(64px, 8vw, 104px);
-  --spacing-gutter:  clamp(20px, 4vw, 56px);
+  --spacing-section: clamp(80px, 11vw, 160px);
+  --spacing-gutter:  clamp(16px, 4vw, 56px);
 }
 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
-  background-color: var(--color-canvas);
-  color: var(--color-ink);
+  background-color: var(--color-sky);
+  color: var(--color-carbon);
   font-family: var(--font-sans);
-  line-height: 1.7;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-::selection { background-color: var(--color-ink); color: var(--color-canvas); }
+::selection { background-color: var(--color-kestrel); color: #fff; }
+:focus-visible { outline: 2px solid var(--color-kestrel); outline-offset: 3px; }
 
-:focus-visible { outline: 2px solid var(--color-signal); outline-offset: 2px; }
+/* Headline cut: Archivo semibold, sentence case, gently tightened. Restraint over weight: headlines are
+   full sentences, so they read as sentences, the way aerospace brands set them.
+   Class names kept from the earlier system. Unlayered, so it sets tracking for every headline. */
+.font-wide {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+}
+/* Capitals only for short names (the aircraft), lighter and slightly open, never for a sentence. */
+.caps {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 0.95;
+}
+/* Smaller headings (cards, names, figures): medium weight. */
+.font-semiwide {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
 
-/* Mono label with the short accent rule beside it */
+/* Section kicker: Space Mono capitals led by a short Kestrel Red rule, like a marking on an airframe. */
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-slate);
+}
+.kicker::before {
+  content: "";
+  flex: none;
+  width: 1.5rem;
+  height: 2px;
+  background: var(--color-kestrel);
+}
+
+/* Controls and navigation: Space Mono capitals. */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.78125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Small data caption under figures and media. */
+.caption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  color: var(--color-slate);
+}
+
+/* Kept for blog and careers components that still reference them. */
 .tag {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-signal);
+  color: var(--color-kestrel);
+}
+.meta {
+  font-size: 0.8125rem;
+  color: var(--color-slate);
 }
 
-.meta {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-ink-muted);
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Single orchestrated moment: the hero headline rises once on load. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
 }
+.rise { animation: rise 900ms cubic-bezier(.2,.7,.2,1) both; }
+.rise-2 { animation-delay: 140ms; }
+.rise-3 { animation-delay: 280ms; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -93,20 +180,3 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
-
-/* ============================================================
-   LEGACY SHIM  ·  TEMPORARY
-   Keeps /kestrel-x2, /laminar, /about and /careers rendering on
-   the old dark palette until each is rebuilt on the system above.
-   Delete this whole block once every page is converted.
-   ============================================================ */
-
-.bg-deep-space        { background-color: #0A1628; color: #FFFFFF; }
-.bg-deep-space-darker { background-color: #050D14; color: #FFFFFF; }
-.bg-orbital-blue      { background-color: #0D2B55; color: #FFFFFF; }
-.text-horizon-cyan        { color: #00AEEF; }
-.text-stratosphere-silver { color: #8A9BB5; }
-.text-cloud-white         { color: #FFFFFF; }
-.border-horizon-cyan      { border-color: rgb(0 174 239 / 0.3); }
-.font-heading { font-family: var(--font-chivo), sans-serif; }
-.font-body    { font-family: var(--font-chivo), sans-serif; }
