@@ -55,11 +55,11 @@ export default function Page() {
         control.
       </p>
 
-      <h2>The battery sits in the floor</h2>
+      <h2>Weight carried low</h2>
       <p>
-        Where the weight goes matters as much as how much there is. The battery sits in the floor of
-        the aircraft, which keeps the centre of gravity low. That helps keep Kestrel X2 stable,
-        especially during the slow and careful moments of take-off and landing.
+        Where the weight goes matters as much as how much there is. Kestrel X2 carries its heaviest
+        parts low, which keeps the centre of gravity low. That helps keep it stable, especially during
+        the slow and careful moments of take-off and landing.
       </p>
 
       <h2>How we test it</h2>

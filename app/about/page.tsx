@@ -65,7 +65,7 @@ export default function AboutPage() {
       </section>
 
       <section className="relative isolate h-[min(70svh,720px)] min-h-[400px] overflow-hidden">
-        <LoopVideo name="city-approach" label="Kestrel X2 approaching over the Bengaluru skyline" className="absolute inset-0 -z-10" />
+        <LoopVideo name="city-approach" label="Kestrel X2 approaching over the Bengaluru skyline" className="absolute inset-0 -z-10 object-[50%_80%]" />
       </section>
 
       {/* ---------- MISSION ---------- */}
