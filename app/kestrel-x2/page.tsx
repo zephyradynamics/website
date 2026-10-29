@@ -21,16 +21,16 @@ const callouts = [
 
 const engineered = [
   {
-    video: 'kestrel-body',
+    video: 'engineered-reveal',
     title: 'Light, stiff, simple',
     body: 'A smooth carbon composite body, shaped for low drag and built to be as light and stiff as it can be, with its weight carried low for stability.',
-    label: 'The camera moves slowly around Kestrel X2 in a dark studio, showing its red carbon composite body',
+    label: 'The red Kestrel X2 body turns to frosted blue glass, with the cabin seat softly visible inside',
   },
   {
     video: 'propulsion',
     title: 'Distributed electric propulsion',
     body: 'Eight motors on four folding arms. Each coaxial pair can carry the load if its partner stops, and thrust is redistributed automatically.',
-    label: 'Kestrel X2 in the studio with all eight rotors spinning',
+    label: 'Kestrel X2 under a frosted blue skin, turning in the studio with all eight rotors spinning',
   },
   {
     video: 'kestrel-canopy',
@@ -39,10 +39,10 @@ const engineered = [
     label: 'A close look at the Kestrel X2 nose and its wide tinted canopy',
   },
   {
-    video: 'kestrel-twin-flight',
+    video: 'redundancy',
     title: 'Redundant by design',
     body: 'Dual flight computers, layered sensing and protection built in layer by layer. Proven first in the FlightLab virtual twin.',
-    label: 'Kestrel X2 flying over Bengaluru in the FlightLab virtual twin',
+    label: 'The dual flight computers, seen softly through the frosted Kestrel X2 skin',
   },
 ];
 
