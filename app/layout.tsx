@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   creator: "Zephyra Dynamics",
   publisher: "Zephyra Dynamics",
   title: {
-    default: `Zephyra Dynamics · ${tagline}`,
+    default: "Zephyra Dynamics",
     template: "%s | Zephyra Dynamics",
   },
   description:
@@ -59,7 +59,6 @@ export const metadata: Metadata = {
     description: tagline,
     images: ["/og.jpg"],
   },
-  icons: { icon: "/logo.ico" },
 };
 
 const organizationSchema = {
@@ -69,8 +68,22 @@ const organizationSchema = {
       "@type": "Organization",
       "@id": "https://www.zephyradynamics.com/#organization",
       name: "Zephyra Dynamics",
+      alternateName: "Zephyra",
       url: "https://www.zephyradynamics.com",
-      logo: "https://www.zephyradynamics.com/img/logo-ink.png",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.zephyradynamics.com/brand/zephyra-logo-square.png",
+        width: 600,
+        height: 600,
+      },
+      image: "https://www.zephyradynamics.com/og.jpg",
+      email: "info@zephyradynamics.com",
+      founder: { "@type": "Person", name: "Sadiq Ali Mir", jobTitle: "Founder and Chief Executive Officer" },
+      knowsAbout: ["Urban Air Mobility", "eVTOL aircraft", "Autonomous flight", "Airspace management", "Virtual twin simulation"],
+      contactPoint: [
+        { "@type": "ContactPoint", contactType: "customer support", email: "info@zephyradynamics.com", areaServed: "IN", availableLanguage: ["en"] },
+        { "@type": "ContactPoint", contactType: "careers", email: "career@zephyradynamics.com", areaServed: "IN", availableLanguage: ["en"] },
+      ],
       description:
         "Zephyra Dynamics builds aircraft, airspace and validation technology for Urban Air Mobility in India.",
       slogan: tagline,
@@ -93,6 +106,7 @@ const organizationSchema = {
       "@id": "https://www.zephyradynamics.com/#website",
       url: "https://www.zephyradynamics.com",
       name: "Zephyra Dynamics",
+      alternateName: ["Zephyra", "zephyradynamics.com"],
       publisher: { "@id": "https://www.zephyradynamics.com/#organization" },
       inLanguage: "en-IN",
     },
