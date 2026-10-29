@@ -9,6 +9,7 @@ import "@fontsource/space-mono/latin-400.css";
 import "@fontsource/space-mono/latin-700.css";
 import "./globals.css";
 import Header from "@/components/Header";
+import MediaGuard from "@/components/MediaGuard";
 
 
 const tagline = "Shaping the future of Urban Air Mobility in India";
@@ -128,6 +129,7 @@ export default function RootLayout({
   return (
     <html lang="en-IN" data-scroll-behavior="smooth">
       <body className="font-sans bg-sky text-carbon overflow-x-clip">
+        <MediaGuard />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c") }}

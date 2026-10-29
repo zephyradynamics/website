@@ -76,6 +76,8 @@ export default function LoopVideo({ name, label, className = '', eager = false, 
       playsInline
       disablePictureInPicture
       disableRemotePlayback
+      controlsList="nodownload noplaybackrate"
+      draggable={false}
       autoPlay={eager}
       preload={eager ? 'auto' : 'none'}
       aria-label={label}
