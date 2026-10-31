@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Footer from '@/components/Footer';
 import LoopVideo from '@/components/LoopVideo';
 import { Button, Container, Heading, Figure } from '@/components/ui';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const metadata: Metadata = pageMeta({
   title: 'Kestrel X2, a single-seat autonomous eVTOL',
@@ -55,6 +56,7 @@ const routes = [
 export default function KestrelX2Page() {
   return (
     <>
+      <BreadcrumbSchema name="Kestrel X2" path="/kestrel-x2" />
       {/* ---------- HERO ---------- */}
       <section className="overflow-hidden bg-sky pt-[clamp(48px,8vh,96px)]">
         <Container>

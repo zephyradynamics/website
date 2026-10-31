@@ -3,6 +3,7 @@ import { pageMeta } from '@/lib/seo';
 import Footer from '@/components/Footer';
 import CareerApplyModal from '@/components/CareerApplyModal';
 import { Container, Heading } from '@/components/ui';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const metadata: Metadata = pageMeta({
   title: 'Careers and aerospace internships',
@@ -92,6 +93,7 @@ function Bullets({ title, items }: { title: string; items: string[] }) {
 export default function CareersPage() {
   return (
     <>
+      <BreadcrumbSchema name="Careers" path="/careers" />
       <section className="bg-sky pt-[clamp(48px,8vh,96px)] pb-(--spacing-section)">
         <Container>
           <p className="kicker rise mb-4">Careers</p>

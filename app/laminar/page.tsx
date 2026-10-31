@@ -5,6 +5,7 @@ import LoopVideo from '@/components/LoopVideo';
 import LaminarConsole from '@/components/LaminarConsole';
 import Image from 'next/image';
 import { Button, Container, Heading } from '@/components/ui';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const metadata: Metadata = pageMeta({
   title: 'LAMINAR urban air traffic management',
@@ -35,6 +36,7 @@ const capabilities = [
 export default function LaminarPage() {
   return (
     <>
+      <BreadcrumbSchema name="LAMINAR" path="/laminar" />
       {/* ---------- HERO ---------- */}
       <section className="bg-sky pt-[clamp(48px,8vh,96px)] pb-(--spacing-section)">
         <Container>

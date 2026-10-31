@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   creator: "Zephyra Dynamics",
   publisher: "Zephyra Dynamics",
   title: {
-    default: "Zephyra Dynamics",
+    default: "Zephyra Dynamics | Autonomous electric aircraft for Indian cities",
     template: "%s | Zephyra Dynamics",
   },
   description:

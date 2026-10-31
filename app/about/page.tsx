@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import LoopVideo from '@/components/LoopVideo';
 import { ChevronDown } from 'lucide-react';
 import { Button, Container, Heading } from '@/components/ui';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const metadata: Metadata = pageMeta({
   title: 'About us, urban air mobility from Bengaluru',
@@ -58,6 +59,7 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbSchema name="Company" path="/about" />
       {/* ---------- HERO ---------- */}
       <section className="bg-sky pt-[clamp(48px,8vh,96px)] pb-(--spacing-section)">
         <Container>

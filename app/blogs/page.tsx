@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import { posts } from '@/lib/posts';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const metadata: Metadata = pageMeta({
   title: 'Writing on urban air mobility in India',
@@ -15,6 +16,7 @@ export const metadata: Metadata = pageMeta({
 export default function BlogsPage() {
   return (
     <>
+      <BreadcrumbSchema name="Writing" path="/blogs" />
       <section className="bg-sky pt-[clamp(48px,8vh,96px)]">
         <div className="mx-auto max-w-[1440px] px-(--spacing-gutter)">
           <p className="kicker rise mb-4">Writing</p>

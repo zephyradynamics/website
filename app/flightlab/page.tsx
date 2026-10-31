@@ -5,6 +5,7 @@ import LoopVideo from '@/components/LoopVideo';
 import FlightLabConsole from '@/components/FlightLabConsole';
 import Image from 'next/image';
 import { Button, Container, Heading, Figure } from '@/components/ui';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const metadata: Metadata = pageMeta({
   title: 'FlightLab virtual twin and flight testing',
@@ -31,6 +32,7 @@ const steps = [
 export default function FlightLabPage() {
   return (
     <>
+      <BreadcrumbSchema name="FlightLab" path="/flightlab" />
       {/* ---------- HERO ---------- */}
       <section className="bg-sky pt-[clamp(48px,8vh,96px)] pb-(--spacing-section)">
         <Container>
