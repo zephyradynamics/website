@@ -103,7 +103,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col justify-between gap-5 border-t border-line pt-6 sm:flex-row sm:items-center">
+        {/* NVIDIA's required attribution wherever its trademarks appear on the site */}
+        <p className="mt-16 max-w-[90ch] text-[12px] leading-relaxed text-slate">
+          NVIDIA, NVIDIA Inception, NVIDIA Omniverse and NVIDIA Isaac Sim are trademarks and/or registered trademarks of
+          NVIDIA Corporation in the U.S. and other countries.
+        </p>
+
+        <div className="mt-6 flex flex-col justify-between gap-5 border-t border-line pt-6 sm:flex-row sm:items-center">
           <p className="text-[13px] text-slate">
             &copy; {new Date().getFullYear()} Zephyra Dynamics. Made in Bengaluru.
           </p>

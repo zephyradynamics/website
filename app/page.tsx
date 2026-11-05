@@ -59,10 +59,10 @@ export default function Home() {
         <Container className="flex flex-col gap-5 py-8 sm:flex-row sm:items-center sm:gap-14">
           <p className="label-mono text-slate">Building with</p>
           <ul className="flex flex-wrap items-center gap-x-12 gap-y-5">
-            {/* partner marks are used unaltered, at their own colours, with clear space around them */}
-            <li className="flex items-center gap-4">
-              <img src="/brand/nvidia-logo.svg" alt="NVIDIA" width={3027} height={1066} className="h-11 w-auto" />
-              <span className="border-l border-line-strong pl-4 text-[14px] leading-tight text-slate">Member of<br />NVIDIA Inception</span>
+            {/* partner marks are used unaltered, at their own colours, with clear space around them. As an Inception
+                member we show the NVIDIA Inception Program badge, never the NVIDIA corporate logo (NVIDIA's partner rules) */}
+            <li className="flex items-center">
+              <img src="/brand/nvidia-inception-badge.png" alt="NVIDIA Inception Program member" width={258} height={90} className="h-12 w-auto" />
             </li>
             <li className="flex items-center">
               <img src="/brand/dassault-systemes.svg" alt="Dassault Systèmes" width={108} height={33} className="h-11 w-auto" />
@@ -200,7 +200,7 @@ export default function Home() {
             <Heading
               kicker="Member of NVIDIA Inception"
               title="Before Kestrel X2 flies over a city, it flies here first, as a virtual twin."
-              lede="We built a virtual twin of Kestrel X2 in NVIDIA Omniverse and Isaac Sim that behaves like the real aircraft. Routes, sudden gusts and equipment faults are all tested there first, and LAMINAR runs on NVIDIA GPUs to test whole fleets at once."
+              lede="We built a virtual twin of Kestrel X2 in NVIDIA Omniverse™ and NVIDIA Isaac Sim™ that behaves like the real aircraft. Routes, sudden gusts and equipment faults are all tested there first, and LAMINAR runs on NVIDIA GPUs to test whole fleets at once."
             />
             <Button href="/flightlab" className="mt-9">Inside FlightLab</Button>
           </div>

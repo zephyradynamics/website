@@ -10,14 +10,14 @@ import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 export const metadata: Metadata = pageMeta({
   title: 'FlightLab virtual twin and flight testing',
   description:
-    'FlightLab is our virtual twin of Kestrel X2, built on NVIDIA Omniverse and Isaac Sim. Every flight is tested in simulation before it happens for real.',
+    'FlightLab is our virtual twin of Kestrel X2, built on NVIDIA Omniverse and NVIDIA Isaac Sim. Every flight is tested in simulation before it happens for real.',
   path: '/flightlab',
 });
 
 const steps = [
   {
     title: 'Build the virtual twin',
-    body: 'A virtual Kestrel X2 that runs its real flight software, with the virtual twin in NVIDIA Omniverse and Isaac Sim adding its sensors and the city around it. LAMINAR plans the routes it flies.',
+    body: 'A virtual Kestrel X2 that runs its real flight software, with the virtual twin in NVIDIA Omniverse™ and NVIDIA Isaac Sim™ adding its sensors and the city around it. LAMINAR plans the routes it flies.',
   },
   {
     title: 'Fly the scenarios',
@@ -78,7 +78,7 @@ export default function FlightLabPage() {
             <figcaption className="caption mt-3 !text-white/60">Kestrel X2’s virtual twin in its test bay.</figcaption>
           </figure>
           <div>
-            <p className="mb-5 text-[15px] font-semibold text-[#FF6A5C]">Built with NVIDIA Omniverse and Isaac Sim</p>
+            <p className="mb-5 text-[15px] font-semibold text-[#FF6A5C]">Built with NVIDIA Omniverse and NVIDIA Isaac Sim</p>
             <h2 className="font-wide text-section text-balance">A virtual twin that behaves like the real aircraft.</h2>
             <p className="mt-6 max-w-[46ch] text-lede text-white/70">
               Thrust on all eight rotors, airflow, sensor fields and the city itself. Because the twin

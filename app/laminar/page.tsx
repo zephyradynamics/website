@@ -10,7 +10,7 @@ import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 export const metadata: Metadata = pageMeta({
   title: 'LAMINAR urban air traffic management',
   description:
-    'LAMINAR plans every corridor over the city, keeps aircraft safely apart and schedules every rooftop landing pad in real time. Accelerated on NVIDIA GPUs.',
+    'LAMINAR plans every corridor over the city, keeps aircraft safely apart and schedules every rooftop landing pad in real time. Fleets are simulated on NVIDIA GPUs.',
   path: '/laminar',
 });
 
@@ -89,11 +89,11 @@ export default function LaminarPage() {
         <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
             <Heading
-              kicker="Accelerated on NVIDIA GPUs"
+              kicker="Fleet simulation on NVIDIA GPUs"
               title="We test every situation we can imagine before it happens in the real sky."
               lede="LAMINAR simulates whole fleets at city scale on NVIDIA GPUs. Corridors are planned, separation is checked and vertiport schedules are stress-tested long before a single aircraft is in the air."
             />
-            <p className="mt-8 text-[14px] text-slate">Zephyra Dynamics is a member of NVIDIA Inception.</p>
+            <p className="mt-8 text-[14px] text-slate">Zephyra Dynamics is a member of NVIDIA Inception, NVIDIA’s program for startups.</p>
           </div>
           <figure>
             <div className="aspect-video overflow-hidden rounded-[18px] bg-haze">
