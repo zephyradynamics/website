@@ -22,7 +22,7 @@ export const team: Member[] = [
     slug: 'sadiq-ali-mir',
     name: 'Sadiq Ali Mir',
     role: 'Founder and Chief Executive Officer',
-    image: '/sadiq-ali-mir-white.png',
+    image: '/team/sadiq-ali-mir.webp',
     imageAlt: 'Sadiq Ali Mir, Founder and Chief Executive Officer of Zephyra Dynamics',
     linkedIn: 'https://www.linkedin.com/in/sadiqalimir/',
     bio: 'Sadiq founded Zephyra Dynamics and leads it as CEO. An aerospace engineering graduate of RV College of Engineering, he co-founded Team AeroAstro and was named to the National Space Society’s inaugural 30 Under 30 class.',
