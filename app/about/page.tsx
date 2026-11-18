@@ -3,7 +3,8 @@ import { pageMeta } from '@/lib/seo';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 import LoopVideo from '@/components/LoopVideo';
-import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { team } from '@/lib/team';
 import { Button, Container, Heading } from '@/components/ui';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
@@ -13,33 +14,6 @@ export const metadata: Metadata = pageMeta({
     'Zephyra Dynamics is a Bengaluru aerospace company building Kestrel X2, LAMINAR and FlightLab to shape the future of Urban Air Mobility in India.',
   path: '/about',
 });
-
-const team = [
-  {
-    name: 'Sadiq Ali Mir',
-    role: 'Founder and Chief Executive Officer',
-    image: '/sadiq-ali-mir-white.png',
-    linkedIn: 'https://www.linkedin.com/in/sadiqalimir/',
-    bio: 'Sadiq founded Zephyra Dynamics and leads it as CEO. An aerospace engineering graduate of RV College of Engineering, he co-founded Team AeroAstro and was named to the National Space Society’s inaugural 30 Under 30 class.',
-    more: 'Team AeroAstro, which he led, built eVTOL and space-debris concepts, presented its eVTOL work to members of the Vertical Flight Society and to Boeing, and was mentored by NASA engineers. He was also Lead Systems Engineer on a lunar rover team in the Milo Mission Academy, admitted by exception as its only participant from India.',
-  },
-  {
-    name: 'Dr. Promio Charles F',
-    role: 'Mentor and Senior Aerospace Advisor',
-    image: '/promio.png',
-    linkedIn: 'https://www.linkedin.com/in/dr-promio-charles-194a6b32/',
-    bio: 'An Associate Professor of Aerospace Engineering at RV College of Engineering, Dr Promio Charles specialises in aeroelasticity, smart structures and aeroservoelasticity, and advises Zephyra Dynamics on aerospace engineering.',
-    more: 'He earned his PhD in Aerospace Engineering from the Academy of Scientific and Innovative Research (AcSIR) at the CSIR National Aerospace Laboratories campus, after an M.Tech in Aeronautical Engineering from Visvesvaraya Technological University. He brings about 15 years across research, industry and teaching, and has been on the RVCE faculty since 2017.',
-  },
-  {
-    name: 'Dr. Ravindra S Kulkarni',
-    role: 'Mentor and Technical Advisor',
-    image: '/ravindra.png',
-    linkedIn: 'https://www.linkedin.com/in/dr-ravindra-s-kulkarni-90181ab0/',
-    bio: 'A founding member and former Head of Aerospace Engineering at RV College of Engineering, Dr Kulkarni has taught there since 1991 and specialises in computational fluid dynamics, aerodynamics and gas dynamics.',
-    more: 'An alumnus of the Aerospace Engineering Department at the Indian Institute of Science, he holds a PhD, an M.S. and a B.E. Across more than three decades of teaching and research he has guided doctoral scholars and helped build RVCE’s aerospace programme. At Zephyra Dynamics he advises on aerodynamics and computational fluid dynamics.',
-  },
-];
 
 const principles = [
   {
@@ -114,38 +88,36 @@ export default function AboutPage() {
       <section id="team" className="border-t border-line bg-cloud py-(--spacing-section)">
         <Container>
           <Heading kicker="Leadership and advisors" title="The people guiding our work." />
-          <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-4">
             {team.map((member) => (
-              <article key={member.name}>
-                <a
-                  href={member.linkedIn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${member.name} on LinkedIn`}
+              <article key={member.slug} className="flex flex-col">
+                <Link
+                  href={`/team/${member.slug}`}
+                  aria-hidden="true"
+                  tabIndex={-1}
                   className="group block aspect-[4/5] overflow-hidden rounded-[18px] bg-mist"
                 >
                   <Image
                     src={member.image}
-                    alt={member.name}
+                    alt=""
                     width={720}
                     height={900}
-                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                    sizes="(min-width: 1280px) 22vw, (min-width: 640px) 45vw, 100vw"
                     className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                   />
-                </a>
-                <h3 className="font-semiwide mt-5 text-[22px] tracking-tight text-carbon">{member.name}</h3>
+                </Link>
+                <h3 className="font-semiwide mt-5 text-[22px] tracking-tight text-carbon">
+                  <Link href={`/team/${member.slug}`} className="hover:text-kestrel">{member.name}</Link>
+                </h3>
                 <p className="mt-1 text-[15px] text-slate">{member.role}</p>
                 <p className="mt-4 max-w-[46ch] text-[15.5px] leading-relaxed text-slate">{member.bio}</p>
-                {member.more && (
-                  <details className="group/more mt-3 max-w-[46ch]">
-                    <summary className="label-mono inline-flex cursor-pointer list-none items-center gap-1.5 text-carbon transition-colors hover:text-kestrel [&::-webkit-details-marker]:hidden">
-                      <span className="group-open/more:hidden">Read full bio</span>
-                      <span className="hidden group-open/more:inline">Show less</span>
-                      <ChevronDown size={14} aria-hidden="true" className="transition-transform group-open/more:rotate-180" />
-                    </summary>
-                    <p className="mt-3 text-[15.5px] leading-relaxed text-slate">{member.more}</p>
-                  </details>
-                )}
+                <Link
+                  href={`/team/${member.slug}`}
+                  aria-label={`Read the full bio of ${member.name}`}
+                  className="label-mono mt-4 inline-flex text-carbon transition-colors hover:text-kestrel"
+                >
+                  Read full bio
+                </Link>
               </article>
             ))}
           </div>

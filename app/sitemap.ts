@@ -9,6 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: number;
   }> = [
     { path: '', changeFrequency: 'weekly', priority: 1 },
+    { path: '/team/sadiq-ali-mir', changeFrequency: 'yearly', priority: 0.5 },
+    { path: '/team/george-a-salazar', changeFrequency: 'yearly', priority: 0.5 },
+    { path: '/team/promio-charles', changeFrequency: 'yearly', priority: 0.5 },
+    { path: '/team/ravindra-s-kulkarni', changeFrequency: 'yearly', priority: 0.5 },
     { path: '/kestrel-x2', changeFrequency: 'monthly', priority: 0.9 },
     { path: '/laminar', changeFrequency: 'monthly', priority: 0.9 },
     { path: '/flightlab', changeFrequency: 'monthly', priority: 0.9 },
