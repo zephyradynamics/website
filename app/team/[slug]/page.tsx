@@ -25,16 +25,20 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
   const i = team.indexOf(member);
   const next = team[(i + 1) % team.length];
 
+  const profiles = member.profiles ?? (member.linkedIn ? [{ label: 'LinkedIn', href: member.linkedIn }] : []);
+  // the @id ties this person to the Organization block in the root layout (its founder points here)
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': `${SITE_URL}/team/${member.slug}#person`,
     name: member.name,
     jobTitle: member.role,
     description: member.bio,
     image: `${SITE_URL}${member.image}`,
     url: `${SITE_URL}/team/${member.slug}`,
     affiliation: { '@type': 'Organization', name: 'Zephyra Dynamics', url: SITE_URL },
-    ...(member.linkedIn ? { sameAs: [member.linkedIn] } : {}),
+    ...(profiles.length ? { sameAs: profiles.map((p) => p.href) } : {}),
+    ...member.schema,
   };
 
   return (
@@ -71,15 +75,21 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
                   </div>
                 ))}
               </dl>
-              {member.linkedIn && (
-                <a
-                  href={member.linkedIn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="label-mono mt-6 inline-flex text-carbon transition-colors hover:text-kestrel"
-                >
-                  LinkedIn profile ↗
-                </a>
+              {profiles.length > 0 && (
+                <ul aria-label={`${member.name} online`} className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                  {profiles.map((p) => (
+                    <li key={p.href}>
+                      <a
+                        href={p.href}
+                        target="_blank"
+                        rel="noopener noreferrer me"
+                        className="label-mono inline-flex text-carbon transition-colors hover:text-kestrel"
+                      >
+                        {p.label} ↗
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               )}
             </div>
 

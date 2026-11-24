@@ -79,14 +79,16 @@ const organizationSchema = {
       },
       image: "https://www.zephyradynamics.com/og.jpg",
       email: "info@zephyradynamics.com",
-      founder: { "@type": "Person", name: "Sadiq Ali Mir", jobTitle: "Founder and Chief Executive Officer" },
+      foundingDate: "2025",
+      // the full Person record lives on the founder's bio page under this @id
+      founder: { "@type": "Person", "@id": "https://www.zephyradynamics.com/team/sadiq-ali-mir#person", name: "Sadiq Ali Mir" },
       knowsAbout: ["Urban Air Mobility", "eVTOL aircraft", "Autonomous flight", "Airspace management", "Virtual twin simulation"],
       contactPoint: [
         { "@type": "ContactPoint", contactType: "customer support", email: "info@zephyradynamics.com", areaServed: "IN", availableLanguage: ["en"] },
         { "@type": "ContactPoint", contactType: "careers", email: "career@zephyradynamics.com", areaServed: "IN", availableLanguage: ["en"] },
       ],
       description:
-        "Zephyra Dynamics builds aircraft, airspace and validation technology for Urban Air Mobility in India.",
+        "Indian aerospace company developing autonomous eVTOL aircraft and airspace software for urban air mobility.",
       slogan: tagline,
       address: {
         "@type": "PostalAddress",
@@ -97,6 +99,7 @@ const organizationSchema = {
         addressCountry: "IN",
       },
       sameAs: [
+        "https://www.wikidata.org/wiki/Q142271123",
         "https://www.linkedin.com/company/zephyradynamics/",
         "https://x.com/Zephyrdynamics",
         "https://www.instagram.com/zephyradynamics/",

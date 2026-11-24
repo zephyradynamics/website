@@ -11,6 +11,10 @@ export type Member = {
   imageAlt: string;
   /** omitted when the person has not asked for a profile link */
   linkedIn?: string;
+  /** public profiles shown on the bio page and listed as sameAs; replaces the lone LinkedIn link when set */
+  profiles?: { label: string; href: string }[];
+  /** extra schema.org Person fields for the bio page, matching the person's Wikidata item */
+  schema?: Record<string, unknown>;
   /** short summary shown on the About card */
   bio: string;
   sections: { heading: string; body: string[] }[];
@@ -25,7 +29,28 @@ export const team: Member[] = [
     image: '/team/sadiq-ali-mir.webp',
     imageAlt: 'Sadiq Ali Mir, Founder and Chief Executive Officer of Zephyra Dynamics',
     linkedIn: 'https://www.linkedin.com/in/sadiqalimir/',
-    bio: 'Sadiq founded Zephyra Dynamics and leads it as CEO. An aerospace engineering graduate of RV College of Engineering, he co-founded Team AeroAstro and was named to the National Space Society’s inaugural 30 Under 30 class.',
+    profiles: [
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sadiqalimir/' },
+      { label: 'X', href: 'https://x.com/astrosadiqali' },
+      { label: 'GitHub', href: 'https://github.com/sadiqalimir' },
+    ],
+    schema: {
+      description: 'Indian aerospace engineer and entrepreneur',
+      nationality: { '@type': 'Country', name: 'India' },
+      alumniOf: { '@type': 'CollegeOrUniversity', name: 'RV College of Engineering' },
+      worksFor: [
+        { '@id': 'https://www.zephyradynamics.com/#organization' },
+        { '@type': 'CollegeOrUniversity', name: 'Indian Institute of Technology Roorkee' },
+      ],
+      award: 'NSS 30 Under 30 (2026)',
+      sameAs: [
+        'https://www.wikidata.org/wiki/Q142270912',
+        'https://www.linkedin.com/in/sadiqalimir/',
+        'https://x.com/astrosadiqali',
+        'https://github.com/sadiqalimir',
+      ],
+    },
+    bio: 'Sadiq Ali Mir is an Indian aerospace engineer and entrepreneur, and the Founder and CEO of Zephyra Dynamics. He was named to the National Space Society’s inaugural 30 Under 30 class.',
     sections: [
       {
         heading: 'Building Zephyra Dynamics',
